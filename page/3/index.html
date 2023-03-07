@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>钧言极客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="钧言极客（JINJUN.TOP）一个独立个人博客，记录平凡生活中的一些感悟、分享生活点滴和折腾的新事物，与我一起记录每一次精彩瞬间。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="钧言极客">
+<meta property="og:url" content="http://blog.jinjun.top/page/3/index.html">
+<meta property="og:site_name" content="钧言极客">
+<meta property="og:description" content="钧言极客（JINJUN.TOP）一个独立个人博客，记录平凡生活中的一些感悟、分享生活点滴和折腾的新事物，与我一起记录每一次精彩瞬间。">
+<meta property="og:locale">
+<meta property="article:author" content="钧言">
+<meta property="article:tag" content="进钧,钧言,进钧博客,钧言极客,小钧,小军,进钧blog,钧言blog,钧言钧言">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="钧言极客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">钧言极客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">记录生活,爱好学习,不爱折腾.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.jinjun.top"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-427" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/07/06/427/" class="article-date">
+  <time class="dt-published" datetime="2022-07-06T07:39:00.000Z" itemprop="datePublished">2022-07-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%BB%BA%E7%AB%99%E7%9F%A5%E8%AF%86/">建站知识</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/07/06/427/">Debian/Ubuntu编译安装kangle web Server</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <!--markdown-->kangle环境是一款国产的WEB服务器是跨平台、轻量级、易上手、功能强大的高性能web和反向代理服务器软件。kangle的适用平台也很广泛如：Linux、Windows、Freebsd等等这些平台都可以编译安装。
+
+<p>由于kangle的官方因为某些原因，导致官网都没有了。但是依然可以在Github上找到备份。</p>
+<p>我之前也有写过centos7安装的教程，但是随着centos官方作死行为，我也准备把环境迁移到Debian。</p>
+<p>这一次测试的环境是<code>Debian 10</code>和<code>Ubuntu 16</code>系统下进行编译安装，kangle能正常安装使用，easypanel面板目前还在测试。目前还在填坑中……</p>
+<h3 id="安装第一步"><a href="#安装第一步" class="headerlink" title="安装第一步"></a>安装第一步</h3><p>先把系统所需要的环境和组件给安排上</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install wget tar libpcre3 libpcre3-dev openssl libssl-dev gcc g++ make autoconf automake libssl-dev libaio-dev sqlite3 libsqlite3-dev</span><br></pre></td></tr></table></figure>
+
+<h3 id="第二步下载源码"><a href="#第二步下载源码" class="headerlink" title="第二步下载源码"></a>第二步下载源码</h3><p>这里我使用的是小樱大佬的备份，也可以去github搜索<a target="_blank" rel="noopener" href="https://github.com/1265578519">1265578519</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 下载kangle</span><br><span class="line">wget https://github.com/1265578519/kangle/releases/download/v3.5.21/kangle-3.5.21.4.tar.gz</span><br><span class="line"></span><br><span class="line"># 解压包</span><br><span class="line">tar -zxf kangle-3.5.21.4.tar.gz</span><br><span class="line"></span><br><span class="line"># 进入编译目录</span><br><span class="line">cd kangle-3.5.21.4</span><br><span class="line"></span><br><span class="line"># 设置编译配置</span><br><span class="line">./configure --prefix=/vhs/kangle --enable-disk-cache --enable-http2 --enable-ipv6 --enable-ssl --enable-vh-limit</span><br><span class="line"></span><br><span class="line"># 编译安装</span><br><span class="line">make -j&amp;&amp;make install</span><br></pre></td></tr></table></figure>
+
+<p>如果顺利安装完成后，就可以启动kangle即可。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/vhs/kangle/bin/kangle</span><br></pre></td></tr></table></figure>
+
+<p>然后尝试进入后台管理，地址为<code>IP:3311</code></p>
+<h3 id="建立systemd管理和控制"><a href="#建立systemd管理和控制" class="headerlink" title="建立systemd管理和控制"></a>建立systemd管理和控制</h3><p>创建一个<code>kangle.service</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 创建一个文件</span><br><span class="line">touch /lib/systemd/system/kangle.service</span><br><span class="line"></span><br><span class="line"># 编辑该文件</span><br><span class="line">vim /lib/systemd/system/kangle.service</span><br></pre></td></tr></table></figure>
+
+<p>在文本编辑器写入并保存</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Kangle Web Service</span><br><span class="line">After=syslog.target network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">ExecStart=/vhs/kangle/bin/kangle</span><br><span class="line">ExecStop=/vhs/kangle/bin/kangle -q</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+
+<p>保存完成，建立开机自启动</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ln -s /lib/systemd/system/kangle.service /etc/systemd/system/multi-user.target.wants/kangle</span><br><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl enable kangle</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="kangle的常用命令"><a href="#kangle的常用命令" class="headerlink" title="kangle的常用命令"></a>kangle的常用命令</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[-h --help]                  可以看到详细的参数说明</span><br><span class="line">[-d level]                   调试运行程序</span><br><span class="line">[-r --reload]                重新加载所有配置文件</span><br><span class="line">[--revh]                     重新加载etc/vh.xml文件(etc/vh.xml)</span><br><span class="line">[--reboot]                   平滑重起程序(原有程序会保证服务完客户），一般用来升级用的</span><br><span class="line">[-z [disk_dir]]              建立硬盘cache目录</span><br><span class="line">[-v --version]               查看程序版本</span><br><span class="line">[-a apache_config_file]      转换的Apache配置</span><br><span class="line">[-q] 关闭程序  [-n]           start program not in daemon</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.jinjun.top/2022/07/06/427/" data-id="cleycjpg3001zqgun63en3e26" data-title="Debian/Ubuntu编译安装kangle web Server" class="article-share-link">Teilen</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Debian/" rel="tag">Debian</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kangle/" rel="tag">kangle</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/" rel="tag">技术教程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">虚拟机</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-异地组网 zerotier 尝鲜" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/07/02/%E5%BC%82%E5%9C%B0%E7%BB%84%E7%BD%91%20zerotier%20%E5%B0%9D%E9%B2%9C/" class="article-date">
+  <time class="dt-published" datetime="2022-07-02T06:08:00.000Z" itemprop="datePublished">2022-07-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/07/02/%E5%BC%82%E5%9C%B0%E7%BB%84%E7%BD%91%20zerotier%20%E5%B0%9D%E9%B2%9C/">异地组网 zerotier 尝鲜</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <!--markdown-->最近在NAS的内网穿透的frp连接不怎么稳定，速度主要是受制于服务器的带宽，使用的是腾讯的5M小水管，在视频播放方面一卡一卡实在再也无法忍受。
+
+<p>通过一番搜索，找到了<code>Zerotier</code>、<code>N2N</code>之类的sd-wan内网穿透软件。今天就来尝鲜Zerotier，也做一下笔记。</p>
+<h3 id="注册使用"><a href="#注册使用" class="headerlink" title="注册使用"></a>注册使用</h3><p>zerotier注册：<a target="_blank" rel="noopener" href="https://my.zerotier.com/">https://my.zerotier.com/</a></p>
+<p>zerotier客户端：<a target="_blank" rel="noopener" href="https://www.zerotier.com/download/">Download – ZeroTier</a></p>
+<h3 id="使用过程"><a href="#使用过程" class="headerlink" title="使用过程"></a>使用过程</h3><p>注册成功，登录账号后，点一次就创建好一个网络，会分配一个<code>Network ID</code>这个在组网的过程会经常使用到。</p>
+<p><img src="https://img.jinjun.top/images/2022/07/5a7b46eb395ce.png" alt="zerotier"></p>
+<p>进入<code>Network ID</code>配置</p>
+<p><img src="https://img.jinjun.top/images/2022/07/6927d1598195e.png" alt="zerotier"></p>
+<p>配置局域网IP和IPV6</p>
+<p><img src="https://img.jinjun.top/images/2022/07/5356ff736fb87.png" alt="zerotier"></p>
+<h4 id="NAS安装使用"><a href="#NAS安装使用" class="headerlink" title="NAS安装使用"></a>NAS安装使用</h4><p>在NAS系统找到zerotier的应用，进行配置。这里我的系统是UNAS，在app管理器找到sd-wan，进行安装，其他系统自行搜索安装。</p>
+<p><img src="https://img.jinjun.top/images/2022/07/c5efdb3976dd3.png" alt="zerotier"></p>
+<p>安装完成后，打开应用进行配置，ID填写刚刚<code>Network ID</code>进行保存。</p>
+<p><img src="https://img.jinjun.top/images/2022/07/4113175b58238.png" alt="zerotier"></p>
+<p>这里进行返回到<code>zerotier</code>的网络配置页面，勾选同意设备的网络接入，并记下局域网IP，并勾选<code>Allow Ethernet Bridging</code>意思就是允许网卡桥接</p>
+<p><img src="https://img.jinjun.top/images/2022/07/893c6937b6cd2.png" alt="zerotier"></p>
+<h3 id="LINUX安装"><a href="#LINUX安装" class="headerlink" title="LINUX安装"></a>LINUX安装</h3><ul>
+<li>运行官方的安装命令</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -s https://install.zerotier.com | sudo bash</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>加入网络</li>
+</ul>
+<p>在SSH运行下列命令进行加入网络，退出网网络，列出网络这些操作。</p>
+<p><code>NETWORK ID</code> 就是zerotier分配的网络识别ID</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 加入网络</span><br><span class="line">zerotier-cli join &lt;NETWORK ID&gt;</span><br><span class="line"></span><br><span class="line"># 离开当前网络</span><br><span class="line">zerotier-cli leave &lt;NETWORK ID&gt;</span><br><span class="line"></span><br><span class="line"># 列出网络</span><br><span class="line">zerotier-cli listnetworks</span><br><span class="line"></span><br><span class="line"># 获取地址和服务状态</span><br><span class="line">zerotier-cli status</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>运行和停止服务</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 启动</span><br><span class="line">systemctl start zerotier-one.service</span><br><span class="line"># 停止</span><br><span class="line">systemctl stop zerotier-one.service</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="客户端测试"><a href="#客户端测试" class="headerlink" title="客户端测试"></a>客户端测试</h3><p>客户端：MAC</p>
+<p>还是刚刚获取到的组网ID，进行配置连接，也要到<code>zerotier</code>的网络配置页面，勾选同意设备的网络接入。</p>
+<p><img src="https://img.jinjun.top/images/2022/07/bf8d7c7e5ff4d.png" alt="MAC"></p>
+<p>使用Mac的终端进行延迟测试</p>
+<p><img src="https://img.jinjun.top/images/2022/07/2e239abaa4781.png" alt="mac"></p>
+<p>使用局域网ip访问nas</p>
+<p><img src="https://img.jinjun.top/images/2022/07/694a596dd9a22.png" alt="nasZeroTierZeroTier"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.jinjun.top/2022/07/02/%E5%BC%82%E5%9C%B0%E7%BB%84%E7%BD%91%20zerotier%20%E5%B0%9D%E9%B2%9C/" data-id="cleycjpm000odqgunebrl4c69" data-title="异地组网 zerotier 尝鲜" class="article-share-link">Teilen</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NAS/" rel="tag">NAS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NAT/" rel="tag">NAT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UNAS/" rel="tag">UNAS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ZeroTier/" rel="tag">ZeroTier</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-shell查看进程是否运行，不存在进行重启" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/06/18/shell%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B%E6%98%AF%E5%90%A6%E8%BF%90%E8%A1%8C%EF%BC%8C%E4%B8%8D%E5%AD%98%E5%9C%A8%E8%BF%9B%E8%A1%8C%E9%87%8D%E5%90%AF/" class="article-date">
+  <time class="dt-published" datetime="2022-06-18T07:09:00.000Z" itemprop="datePublished">2022-06-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%BB%BA%E7%AB%99%E7%9F%A5%E8%AF%86/">建站知识</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/06/18/shell%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B%E6%98%AF%E5%90%A6%E8%BF%90%E8%A1%8C%EF%BC%8C%E4%B8%8D%E5%AD%98%E5%9C%A8%E8%BF%9B%E8%A1%8C%E9%87%8D%E5%90%AF/">shell查看进程是否运行，不存在进行重启</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <!--markdown-->最近换下宝塔的环境，转战kangle和amh，主要是宝塔被大佬爆出后门。换到其他面板后，mysql莫名其妙会被挤掉，所以写一个定时 监控的bash守护脚本，以便掉线进行重启。
+
+<h3 id="bash代码如下"><a href="#bash代码如下" class="headerlink" title="bash代码如下"></a>bash代码如下</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">result=`ps -ef|grep -w mysql|grep -v grep|wc -l`</span><br><span class="line">if [ $result -ge 1 ];then</span><br><span class="line">        echo &quot;app start sucessed&quot;</span><br><span class="line">else</span><br><span class="line">        /etc/init.d/mysql restart</span><br><span class="line">        echo &quot;Restarting current program&quot;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<p>重命名并保存为<code>mysql.sh</code>，这个名字也可以自定义</p>
+<h3 id="函数解析"><a href="#函数解析" class="headerlink" title="函数解析"></a>函数解析</h3><h4 id="检查程序是否运行"><a href="#检查程序是否运行" class="headerlink" title="检查程序是否运行"></a>检查程序是否运行</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ps -ef|grep -w mysql       搜索mysql进程名称</span><br><span class="line">grep -v grep               过滤掉 grep 进程</span><br><span class="line">wc -l                      显示结果行数</span><br></pre></td></tr></table></figure>
+
+<h4 id="if判断的类型"><a href="#if判断的类型" class="headerlink" title="if判断的类型"></a>if判断的类型</h4><p>result返回现在有多少指定进程在进程，不存在则进行下一步操作</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-eq：等于</span><br><span class="line">-ne：不等于</span><br><span class="line">-le：小于等于</span><br><span class="line">-ge：大于等于</span><br><span class="line">-lt：小于</span><br><span class="line">-gt：大于</span><br></pre></td></tr></table></figure>
+
+<h3 id="crontab守护"><a href="#crontab守护" class="headerlink" title="crontab守护"></a>crontab守护</h3><p>在ssh界面进入crontab界面来设置定时任务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">crontab -e</span><br><span class="line">或</span><br><span class="line">vim /etc/crontab</span><br></pre></td></tr></table></figure>
+
+<p>这里我设置5分钟的定时定时任务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*/5 * * * * bash /root/mysql.sh</span><br></pre></td></tr></table></figure>
+
+<p>这样就搞定了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.jinjun.top/2022/06/18/shell%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B%E6%98%AF%E5%90%A6%E8%BF%90%E8%A1%8C%EF%BC%8C%E4%B8%8D%E5%AD%98%E5%9C%A8%E8%BF%9B%E8%A1%8C%E9%87%8D%E5%90%AF/" data-id="cleycjpk800hmqgun4quhe9v7" data-title="shell查看进程是否运行，不存在进行重启" class="article-share-link">Teilen</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSH/" rel="tag">SSH</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">服务器</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BB%88%E7%AB%AF/" rel="tag">终端</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%90%E7%BB%B4%E6%95%99%E7%A8%8B/" rel="tag">运维教程</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-423" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/05/29/423/" class="article-date">
+  <time class="dt-published" datetime="2022-05-28T19:01:00.000Z" itemprop="datePublished">2022-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%99%9A%E6%8B%9F%E5%8C%96/">虚拟化</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/05/29/423/">Proxmox VE 6/7 配置软件源和去订阅提醒</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <!--markdown-->社区版本ProxmoxVE 会有一些不怎么友好的操作，弹订阅提示、官方源下载慢、镜像下载慢等，有一次进行配置ceph的时候，没有切换到社区源版本，导致环境崩了，只好重装系统。
+
+<h2 id="Proxmox-VE-6-x-x2F-7-x"><a href="#Proxmox-VE-6-x-x2F-7-x" class="headerlink" title="Proxmox VE 6.x&#x2F;7.x"></a>Proxmox VE 6.x&#x2F;7.x</h2><h3 id="去除官方订阅源"><a href="#去除官方订阅源" class="headerlink" title="去除官方订阅源"></a>去除官方订阅源</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mv /etc/apt/sources.list.d/pve-enterprise.list /etc/apt/sources.list.d/pve-enterprise.list.bak</span><br><span class="line"># 也可以进行删除文件</span><br><span class="line">rm -rf /etc/apt/sources.list.d/pve-enterprise.list</span><br></pre></td></tr></table></figure>
+
+<h2 id="Promox-VE-6-x国内加速源"><a href="#Promox-VE-6-x国内加速源" class="headerlink" title="Promox VE 6.x国内加速源"></a>Promox VE 6.x国内加速源</h2><p>中科大源</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://mirrors.ustc.edu.cn/proxmox/debian/proxmox-release-bullseye.gpg -O /etc/apt/trusted.gpg.d/proxmox-ve-release-6.x.gpg</span><br><span class="line">echo &quot;deb https://mirrors.ustc.edu.cn/proxmox/debian/pve bullseye pve-no-subscription&quot; &gt; /etc/apt/sources.list.d/pve-no-subscription.list</span><br></pre></td></tr></table></figure>
+
+<p>清华大学源</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://mirrors.tuna.tsinghua.edu.cn/proxmox/debian/dists/buster/Release.gpg -O /etc/apt/trusted.gpg.d/proxmox-release-buster.gpg</span><br><span class="line">echo &quot;deb https://mirrors.tuna.tsinghua.edu.cn/proxmox/debian buster pve-no-subscription&quot; &gt; /etc/apt/sources.list.d/pve-no-subscription.list</span><br></pre></td></tr></table></figure>
+
+<p>更新软件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt update &amp;&amp; apt dist-upgrade</span><br></pre></td></tr></table></figure>
+
+<h3 id="LXC仓库源更换"><a href="#LXC仓库源更换" class="headerlink" title="LXC仓库源更换"></a>LXC仓库源更换</h3><p>中科大源</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sed -i.bak &quot;s#http://download.proxmox.com/images#https://mirrors.ustc.edu.cn/proxmox/images#g&quot; /usr/share/perl5/PVE/APLInfo.pm</span><br><span class="line">wget -O /var/lib/pve-manager/apl-info/mirrors.ustc.edu.cn https://mirrors.ustc.edu.cn/proxmox/images/aplinfo-pve-6.dat</span><br><span class="line">systemctl restart pvedaemon</span><br></pre></td></tr></table></figure>
+
+<p>清华大学源</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sed -i.bak &quot;s#http://download.proxmox.com/images#https://mirrors.tuna.tsinghua.edu.cn/proxmox/images#g&quot; /usr/share/perl5/PVE/APLInfo.pm</span><br><span class="line">wget -O /var/lib/pve-manager/apl-info/mirrors.ustc.edu.cn https://mirrors.tuna.tsinghua.edu.cn/proxmox/images/aplinfo-pve-6.dat</span><br><span class="line">systemctl restart pvedaemon</span><br></pre></td></tr></table></figure>
+
+<p>南开NJJ源</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sed -i.bak &quot;s#http://download.proxmox.com/images#https://mirrors.nju.edu.cn/proxmox/images#g&quot; /usr/share/perl5/PVE/APLInfo.pm</span><br><span class="line">wget -O /var/lib/pve-manager/apl-info/mirrors.nju.edu.cn https://mirrors.nju.edu.cn/proxmox/images/aplinfo-pve-6.dat</span><br><span class="line">systemctl restart pvedaemon</span><br></pre></td></tr></table></figure>
+
+<h3 id="CEPH源更换"><a href="#CEPH源更换" class="headerlink" title="CEPH源更换"></a>CEPH源更换</h3><p>中科大源</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;deb https://mirrors.ustc.edu.cn/proxmox/debian/ceph-pacific buster main&quot; &gt; /etc/apt/sources.list.d/ceph.list</span><br><span class="line">sed -i.bak &quot;s#http://download.proxmox.com/debian#https://mirrors.ustc.edu.cn/proxmox/debian#g&quot; /usr/share/perl5/PVE/CLI/pveceph.pm</span><br></pre></td></tr></table></figure>
+
+<p>清华大学源</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;deb https://mirrors.tuna.tsinghua.edu.cn/proxmox/debian/ceph-pacific buster main&quot; &gt; /etc/apt/sources.list.d/ceph.list</span><br><span class="line">sed -i.bak &quot;s#http://download.proxmox.com/debian#https://mirrors.ustc.edu.cn/proxmox/debian#g&quot; /usr/share/perl5/PVE/CLI/pveceph.pm</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Promox-VE-7-x-国内加速源"><a href="#Promox-VE-7-x-国内加速源" class="headerlink" title="Promox VE 7.x 国内加速源"></a>Promox VE 7.x 国内加速源</h2><p>南开NJU源</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://mirrors.nju.edu.cn/proxmox/debian/proxmox-release-bullseye.gpg -O /etc/apt/trusted.gpg.d/proxmox-release-bullseye.gpg</span><br><span class="line">echo &quot;deb https://mirrors.nju.edu.cn/proxmox/debian/pve bullseye pve-no-subscription&quot; &gt; /etc/apt/sources.list.d/pve-no-subscription.list</span><br></pre></td></tr></table></figure>
+
+<p>清华大学源</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://mirrors.tuna.tsinghua.edu.cn/proxmox/debian/dists/bullseye/Release.gpg -O /etc/apt/trusted.gpg.d/proxmox-release-bullseye.gpg</span><br><span class="line">echo &quot;deb https://mirrors.tuna.tsinghua.edu.cn/proxmox/debian bullseye pve-no-subscription&quot; &gt; /etc/apt/sources.list.d/pve-no-subscription.list</span><br></pre></td></tr></table></figure>
+
+<p>中科大源</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget https://mirrors.ustc.edu.cn/proxmox/debian/proxmox-release-bullseye.gpg -O /etc/apt/trusted.gpg.d/proxmox-release-bullseye.gpg</span><br><span class="line">echo &quot;deb https://mirrors.ustc.edu.cn/proxmox/debian/pve bullseye pve-no-subscription&quot; &gt; /etc/apt/sources.list.d/pve-no-subscription.list</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>更新软件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt update &amp;&amp; apt dist-upgrade</span><br></pre></td></tr></table></figure>
+
+<h3 id="LXC仓库源更换-1"><a href="#LXC仓库源更换-1" class="headerlink" title="LXC仓库源更换"></a>LXC仓库源更换</h3><p>南开NJU源</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sed -i.bak &quot;s#http://download.proxmox.com/images#https://mirrors.nju.edu.cn/proxmox/images#g&quot; /usr/share/perl5/PVE/APLInfo.pm</span><br><span class="line">wget -O /var/lib/pve-manager/apl-info/mirrors.nju.edu.cn https://mirrors.nju.edu.cn/proxmox/images/aplinfo-pve-7.dat</span><br><span class="line">systemctl restart pvedaemon</span><br></pre></td></tr></table></figure>
+
+<p>清华大学源</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sed -i.bak &quot;s#http://download.proxmox.com/images#https://mirrors.tuna.tsinghua.edu.cn/proxmox/images#g&quot; /usr/share/perl5/PVE/APLInfo.pm</span><br><span class="line">wget -O /var/lib/pve-manager/apl-info/mirrors.nju.edu.cn https://mirrors.tuna.tsinghua.edu.cn/proxmox/images/aplinfo-pve-7.dat</span><br><span class="line">systemctl restart pvedaemon</span><br></pre></td></tr></table></figure>
+
+<p>中科大源</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sed -i.bak &quot;s#http://download.proxmox.com/images#https://mirrors.ustc.edu.cn/proxmox/images#g&quot; /usr/share/perl5/PVE/APLInfo.pm</span><br><span class="line">wget -O /var/lib/pve-manager/apl-info/mirrors.ustc.edu.cn https://mirrors.ustc.edu.cn/proxmox/images/aplinfo-pve-7.dat</span><br><span class="line">systemctl restart pvedaemon</span><br></pre></td></tr></table></figure>
+
+<h3 id="CEPH源更换-1"><a href="#CEPH源更换-1" class="headerlink" title="CEPH源更换"></a>CEPH源更换</h3><p>中科大源</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;deb https://mirrors.ustc.edu.cn/proxmox/debian/ceph-pacific bullseye main&quot; &gt; /etc/apt/sources.list.d/ceph.list</span><br><span class="line">sed -i.bak &quot;s#http://download.proxmox.com/debian#https://mirrors.ustc.edu.cn/proxmox/debian#g&quot; /usr/share/perl5/PVE/CLI/pveceph.pm</span><br></pre></td></tr></table></figure>
+
+<p>清华大学源</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;deb https://mirrors.tuna.tsinghua.edu.cn/proxmox/debian/ceph-pacific bullseye main&quot; &gt; /etc/apt/sources.list.d/ceph.list</span><br><span class="line">sed -i.bak &quot;s#http://download.proxmox.com/debian#https://mirrors.tuna.tsinghua.edu.cn/proxmox/debian#g&quot; /usr/share/perl5/PVE/CLI/pveceph.pm</span><br></pre></td></tr></table></figure>
+
+<h2 id="去除6-x-x2F-7-x-订阅提醒"><a href="#去除6-x-x2F-7-x-订阅提醒" class="headerlink" title="去除6.x&#x2F;7.x 订阅提醒"></a>去除6.x&#x2F;7.x 订阅提醒</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sed -i_orig &quot;s/data.status === &#x27;Active&#x27;/true/g&quot; /usr/share/pve-manager/js/pvemanagerlib.js</span><br><span class="line">sed -i_orig &quot;s/if (res === null || res === undefined || \!res || res/if(/g&quot; /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js</span><br><span class="line">sed -i_orig &quot;s/.data.status.toLowerCase() !== &#x27;active&#x27;/false/g&quot; /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js</span><br><span class="line">sed -Ezi.bak &quot;s/(Ext.Msg.show\(\&#123;\s+title: gettext\(&#x27;No valid sub)/void\(\&#123; \/\/\1/g&quot; /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js</span><br><span class="line">systemctl restart pveproxy.service</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.jinjun.top/2022/05/29/423/" data-id="cleycjpg2001uqgun1uvsgpew" data-title="Proxmox VE 6/7 配置软件源和去订阅提醒" class="article-share-link">Teilen</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Debian/" rel="tag">Debian</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LXC%E5%AE%B9%E5%99%A8/" rel="tag">LXC容器</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Proxmox/" rel="tag">Proxmox</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">服务器</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F/" rel="tag">镜像加速</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-使用vanilla-lazyload实现懒加载" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/05/14/%E4%BD%BF%E7%94%A8vanilla-lazyload%E5%AE%9E%E7%8E%B0%E6%87%92%E5%8A%A0%E8%BD%BD/" class="article-date">
+  <time class="dt-published" datetime="2022-05-14T06:53:00.000Z" itemprop="datePublished">2022-05-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Typecho/">Typecho</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/05/14/%E4%BD%BF%E7%94%A8vanilla-lazyload%E5%AE%9E%E7%8E%B0%E6%87%92%E5%8A%A0%E8%BD%BD/">使用vanilla-lazyload实现懒加载</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <!--markdown-->给主题配置一个全新的lazyload库，来自`verlok`的`vanilla-lazyload`开源js库，支持更多的特性和特效。
+
+<blockquote>
+<p>vanilla-lazyload是一个轻量级、灵活的脚本，可将图像、背景、视频、iframe等实现懒加载</p>
+</blockquote>
+<p>Github：<a target="_blank" rel="noopener" href="https://github.com/verlok/vanilla-lazyload">vanilla-lazyload</a><br>UNPKG源：<a target="_blank" rel="noopener" href="https://unpkg.com/browse/vanilla-lazyload/dist/">vanilla-lazyload</a><br>WIki文档：<a target="_blank" rel="noopener" href="https://www.andreaverlicchi.eu/vanilla-lazyload/">vanilla-lazyload</a></p>
+<p>废话不多说直接开搞</p>
+<ul>
+<li>先引入JS库</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script async src=&quot;https://unpkg.com/browse/vanilla-lazyload@17.8.3/dist/lazyload.iife.min.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>格式化图片样式</li>
+</ul>
+<p><code>src</code>属性可填写加载中的占位图&#x2F;加载gif路径，<code>data-lazy-src</code>属性设置为原图路径</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=&quot;./images/loading.gif&quot; data-lzay-src=&quot;./images/web.png&quot; alt=&quot;web&quot; class=&quot;lazy&quot;&gt; </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置运行参数</li>
+</ul>
+<p>以下是我的Javascript参数，更多参数DIY自行找文档</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var lazyLoadInstance = new LazyLoad(&#123;</span><br><span class="line">// css属性选择器</span><br><span class="line">  elements_selector: &#x27;img&#x27;,</span><br><span class="line">// 滚动多少加载</span><br><span class="line">  threshold: 0,</span><br><span class="line">// 加载的元素URL的属性</span><br><span class="line">  data_src: &#x27;lazy-src&#x27;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>css模糊渐变特效</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">img[data-lazy-src]:not(.loaded) &#123;filter: blur(10px) brightness(1);&#125;img[data-lazy-src].error &#123;filter: none;&#125;</span><br><span class="line"></span><br><span class="line">img&#123;</span><br><span class="line">-webkit-transition: filter 375ms ease-in .2s,-webkit-transform .6s;</span><br><span class="line">    -moz-transition: filter 375ms ease-in .2s,-moz-transform .6s;</span><br><span class="line">    -o-transition: filter 375ms ease-in .2s,-o-transform .6s;</span><br><span class="line">    -ms-transition: filter 375ms ease-in .2s,-ms-transform .6s;</span><br><span class="line">    transition: filter 375ms ease-in .2s,transform .6s;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+
+<p>demo演示：<a target="_blank" rel="noopener" href="https://www.jinjun.top/cs/">DEMO</a></p>
+<p>更多的参数可以去看作者的wiki文档，配置起来比<code>jquery.lazyload.js</code>简单，性能也比前者要好不少。</p>
+<p>感谢团团反馈，检查是我写文章的时候把作者的js搞混了，现已经修正。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.jinjun.top/2022/05/14/%E4%BD%BF%E7%94%A8vanilla-lazyload%E5%AE%9E%E7%8E%B0%E6%87%92%E5%8A%A0%E8%BD%BD/" data-id="cleycjpl100ktqgungnvi0dnk" data-title="使用vanilla-lazyload实现懒加载" class="article-share-link">Teilen</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Typecho/" rel="tag">Typecho</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WEB/" rel="tag">WEB</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%87%92%E5%8A%A0%E8%BD%BD/" rel="tag">懒加载</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-iptables防火墙常用使用命令" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/18/iptables%E9%98%B2%E7%81%AB%E5%A2%99%E5%B8%B8%E7%94%A8%E4%BD%BF%E7%94%A8%E5%91%BD%E4%BB%A4/" class="article-date">
+  <time class="dt-published" datetime="2022-04-18T07:34:00.000Z" itemprop="datePublished">2022-04-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/04/18/iptables%E9%98%B2%E7%81%AB%E5%A2%99%E5%B8%B8%E7%94%A8%E4%BD%BF%E7%94%A8%E5%91%BD%E4%BB%A4/">iptables防火墙常用使用命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <!--markdown-->### 安装iptables
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># centos</span><br><span class="line">yum install iptables</span><br><span class="line"># debian/ubunte</span><br><span class="line">apt-get install iptables</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看已添加的规则"><a href="#查看已添加的规则" class="headerlink" title="查看已添加的规则"></a>查看已添加的规则</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">iptables -L -n -v</span><br><span class="line">iptables -L --line-numbers</span><br><span class="line"># 查看nat规则</span><br><span class="line">iptables -t nat -vnL</span><br><span class="line"></span><br><span class="line"># 注释</span><br><span class="line">v：显示详细信息，包括每条规则的匹配包数量和匹配字节数</span><br><span class="line">x：在 v 的基础上，禁止自动单位换算（K、M）</span><br><span class="line">n：只显示IP地址和端口号，不将ip解析为域名</span><br></pre></td></tr></table></figure>
+
+<h3 id="清空iptables规则"><a href="#清空iptables规则" class="headerlink" title="清空iptables规则"></a>清空iptables规则</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">iptables -F</span><br><span class="line">iptables -X</span><br><span class="line">iptables -Z</span><br><span class="line"></span><br><span class="line"># 删除nat规则 </span><br><span class="line">iptables -t nat -F</span><br><span class="line"></span><br><span class="line"># 序号显示</span><br><span class="line">iptables -L -n --line-numbers</span><br><span class="line"># 删除相关序号</span><br><span class="line">iptables -D INPUT 3</span><br><span class="line"># 保存规则</span><br><span class="line">iptables save</span><br></pre></td></tr></table></figure>
+
+<h3 id="开放本机防火墙常用端口"><a href="#开放本机防火墙常用端口" class="headerlink" title="开放本机防火墙常用端口"></a>开放本机防火墙常用端口</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 允许所有本机向外的访问</span><br><span class="line">iptables?-A?OUTPUT?-j?ACCEPT</span><br><span class="line"></span><br><span class="line"># 允许本机访问</span><br><span class="line">iptables -l INPUT -i lo -j ACCEPT</span><br><span class="line"></span><br><span class="line"># 开放789端口</span><br><span class="line">iptables -I INPUT -p tcp --dport 789 -j ACCEPT</span><br><span class="line"></span><br><span class="line"># 开放80，443端口</span><br><span class="line">iptables -t filter -l INPUT -p tcp -m multiport --dports 80,443 -j REJECT</span><br><span class="line"></span><br><span class="line"># 开放20-22端口</span><br><span class="line">iptables -t filter -I INPUT -p tcp --dport 20:21 -j ACCEPT</span><br></pre></td></tr></table></figure>
+
+<h3 id="允许对所有的地址开放本机的基于ICMP协议的数据包访问"><a href="#允许对所有的地址开放本机的基于ICMP协议的数据包访问" class="headerlink" title="允许对所有的地址开放本机的基于ICMP协议的数据包访问"></a>允许对所有的地址开放本机的基于ICMP协议的数据包访问</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -t filter -I INPUT -p icmp -j ACCEPT</span><br></pre></td></tr></table></figure>
+
+<h3 id="其他未被允许的端口则禁止访问"><a href="#其他未被允许的端口则禁止访问" class="headerlink" title="其他未被允许的端口则禁止访问"></a>其他未被允许的端口则禁止访问</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -t filter -A INPUT -j REJECT</span><br></pre></td></tr></table></figure>
+
+<h3 id="防止SYN洪水攻击"><a href="#防止SYN洪水攻击" class="headerlink" title="防止SYN洪水攻击"></a>防止SYN洪水攻击</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -p tcp --syn -m limit --limit 5/second -j ACCEPT</span><br></pre></td></tr></table></figure>
+
+<h3 id="允许-x2F-屏蔽PING"><a href="#允许-x2F-屏蔽PING" class="headerlink" title="允许&#x2F;屏蔽PING"></a>允许&#x2F;屏蔽PING</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 允许ping</span><br><span class="line">iptables -A  INPUT -p icmp --icmp-type echo-request -j ACCEPT</span><br><span class="line">iptables -A OUTPUT -p icmp --icmp-type echo-reply -j ACCEPT</span><br><span class="line"></span><br><span class="line"># 禁止ping</span><br><span class="line">iptables -A  INPUT -p icmp --icmp-type  8 -s 0/0 -j DROP</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="屏蔽IP或IP段"><a href="#屏蔽IP或IP段" class="headerlink" title="屏蔽IP或IP段"></a>屏蔽IP或IP段</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 屏蔽IP</span><br><span class="line">iptables -I INPUT -s 123.45.6.7 -j DROP</span><br><span class="line"></span><br><span class="line"># 屏蔽IP段</span><br><span class="line">iptables -l INPUT -s 123.0.0.0/8 -j DROP</span><br></pre></td></tr></table></figure>
+<h3 id="禁止其他未允许的规则访问"><a href="#禁止其他未允许的规则访问" class="headerlink" title="禁止其他未允许的规则访问"></a>禁止其他未允许的规则访问</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -j REJECT</span><br><span class="line">iptables -A FORWARD -j REJECT</span><br></pre></td></tr></table></figure>
+
+<h3 id="只允许指定ip地址访问指定端口"><a href="#只允许指定ip地址访问指定端口" class="headerlink" title="只允许指定ip地址访问指定端口"></a>只允许指定ip地址访问指定端口</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iptables -A  INPUT -s xxx.xxx.xxx.xxx -p tcp --dport  22 -j ACCEPT</span><br><span class="line">iptables -A OUTPUT -d xxx.xxx.xxx.xxx -p tcp --sport  22 -j ACCEPT</span><br></pre></td></tr></table></figure>
+<p>上面这两条，请注意 <code>--dport</code> 为目标端口，当数据从外部进入服务器为目标端口；反之，数据从服务器出去则为数据源端口，使用 <code>--sport</code> 同理，<code>-s</code> 是指定源地址，<code>-d</code> 是指定目标地址。</p>
+<h3 id="转发NAT规则"><a href="#转发NAT规则" class="headerlink" title="转发NAT规则"></a>转发NAT规则</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 允许数据转发</span><br><span class="line">iptables -A FORWARD -j ACCEPT</span><br><span class="line"></span><br><span class="line"># 添加IP TCP转发</span><br><span class="line">iptables -t nat -A PREROUTING -p tcp -m tcp --dport 1122 -j DNAT --to-destination 10.10.10.11:22</span><br><span class="line"></span><br><span class="line"># 添加IP UDP转发</span><br><span class="line">iptables -t nat -A PREROUTING -p udp -m tcp --dport 1122 -j DNAT --to-destination 10.10.10.11:22</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除NAT规则"><a href="#删除NAT规则" class="headerlink" title="删除NAT规则"></a>删除NAT规则</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 列出nat规则</span><br><span class="line">iptables -t nat -vnL PREROUTING --line-number</span><br><span class="line"></span><br><span class="line"># 删除相对应序号2的规则</span><br><span class="line">iptables -t nat -D PREOUTING 2</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="iptables持久化"><a href="#iptables持久化" class="headerlink" title="iptables持久化"></a>iptables持久化</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 保存规则</span><br><span class="line">iptables save</span><br><span class="line"></span><br><span class="line"># 重启服务</span><br><span class="line">iptables restart</span><br></pre></td></tr></table></figure>
+
+
+<p>安装 <code>iptables-persistent</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">apt install iptables-persistent</span><br><span class="line"></span><br><span class="line"># 规则生效</span><br><span class="line">netfilter-persistent save</span><br><span class="line">netfilter-persistent reload</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.jinjun.top/2022/04/18/iptables%E9%98%B2%E7%81%AB%E5%A2%99%E5%B8%B8%E7%94%A8%E4%BD%BF%E7%94%A8%E5%91%BD%E4%BB%A4/" data-id="cleycjpjl00f7qgun116feden" data-title="iptables防火墙常用使用命令" class="article-share-link">Teilen</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IPv4/" rel="tag">IPv4</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IPv6/" rel="tag">IPv6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iptables/" rel="tag">iptables</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">服务器</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">虚拟机</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%98%B2%E7%81%AB%E5%A2%99/" rel="tag">防火墙</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-CSS 图片显示模糊解决方法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/10/CSS%20%E5%9B%BE%E7%89%87%E6%98%BE%E7%A4%BA%E6%A8%A1%E7%B3%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" class="article-date">
+  <time class="dt-published" datetime="2022-04-10T07:32:00.000Z" itemprop="datePublished">2022-04-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%BB%BA%E7%AB%99%E7%9F%A5%E8%AF%86/">建站知识</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/04/10/CSS%20%E5%9B%BE%E7%89%87%E6%98%BE%E7%A4%BA%E6%A8%A1%E7%B3%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">CSS 图片显示模糊解决方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <!--markdown-->![css][1]
+
+<p>旁边的brand的图片明显糊掉，但是设置 <code>height: 100%;</code> ，一样会显示模糊不清。经过一番咨询好友后，得到以下答案并解决了问题。</p>
+<h3 id="使用-image-rendering-优化"><a href="#使用-image-rendering-优化" class="headerlink" title="使用 image-rendering 优化"></a>使用 image-rendering 优化</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS">CSS</a>?属性?<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/image-rendering">image-rendering</a>?用于设置图像缩放算法。它适用于元素本身，适用于元素其他属性中的图像，也应用于子元素。</p>
+</blockquote>
+<p><img src="https://img.jinjun.top/images/2022/04/25977ae2f43e0.png" alt="兼容性"></p>
+<p>使用兼容性没有问题，不会还有人使用IE吧！！</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.brand img &#123;</span><br><span class="line">  image-rendering: -webkit-optimize-contrast;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用这个方法就可以解决css的图片缩放带来的图片模糊问题。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.jinjun.top/2022/04/10/CSS%20%E5%9B%BE%E7%89%87%E6%98%BE%E7%A4%BA%E6%A8%A1%E7%B3%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" data-id="cleycjpg9002kqgun02frg7ff" data-title="CSS 图片显示模糊解决方法" class="article-share-link">Teilen</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-华为云 Debian 设置双网卡双IP配置" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/03/20/%E5%8D%8E%E4%B8%BA%E4%BA%91%20Debian%20%E8%AE%BE%E7%BD%AE%E5%8F%8C%E7%BD%91%E5%8D%A1%E5%8F%8CIP%E9%85%8D%E7%BD%AE/" class="article-date">
+  <time class="dt-published" datetime="2022-03-20T01:10:00.000Z" itemprop="datePublished">2022-03-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/">资源分享</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/03/20/%E5%8D%8E%E4%B8%BA%E4%BA%91%20Debian%20%E8%AE%BE%E7%BD%AE%E5%8F%8C%E7%BD%91%E5%8D%A1%E5%8F%8CIP%E9%85%8D%E7%BD%AE/">华为云 Debian 设置双网卡双IP配置</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <!--markdown-->最近给华为云升级了一下带宽300Mbps，检查发现只有主网卡的IP可以连接，扩展的网卡无法ping。在服务器中配置双网卡双IP单网关，双网卡配置都可以对外提供上网服务。在华为云文档和腾讯云文档找到了相关内容。
+
+<p><img src="https://img.jinjun.top/images/2022/03/381693531566e.png" alt="华为云测速"></p>
+<h2 id="配置信息"><a href="#配置信息" class="headerlink" title="配置信息"></a>配置信息</h2><ul>
+<li>检查网卡绑定信息</li>
+</ul>
+<p>使用 <code>ifconfig</code> 命令查看</p>
+<p><img src="https://img.jinjun.top/images/2022/03/70b2212d66a09.png" alt="IP"></p>
+<p>这里eth0为主网卡，eth1为扩展网卡。如果没有你的网卡信息这就需要自己去添加。这里要记下IP和网卡名称，下面会用到。如果获取到IP可以不进行下面这一步。</p>
+<ul>
+<li>如果没有你的网卡信息需要添加一个</li>
+</ul>
+<p>编辑系统网络文件 <code>interfaces</code> 文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt install vim</span><br><span class="line">vim /etc/network/interfaces</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img.jinjun.top/images/2022/03/1fb1909f0427f.png" alt="Network"></p>
+<p>这里是默认提供DHCP来获取，如果是自定义需重新编辑文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">auto eth0  # 此处填写步骤1中查看到的需配置的弹性网卡名称</span><br><span class="line">iface eth0 inet static  # 此处填写步骤1中查看到的需配置的弹性网卡名称</span><br><span class="line">address 10.0.0.30 # 此处填写弹性网卡上的 IP 地址</span><br><span class="line">netmask 255.255.255.0  #此处填写子网掩码</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建策略路由"><a href="#创建策略路由" class="headerlink" title="创建策略路由"></a>创建策略路由</h3><ul>
+<li>创建多张路由表，根据自己需求添加</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;10 t1&quot; &gt;&gt; /etc/iproute2/rt_tables   #10为自定义的路由ID，t1为自定义的路由表名称</span><br><span class="line">echo &quot;20 t2&quot; &gt;&gt; /etc/iproute2/rt_tables    #20为自定义的路由ID，t2为自定义的路由表名称</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>创建多个默认路由，根据自己需求添加</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 主网卡</span><br><span class="line">ip route add default via 10.0.0.1 dev eth0 table 10</span><br><span class="line">ip route add 10.0.0.0/24 dev eth0 table 10</span><br><span class="line">ip rule add from 10.0.0.98 table 10</span><br><span class="line"></span><br><span class="line"># 扩展网卡</span><br><span class="line">ip route add default via 10.0.0.1 dev eth1 table 20</span><br><span class="line">ip route add 10.0.0.0/24 dev eth1 table 20</span><br><span class="line">ip rule add from 10.0.0.76 table 20</span><br><span class="line"></span><br><span class="line">## 命令参考信息</span><br><span class="line">ip route add default via?子网网关?dev?网卡名称?table?路由表名称</span><br><span class="line">ip route add?子网网段?dev?网卡名称?table?路由表名称</span><br><span class="line">ip rule add from?网卡地址?table?路由表名称</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>验证策略路由</li>
+</ul>
+<p><img src="https://img.jinjun.top/images/2022/03/779c1623abbcb.png" alt="策略路由"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ip rule</span><br><span class="line">ip route show table 10</span><br><span class="line">ip route show table 20</span><br><span class="line"></span><br><span class="line">## 命令参考信息</span><br><span class="line">ip rule</span><br><span class="line">ip route show table?主网卡路由表名称</span><br><span class="line">ip route show table?扩展网卡路由表名称</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>验证内网 公网 联通</li>
+</ul>
+<p><img src="https://img.jinjun.top/images/2022/03/423c54db7f813.png" alt="Ping"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ping -I 10.0.0.98 114.114.114.114</span><br><span class="line"></span><br><span class="line">## 命令参考信息</span><br><span class="line">ping -I?源端云服务器网卡地址 目的端云服务器地址</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置永久路由"><a href="#配置永久路由" class="headerlink" title="配置永久路由"></a>配置永久路由</h2><p>临时路由配置完后立即生效，当服务器重启后临时路由会丢失，执行完配置完临时路由后，应继续执行配置永久路由，避免服务器重启后网络中断。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt install vim</span><br><span class="line">vim /etc/rc.local</span><br></pre></td></tr></table></figure>
+
+<p>添加以下内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># wait for nics up</span><br><span class="line">sleep 5</span><br><span class="line"></span><br><span class="line"># Add v4 routes for eth0</span><br><span class="line">ip route flush table 10</span><br><span class="line">ip route add default via 10.0.0.1 dev eth0 table 10</span><br><span class="line">ip route add 10.0.0.0/24 dev eth0 table 10</span><br><span class="line">ip rule add from 10.0.0.98 table 10</span><br><span class="line"></span><br><span class="line"># Add v4 routes for eth1</span><br><span class="line">ip route flush table 20</span><br><span class="line">ip route add default via 10.0.0.76 dev eth1 table 20</span><br><span class="line">ip route add 10.0.1.0/24 dev eth1 table 20</span><br><span class="line">ip rule add from 10.0.1.183 table 20</span><br><span class="line"></span><br><span class="line"># Add v4 routes for cloud-init</span><br><span class="line">ip rule add to 169.254.169.254 table main</span><br></pre></td></tr></table></figure>
+
+<p>其中，参数说明如下：</p>
+<ul>
+<li>wait for nics up：文件启动时间。</li>
+<li>Add v4 routes for eth0：主网卡的策略路由，和配置策略保持一致。</li>
+<li>Add v4 routes for eth1：扩展网卡的策略路由，和配置策略保持一致。</li>
+<li>Add v4 routes for cloud-init：配置cloud-init地址。</li>
+</ul>
+<ol>
+<li><p>按ESC退出，并输入<code>:wq!</code>保存配置。</p>
+</li>
+<li><p>执行以下命令，为<code>/etc/rc.local</code>文件添加执行权限。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x /etc/rc.local</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>执行以下命令，重启云服务器。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reboot</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>文章参考：</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://support.huaweicloud.com/bestpractice-vpc/bestpractice_0020.html#bestpractice_0020__li111457351491">为多网卡Linux云服务器配置策略路由 (IPv4&#x2F;IPv6)</a></li>
+<li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/document/product/576/59353">Linux 云服务器配置弹性网卡</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.jinjun.top/2022/03/20/%E5%8D%8E%E4%B8%BA%E4%BA%91%20Debian%20%E8%AE%BE%E7%BD%AE%E5%8F%8C%E7%BD%91%E5%8D%A1%E5%8F%8CIP%E9%85%8D%E7%BD%AE/" data-id="cleycjplh00mgqgunhmk19vge" data-title="华为云 Debian 设置双网卡双IP配置" class="article-share-link">Teilen</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSH/" rel="tag">SSH</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VPS/" rel="tag">VPS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%8E%E4%B8%BA%E4%BA%91/" rel="tag">华为云</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">服务器</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%85%BE%E8%AE%AF%E4%BA%91/" rel="tag">腾讯云</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">虚拟机</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%90%E7%BB%B4%E6%95%99%E7%A8%8B/" rel="tag">运维教程</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Cloudflare Workers 反代 Gravatar 头像" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/19/Cloudflare%20Workers%20%E5%8F%8D%E4%BB%A3%20Gravatar%20%E5%A4%B4%E5%83%8F/" class="article-date">
+  <time class="dt-published" datetime="2022-02-19T07:52:00.000Z" itemprop="datePublished">2022-02-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%BB%BA%E7%AB%99%E7%9F%A5%E8%AF%86/">建站知识</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/02/19/Cloudflare%20Workers%20%E5%8F%8D%E4%BB%A3%20Gravatar%20%E5%A4%B4%E5%83%8F/">Cloudflare Workers 反代 Gravatar 头像</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <!--markdown-->之前写过使用腾讯云cdn进行头像加速，今天刚刚想打开发现已经链接超时了。进行Ping发现Gravatar的域名全部被墙了，在国内无法使用该服务。
+
+<p>之前一直使用这七牛和loli的镜像源，本着人有我也要有的原则，我决定自建一个gravatar的镜像加速源，这里感谢十年之约的网友，告诉我可以使用Cloudflare Works来反代，再经过国内CDN进行加速。</p>
+<h3 id="Cloudflare-Workrs的免费套餐"><a href="#Cloudflare-Workrs的免费套餐" class="headerlink" title="Cloudflare Workrs的免费套餐"></a>Cloudflare Workrs的免费套餐</h3><ul>
+<li>每个请求最多占用 10 毫秒 CPU 时间</li>
+<li>第一个请求后的延迟最低</li>
+<li>每天最多 100,000 个请求 (UTC+0)</li>
+</ul>
+<p>每天10W的请求，对于自用的话也足够了。还有国内的CDN进行分流，估计也用不了多少。又薅cf的羊毛。</p>
+<h2 id="workers创建和设置"><a href="#workers创建和设置" class="headerlink" title="workers创建和设置"></a>workers创建和设置</h2><p>登录：<a target="_blank" rel="noopener" href="https://dash.cloudflare.com/login">https://dash.cloudflare.com/login</a></p>
+<p><img src="https://img.jinjun.top/images/2022/02/4b9f11abae609.png" alt="Cloudflare"></p>
+<p>在这里创建好workrs的服务后，进入刚刚创建好的服务，点<code>快速编辑</code></p>
+<p><img src="https://img.jinjun.top/images/2022/02/156fdb16d9fd2.png" alt="workrs"></p>
+<p>复制以下内容到workrs编辑器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br></pre></td><td class="code"><pre><span class="line">// 替换成你想镜像的站点</span><br><span class="line">const upstream = &#x27;gravatar.com&#x27;</span><br><span class="line"> </span><br><span class="line">// 如果那个站点有专门的移动适配站点，否则保持和上面一致</span><br><span class="line">const upstream_mobile = &#x27;gravatar.com&#x27;</span><br><span class="line"> </span><br><span class="line">// 你希望禁止哪些国家访问</span><br><span class="line">const blocked_region = []</span><br><span class="line"> </span><br><span class="line">// 禁止自访问</span><br><span class="line">const blocked_ip_address = [&#x27;0.0.0.0&#x27;, &#x27;127.0.0.1&#x27;]</span><br><span class="line"> </span><br><span class="line">// 替换成你想镜像的站点</span><br><span class="line">const replace_dict = &#123;</span><br><span class="line">    &#x27;$upstream&#x27;: &#x27;$custom_domain&#x27;,</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">//以下内容都不用动</span><br><span class="line">addEventListener(&#x27;fetch&#x27;, event =&gt; &#123;</span><br><span class="line">    event.respondWith(fetchAndApply(event.request));</span><br><span class="line">&#125;)</span><br><span class="line"> </span><br><span class="line">async function fetchAndApply(request) &#123;</span><br><span class="line"> </span><br><span class="line">    const region = request.headers.get(&#x27;cf-ipcountry&#x27;).toUpperCase();</span><br><span class="line">    const ip_address = request.headers.get(&#x27;cf-connecting-ip&#x27;);</span><br><span class="line">    const user_agent = request.headers.get(&#x27;user-agent&#x27;);</span><br><span class="line"> </span><br><span class="line">    let response = null;</span><br><span class="line">    let url = new URL(request.url);</span><br><span class="line">    let url_host = url.host;</span><br><span class="line"> </span><br><span class="line">    if (url.protocol == &#x27;http:&#x27;) &#123;</span><br><span class="line">        url.protocol = &#x27;https:&#x27;</span><br><span class="line">        response = Response.redirect(url.href);</span><br><span class="line">        return response;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    if (await device_status(user_agent)) &#123;</span><br><span class="line">        upstream_domain = upstream</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        upstream_domain = upstream_mobile</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    url.host = upstream_domain;</span><br><span class="line"> </span><br><span class="line">    if (blocked_region.includes(region)) &#123;</span><br><span class="line">        response = new Response(&#x27;Access denied: WorkersProxy is not available in your region yet.&#x27;, &#123;</span><br><span class="line">            status: 403</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125; else if(blocked_ip_address.includes(ip_address))&#123;</span><br><span class="line">        response = new Response(&#x27;Access denied: Your IP address is blocked by WorkersProxy.&#x27;, &#123;</span><br><span class="line">            status: 403</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125; else&#123;</span><br><span class="line">        let method = request.method;</span><br><span class="line">        let request_headers = request.headers;</span><br><span class="line">        let new_request_headers = new Headers(request_headers);</span><br><span class="line"> </span><br><span class="line">        new_request_headers.set(&#x27;Host&#x27;, upstream_domain);</span><br><span class="line">        new_request_headers.set(&#x27;Referer&#x27;, url.href);</span><br><span class="line"> </span><br><span class="line">        let original_response = await fetch(url.href, &#123;</span><br><span class="line">            method: method,</span><br><span class="line">            headers: new_request_headers</span><br><span class="line">        &#125;)</span><br><span class="line"> </span><br><span class="line">        let original_response_clone = original_response.clone();</span><br><span class="line">        let original_text = null;</span><br><span class="line">        let response_headers = original_response.headers;</span><br><span class="line">        let new_response_headers = new Headers(response_headers);</span><br><span class="line">        let status = original_response.status;</span><br><span class="line"> </span><br><span class="line">        new_response_headers.set(&#x27;access-control-allow-origin&#x27;, &#x27;*&#x27;);</span><br><span class="line">        new_response_headers.set(&#x27;access-control-allow-credentials&#x27;, true);</span><br><span class="line">        new_response_headers.delete(&#x27;content-security-policy&#x27;);</span><br><span class="line">        new_response_headers.delete(&#x27;content-security-policy-report-only&#x27;);</span><br><span class="line">        new_response_headers.delete(&#x27;clear-site-data&#x27;);</span><br><span class="line"> </span><br><span class="line">        const content_type = new_response_headers.get(&#x27;content-type&#x27;);</span><br><span class="line">        if (content_type.includes(&#x27;text/html&#x27;) &amp;&amp; content_type.includes(&#x27;UTF-8&#x27;)) &#123;</span><br><span class="line">            original_text = await replace_response_text(original_response_clone, upstream_domain, url_host);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            original_text = original_response_clone.body</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        response = new Response(original_text, &#123;</span><br><span class="line">            status,</span><br><span class="line">            headers: new_response_headers</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    return response;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">async function replace_response_text(response, upstream_domain, host_name) &#123;</span><br><span class="line">    let text = await response.text()</span><br><span class="line"> </span><br><span class="line">    var i, j;</span><br><span class="line">    for (i in replace_dict) &#123;</span><br><span class="line">        j = replace_dict[i]</span><br><span class="line">        if (i == &#x27;$upstream&#x27;) &#123;</span><br><span class="line">            i = upstream_domain</span><br><span class="line">        &#125; else if (i == &#x27;$custom_domain&#x27;) &#123;</span><br><span class="line">            i = host_name</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        if (j == &#x27;$upstream&#x27;) &#123;</span><br><span class="line">            j = upstream_domain</span><br><span class="line">        &#125; else if (j == &#x27;$custom_domain&#x27;) &#123;</span><br><span class="line">            j = host_name</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        let re = new RegExp(i, &#x27;g&#x27;)</span><br><span class="line">        text = text.replace(re, j);</span><br><span class="line">    &#125;</span><br><span class="line">    return text;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">async function device_status (user_agent_info) &#123;</span><br><span class="line">    var agents = [&quot;Android&quot;, &quot;iPhone&quot;, &quot;SymbianOS&quot;, &quot;Windows Phone&quot;, &quot;iPad&quot;, &quot;iPod&quot;];</span><br><span class="line">    var flag = true;</span><br><span class="line">    for (var v = 0; v &lt; agents.length; v++) &#123; if (user_agent_info.indexOf(agents[v]) &gt; 0) &#123;</span><br><span class="line">            flag = false;</span><br><span class="line">            break;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return flag;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里Cloudflare Workers也提供简约版的F12页面给你进行调试程序，这个功能针不撮，方便我这种菜鸟！！</p>
+<p><img src="https://img.jinjun.top/images/2022/02/fc7da34f4ba75.png" alt="workrs"></p>
+<h2 id="自定义works域名"><a href="#自定义works域名" class="headerlink" title="自定义works域名"></a>自定义works域名</h2><p>我这个页面应该是在19年的时候注册的服务，使用第三方面板进行，那时候还可以进行<code>cname</code>进行接入，现在添加新域名都要NS认证，不然不给你使用。这个就有点小遗憾。</p>
+<p>使用workrs的自定义域名服务，要在第三方面板上进行添加DNS，我之前添加的那个第三方面板跑路，所以这里我使用了挖站否：<a target="_blank" rel="noopener" href="https://cdn.wzfou.com/">https://cdn.wzfou.com/</a> 的第三方服务来修改DNS。</p>
+<p>来到 <code>网站</code> - <code>workre</code> - <code> -添加路由</code> - <code>填写你的自定义加速的域名</code> - <code>选择对应的worksrs</code></p>
+<p><img src="https://img.jinjun.top/images/2022/02/aadb8f991d820.png" alt="workrs"></p>
+<p>添加完成就是这个样子的，然后来到<code>规则</code>来进行页面规则设置</p>
+<p>设置Always Online在线，缓存TTL最多设置为一个月。</p>
+<p><img src="https://img.jinjun.top/images/2022/02/0ffe4fb22bc40.png" alt="workrs"></p>
+<p>接着返回 <code>Cloudflare Workrs</code> 页面，选择刚刚创建好的服务，查看刚刚的规则是否成功</p>
+<p><img src="https://img.jinjun.top/images/2022/02/fe81b2b864ac1.png" alt="workrs"></p>
+<p>这样就是大工告成，搞完收工。</p>
+<h4 id="镜像源地址"><a href="#镜像源地址" class="headerlink" title="镜像源地址"></a>镜像源地址</h4><p>自建代理地址：<a target="_blank" rel="noopener" href="https://gravatar.jinjun.top/avatar/">https://gravatar.jinjun.top/avatar/</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.jinjun.top/2022/02/19/Cloudflare%20Workers%20%E5%8F%8D%E4%BB%A3%20Gravatar%20%E5%A4%B4%E5%83%8F/" data-id="cleycjpgk003kqgun02qbfp4p" data-title="Cloudflare Workers 反代 Gravatar 头像" class="article-share-link">Teilen</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cloudflare/" rel="tag">Cloudflare</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gravtar/" rel="tag">Gravtar</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" rel="tag">反向代理</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-PHP缓存扩展yac安装" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/01/28/PHP%E7%BC%93%E5%AD%98%E6%89%A9%E5%B1%95yac%E5%AE%89%E8%A3%85/" class="article-date">
+  <time class="dt-published" datetime="2022-01-28T06:43:00.000Z" itemprop="datePublished">2022-01-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%BB%BA%E7%AB%99%E7%9F%A5%E8%AF%86/">建站知识</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/01/28/PHP%E7%BC%93%E5%AD%98%E6%89%A9%E5%B1%95yac%E5%AE%89%E8%A3%85/">PHP缓存扩展yac安装</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <!--markdown-->Yac是鸟哥大神的作品，Yac比apc的效率更快，占用cpu比Memcache/Redis低，综合这些我决定给博客的服务器PHP环境加上yac缓存扩展，禁用Memcache。
+
+<p>鸟哥大神博客：<a target="_blank" rel="noopener" href="https://www.laruence.com/2013/03/18/2846.html">https://www.laruence.com/2013/03/18/2846.html</a></p>
+<p>GitHub地址：<a target="_blank" rel="noopener" href="https://github.com/laruence/yac">https://github.com/laruence/yac</a></p>
+<h2 id="yac安装过程"><a href="#yac安装过程" class="headerlink" title="yac安装过程"></a>yac安装过程</h2><p>由于GitHub在国内日常污染，所以使用php源进行下载。</p>
+<p>PHP源：<a target="_blank" rel="noopener" href="https://pecl.php.net/package/yac">https://pecl.php.net/package/yac</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">wget https://pecl.php.net/get/yac-2.3.1.tgz</span><br><span class="line">tar -zxvf yac-2.3.1.tgz</span><br><span class="line">cd yac-2.3.1</span><br><span class="line"># 指定PHP版本安装yac扩展</span><br><span class="line">/vhs/kangle/ext/tpl_php7.3/bin/phpize</span><br><span class="line">./configure --prefix=/usr/local/yac --with-php-config=/vhs/kangle/ext/tpl_php7.3/bin/php-config</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置php-ini"><a href="#配置php-ini" class="headerlink" title="配置php.ini"></a>配置php.ini</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /vhs/kangle/ext/tpl_php7.3/php-templete.ini</span><br></pre></td></tr></table></figure>
+<p>在PHP配置文件，添加以下内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">extension=yac.so</span><br><span class="line">[yac]</span><br><span class="line">yac.enable = 1</span><br><span class="line">yac.keys_memory_size = 4M</span><br><span class="line">yac.values_memory_size = 64M</span><br><span class="line">yac.compress_threshold = -1</span><br><span class="line">yac.enable_cli = 0</span><br></pre></td></tr></table></figure>
+
+<h2 id="检测生效"><a href="#检测生效" class="headerlink" title="检测生效"></a>检测生效</h2><p>重启PHP： <code>service php-fpm restart</code></p>
+<p>查看PHP扩展：<code>php -m</code></p>
+<p><img src="https://img.jinjun.top/images/2022/02/5626cf07a6f01.png" alt="YAC扩展"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.jinjun.top/2022/01/28/PHP%E7%BC%93%E5%AD%98%E6%89%A9%E5%B1%95yac%E5%AE%89%E8%A3%85/" data-id="cleycjphy008zqgunf1fahvnu" data-title="PHP缓存扩展yac安装" class="article-share-link">Teilen</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP%E6%89%A9%E5%B1%95/" rel="tag">PHP扩展</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; zurück</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/33/">33</a><a class="extend next" rel="next" href="/page/4/">weiter &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Kategorien</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Typecho/">Typecho</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E4%BD%9C%E7%AC%94%E8%AE%B0/">工作笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BB%BA%E7%AB%99%E7%9F%A5%E8%AF%86/">建站知识</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%98%E8%85%BE%E7%AC%94%E8%AE%B0/">折腾笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%99%9A%E6%8B%9F%E5%8C%96/">虚拟化</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/">资源分享</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%92%A7%E8%A8%80%E9%92%A7%E8%AF%AD/">钧言钧语</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/2020/" rel="tag">2020</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliSQL/" rel="tag">AliSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Aria2/" rel="tag">Aria2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BT/" rel="tag">BT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Brotli/" rel="tag">Brotli</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CDN/" rel="tag">CDN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CardLink/" rel="tag">CardLink</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/" rel="tag">CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Chrome/" rel="tag">Chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cloudflare/" rel="tag">Cloudflare</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DUX/" rel="tag">DUX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Debian/" rel="tag">Debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deepin/" rel="tag">Deepin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flash/" rel="tag">Flash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GCC/" rel="tag">GCC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GD/" rel="tag">GD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GNOME/" rel="tag">GNOME</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github/" rel="tag">Github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Go/" rel="tag">Go</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GoAccess/" rel="tag">GoAccess</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/" rel="tag">Golang</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gravtar/" rel="tag">Gravtar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hyper-V/" rel="tag">Hyper-V</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IPv4/" rel="tag">IPv4</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IPv6/" rel="tag">IPv6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Instantbox/" rel="tag">Instantbox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/" rel="tag">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KMS/" rel="tag">KMS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LXC%E5%AE%B9%E5%99%A8/" rel="tag">LXC容器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC/" rel="tag">MAC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MD5/" rel="tag">MD5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mariadb/" rel="tag">Mariadb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NAS/" rel="tag">NAS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NAT/" rel="tag">NAT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NTP/" rel="tag">NTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OSS/" rel="tag">OSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP%E6%89%A9%E5%B1%95/" rel="tag">PHP扩展</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PS/" rel="tag">PS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PT/" rel="tag">PT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PWA/" rel="tag">PWA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Photoshop/" rel="tag">Photoshop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PostgreSQL/" rel="tag">PostgreSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PowerOff/" rel="tag">PowerOff</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Proxmox/" rel="tag">Proxmox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QQ/" rel="tag">QQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reboot/" rel="tag">Reboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rocky/" rel="tag">Rocky</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SATA/" rel="tag">SATA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SHA1/" rel="tag">SHA1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SmarSpam/" rel="tag">SmarSpam</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCPA/" rel="tag">TCPA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tengine/" rel="tag">Tengine</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tenginx/" rel="tag">Tenginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Termux/" rel="tag">Termux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TinyProxy/" rel="tag">TinyProxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Transmission/" rel="tag">Transmission</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Typecho/" rel="tag">Typecho</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UNAS/" rel="tag">UNAS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UOS/" rel="tag">UOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware/" rel="tag">VMware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VNC/" rel="tag">VNC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPS/" rel="tag">VPS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VS-Code/" rel="tag">VS Code</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WEB/" rel="tag">WEB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WPS/" rel="tag">WPS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WPS-Office/" rel="tag">WPS Office</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WPS-Pro/" rel="tag">WPS Pro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ZeroTier/" rel="tag">ZeroTier</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dig%E5%91%BD%E4%BB%A4/" rel="tag">dig命令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/easypanel/" rel="tag">easypanel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/h5ai/" rel="tag">h5ai</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/halt/" rel="tag">halt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hosts/" rel="tag">hosts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iframe/" rel="tag">iframe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ipset/" rel="tag">ipset</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/" rel="tag">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kangle/" rel="tag">kangle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lazyload/" rel="tag">lazyload</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nethogs/" rel="tag">nethogs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nohup/" rel="tag">nohup</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ossutil/" rel="tag">ossutil</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/qBittorrent/" rel="tag">qBittorrent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rdesktop/" rel="tag">rdesktop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/screen/" rel="tag">screen</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webp/" rel="tag">webp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%8B%E8%BD%BD/" rel="tag">下载</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/" rel="tag">个人笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AD%E5%9B%BD%E7%94%B5%E4%BF%A1/" rel="tag">中国电信</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AD%E5%9B%BD%E7%A7%BB%E5%8A%A8/" rel="tag">中国移动</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AD%E5%9B%BD%E8%81%94%E9%80%9A/" rel="tag">中国联通</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AD%E7%A7%8B/" rel="tag">中秋</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%BB%E9%A2%98/" rel="tag">主题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%BB%E9%A2%98%E5%BC%80%E5%8F%91/" rel="tag">主题开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%91%E9%94%81/" rel="tag">云锁</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%92%E8%81%94%E7%BD%91/" rel="tag">互联网</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%92%E8%81%94%E7%BD%91%E5%8D%A1/" rel="tag">互联网卡</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/" rel="tag">代码片段</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E9%AB%98%E4%BA%AE/" rel="tag">代码高亮</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%81%9A%E5%9B%BE%E5%B0%8F%E6%8A%80%E5%B7%A7/" rel="tag">做图小技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%8D%E6%B5%81/" rel="tag">免流</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E6%A0%B8/" rel="tag">内核</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A0%E5%AF%86%E4%BF%9D%E6%8A%A4/" rel="tag">加密保护</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%8E%E4%B8%BA/" rel="tag">华为</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%8E%E4%B8%BA%E4%BA%91/" rel="tag">华为云</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%8E%E4%B8%BA%E8%A7%86%E9%A2%91/" rel="tag">华为视频</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%97%E5%8D%9A/" rel="tag">南博</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" rel="tag">反向代理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BD%E5%BA%86/" rel="tag">国庆</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E7%89%87/" rel="tag">图片</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%9F%E5%90%8D/" rel="tag">域名</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%87%E4%BB%BD/" rel="tag">备份</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%87%E6%A1%88/" rel="tag">备案</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9C%E9%97%B4%E6%A8%A1%E5%BC%8F/" rel="tag">夜间模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E4%BD%93/" rel="tag">字体</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/" rel="tag">宝塔面板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%BD%E5%B8%A6%E6%B5%8B%E9%80%9F/" rel="tag">宽带测速</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E5%A4%A9%E7%A5%9E/" rel="tag">小天神</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E4%BF%A1%E9%83%A8/" rel="tag">工信部</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%BF%E4%B8%9C%E7%94%B5%E4%BF%A1/" rel="tag">广东电信</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BB%BA%E7%AB%99%E6%95%99%E7%A8%8B/" rel="tag">建站教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1/" rel="tag">微信</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="tag">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%87%92%E5%8A%A0%E8%BD%BD/" rel="tag">懒加载</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/" rel="tag">技术教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8C%82%E8%BD%BD%E7%A3%81%E7%9B%98/" rel="tag">挂载磁盘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/" rel="tag">搜索引擎</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%94%AF%E4%BB%98%E5%AE%9D/" rel="tag">支付宝</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A0%E7%BA%BF%E6%B5%8B%E9%80%9F/" rel="tag">无线测速</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1/" rel="tag">日志服务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%97%E7%94%B5%E6%B5%81/" rel="tag">暗电流</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">服务器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/" rel="tag">格式转换</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%8C%E9%9D%A2%E7%8E%AF%E5%A2%83/" rel="tag">桌面环境</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B0%94%E6%B3%A1/" rel="tag">气泡</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B1%BD%E8%BD%A6/" rel="tag">汽车</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B1%BD%E8%BD%A6%E6%BC%8F%E7%94%B5/" rel="tag">汽车漏电</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E9%80%9F/" rel="tag">测速</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BC%94%E8%AF%B4%E5%AE%B6/" rel="tag">演说家</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%81%AF%E7%AE%B1%E6%95%88%E6%9E%9C/" rel="tag">灯箱效果</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%82%B9%E6%BB%B4/" rel="tag">点滴</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%97%A5%E5%BF%AB%E4%B9%90/" rel="tag">生日快乐</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB/" rel="tag">生活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%B5%E8%B7%AF%E6%A3%80%E6%B5%8B/" rel="tag">电路检测</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%95%85%E8%B0%88/" rel="tag">畅谈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BB%E5%BD%95%E6%8F%90%E9%86%92/" rel="tag">登录提醒</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F/" rel="tag">监控系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%AD%E4%BB%A3%E7%A0%81/" rel="tag">短代码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%AF%E4%BB%A3%E7%A0%81/" rel="tag">纯代码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%88%E7%AB%AF/" rel="tag">终端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%A9%E7%95%A5%E5%9B%BE/" rel="tag">缩略图</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%AB%99%E4%BC%98%E5%8C%96/" rel="tag">网站优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E9%80%9F%E6%B5%8B%E8%AF%95/" rel="tag">网速测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%85%BE%E8%AE%AF/" rel="tag">腾讯</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%85%BE%E8%AE%AF%E4%BA%91/" rel="tag">腾讯云</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%85%BE%E8%AE%AF%E5%A4%A7%E7%8E%8B%E5%8D%A1/" rel="tag">腾讯大王卡</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%8A%B1%E5%B8%81/" rel="tag">花币</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%8B%B9%E6%9E%9C%E7%B3%BB%E7%BB%9F/" rel="tag">苹果系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" rel="tag">虚拟化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91/" rel="tag">视频</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%B0%E4%BA%8B%E6%9C%AC/" rel="tag">记事本</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BF%E9%97%AE%E7%BB%9F%E8%AE%A1/" rel="tag">访问统计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/" rel="tag">资源分享</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B7%A8%E5%B9%B4/" rel="tag">跨年</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%87%E6%BB%A4%E8%AF%84%E8%AE%BA/" rel="tag">过滤评论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%90%E7%BB%B4%E6%95%99%E7%A8%8B/" rel="tag">运维教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%98%E5%8E%9F/" rel="tag">还原</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9C%E7%A8%8B%E7%AE%A1%E7%90%86/" rel="tag">远程管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%92%89%E9%92%89/" rel="tag">钉钉</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%92%A7%E8%A8%80%E9%92%A7%E8%AF%AD/" rel="tag">钧言钧语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F/" rel="tag">镜像加速</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%98%B2%E7%81%AB%E5%A2%99/" rel="tag">防火墙</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%98%B2%E7%9B%97%E9%93%BE/" rel="tag">防盗链</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%98%B2%E9%AA%9A%E6%89%B0/" rel="tag">防骚扰</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91/" rel="tag">阿里云</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E4%BA%94%E7%A6%8F/" rel="tag">集五福</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%99%E6%80%81IP/" rel="tag">静态IP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99/" rel="tag">静态网站</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9F%B3%E4%B9%90/" rel="tag">音乐</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9F%B3%E5%93%8D/" rel="tag">音响</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%86%E5%8F%96%E6%B5%81%E9%87%8F/" rel="tag">领取流量</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/2020/" style="font-size: 10px;">2020</a> <a href="/tags/AliSQL/" style="font-size: 10.67px;">AliSQL</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Aria2/" style="font-size: 10px;">Aria2</a> <a href="/tags/BT/" style="font-size: 10px;">BT</a> <a href="/tags/Brotli/" style="font-size: 10px;">Brotli</a> <a href="/tags/CDN/" style="font-size: 14.67px;">CDN</a> <a href="/tags/CSS/" style="font-size: 14.67px;">CSS</a> <a href="/tags/CardLink/" style="font-size: 10px;">CardLink</a> <a href="/tags/CentOS/" style="font-size: 18.67px;">CentOS</a> <a href="/tags/Chrome/" style="font-size: 11.33px;">Chrome</a> <a href="/tags/Cloudflare/" style="font-size: 10px;">Cloudflare</a> <a href="/tags/DUX/" style="font-size: 10px;">DUX</a> <a href="/tags/Debian/" style="font-size: 16.67px;">Debian</a> <a href="/tags/Deepin/" style="font-size: 14.67px;">Deepin</a> <a href="/tags/Docker/" style="font-size: 15.33px;">Docker</a> <a href="/tags/Flash/" style="font-size: 10px;">Flash</a> <a href="/tags/GCC/" style="font-size: 10.67px;">GCC</a> <a href="/tags/GD/" style="font-size: 10px;">GD</a> <a href="/tags/GNOME/" style="font-size: 10px;">GNOME</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Go/" style="font-size: 10px;">Go</a> <a href="/tags/GoAccess/" style="font-size: 10px;">GoAccess</a> <a href="/tags/Golang/" style="font-size: 10px;">Golang</a> <a href="/tags/Gravtar/" style="font-size: 10.67px;">Gravtar</a> <a href="/tags/HTML/" style="font-size: 15.33px;">HTML</a> <a href="/tags/Hyper-V/" style="font-size: 10.67px;">Hyper-V</a> <a href="/tags/IPv4/" style="font-size: 12.67px;">IPv4</a> <a href="/tags/IPv6/" style="font-size: 12.67px;">IPv6</a> <a href="/tags/Instantbox/" style="font-size: 10px;">Instantbox</a> <a href="/tags/Javascript/" style="font-size: 17.33px;">Javascript</a> <a href="/tags/KMS/" style="font-size: 10px;">KMS</a> <a href="/tags/LXC%E5%AE%B9%E5%99%A8/" style="font-size: 11.33px;">LXC容器</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/MAC/" style="font-size: 12px;">MAC</a> <a href="/tags/MD5/" style="font-size: 10px;">MD5</a> <a href="/tags/Mariadb/" style="font-size: 10.67px;">Mariadb</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/NAS/" style="font-size: 11.33px;">NAS</a> <a href="/tags/NAT/" style="font-size: 11.33px;">NAT</a> <a href="/tags/NTP/" style="font-size: 10px;">NTP</a> <a href="/tags/Nginx/" style="font-size: 17.33px;">Nginx</a> <a href="/tags/OSS/" style="font-size: 10.67px;">OSS</a> <a href="/tags/PHP/" style="font-size: 17.33px;">PHP</a> <a href="/tags/PHP%E6%89%A9%E5%B1%95/" style="font-size: 14px;">PHP扩展</a> <a href="/tags/PS/" style="font-size: 10px;">PS</a> <a href="/tags/PT/" style="font-size: 10.67px;">PT</a> <a href="/tags/PWA/" style="font-size: 10px;">PWA</a> <a href="/tags/Photoshop/" style="font-size: 10px;">Photoshop</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/PowerOff/" style="font-size: 10px;">PowerOff</a> <a href="/tags/Proxmox/" style="font-size: 13.33px;">Proxmox</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/Reboot/" style="font-size: 10px;">Reboot</a> <a href="/tags/Rocky/" style="font-size: 10px;">Rocky</a> <a href="/tags/SATA/" style="font-size: 10px;">SATA</a> <a href="/tags/SHA1/" style="font-size: 10px;">SHA1</a> <a href="/tags/SSH/" style="font-size: 14.67px;">SSH</a> <a href="/tags/SmarSpam/" style="font-size: 10px;">SmarSpam</a> <a href="/tags/TCPA/" style="font-size: 10px;">TCPA</a> <a href="/tags/Tengine/" style="font-size: 10px;">Tengine</a> <a href="/tags/Tenginx/" style="font-size: 16px;">Tenginx</a> <a href="/tags/Termux/" style="font-size: 12.67px;">Termux</a> <a href="/tags/TinyProxy/" style="font-size: 10.67px;">TinyProxy</a> <a href="/tags/Transmission/" style="font-size: 12px;">Transmission</a> <a href="/tags/Typecho/" style="font-size: 19.33px;">Typecho</a> <a href="/tags/UNAS/" style="font-size: 10px;">UNAS</a> <a href="/tags/UOS/" style="font-size: 11.33px;">UOS</a> <a href="/tags/Ubuntu/" style="font-size: 13.33px;">Ubuntu</a> <a href="/tags/VMware/" style="font-size: 12px;">VMware</a> <a href="/tags/VNC/" style="font-size: 10.67px;">VNC</a> <a href="/tags/VPS/" style="font-size: 11.33px;">VPS</a> <a href="/tags/VS-Code/" style="font-size: 10px;">VS Code</a> <a href="/tags/WEB/" style="font-size: 12.67px;">WEB</a> <a href="/tags/WPS/" style="font-size: 10px;">WPS</a> <a href="/tags/WPS-Office/" style="font-size: 10px;">WPS Office</a> <a href="/tags/WPS-Pro/" style="font-size: 10px;">WPS Pro</a> <a href="/tags/Windows/" style="font-size: 13.33px;">Windows</a> <a href="/tags/ZeroTier/" style="font-size: 10.67px;">ZeroTier</a> <a href="/tags/dig%E5%91%BD%E4%BB%A4/" style="font-size: 10px;">dig命令</a> <a href="/tags/easypanel/" style="font-size: 10.67px;">easypanel</a> <a href="/tags/h5ai/" style="font-size: 10px;">h5ai</a> <a href="/tags/halt/" style="font-size: 10px;">halt</a> <a href="/tags/hosts/" style="font-size: 10px;">hosts</a> <a href="/tags/iframe/" style="font-size: 10px;">iframe</a> <a href="/tags/ipset/" style="font-size: 10px;">ipset</a> <a href="/tags/iptables/" style="font-size: 10.67px;">iptables</a> <a href="/tags/kangle/" style="font-size: 14.67px;">kangle</a> <a href="/tags/lazyload/" style="font-size: 10px;">lazyload</a> <a href="/tags/mysql/" style="font-size: 18px;">mysql</a> <a href="/tags/nethogs/" style="font-size: 10px;">nethogs</a> <a href="/tags/nohup/" style="font-size: 10px;">nohup</a> <a href="/tags/ossutil/" style="font-size: 10px;">ossutil</a> <a href="/tags/qBittorrent/" style="font-size: 10px;">qBittorrent</a> <a href="/tags/rdesktop/" style="font-size: 10px;">rdesktop</a> <a href="/tags/screen/" style="font-size: 10px;">screen</a> <a href="/tags/webp/" style="font-size: 10px;">webp</a> <a href="/tags/%E4%B8%8B%E8%BD%BD/" style="font-size: 11.33px;">下载</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/" style="font-size: 10px;">个人笔记</a> <a href="/tags/%E4%B8%AD%E5%9B%BD%E7%94%B5%E4%BF%A1/" style="font-size: 12px;">中国电信</a> <a href="/tags/%E4%B8%AD%E5%9B%BD%E7%A7%BB%E5%8A%A8/" style="font-size: 11.33px;">中国移动</a> <a href="/tags/%E4%B8%AD%E5%9B%BD%E8%81%94%E9%80%9A/" style="font-size: 12px;">中国联通</a> <a href="/tags/%E4%B8%AD%E7%A7%8B/" style="font-size: 10px;">中秋</a> <a href="/tags/%E4%B8%BB%E9%A2%98/" style="font-size: 10px;">主题</a> <a href="/tags/%E4%B8%BB%E9%A2%98%E5%BC%80%E5%8F%91/" style="font-size: 10.67px;">主题开发</a> <a href="/tags/%E4%BA%91%E9%94%81/" style="font-size: 10px;">云锁</a> <a href="/tags/%E4%BA%92%E8%81%94%E7%BD%91/" style="font-size: 10px;">互联网</a> <a href="/tags/%E4%BA%92%E8%81%94%E7%BD%91%E5%8D%A1/" style="font-size: 10.67px;">互联网卡</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/" style="font-size: 10.67px;">代码片段</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E9%AB%98%E4%BA%AE/" style="font-size: 10px;">代码高亮</a> <a href="/tags/%E5%81%9A%E5%9B%BE%E5%B0%8F%E6%8A%80%E5%B7%A7/" style="font-size: 10px;">做图小技巧</a> <a href="/tags/%E5%85%8D%E6%B5%81/" style="font-size: 10.67px;">免流</a> <a href="/tags/%E5%86%85%E6%A0%B8/" style="font-size: 10.67px;">内核</a> <a href="/tags/%E5%8A%A0%E5%AF%86%E4%BF%9D%E6%8A%A4/" style="font-size: 10px;">加密保护</a> <a href="/tags/%E5%8D%8E%E4%B8%BA/" style="font-size: 11.33px;">华为</a> <a href="/tags/%E5%8D%8E%E4%B8%BA%E4%BA%91/" style="font-size: 10.67px;">华为云</a> <a href="/tags/%E5%8D%8E%E4%B8%BA%E8%A7%86%E9%A2%91/" style="font-size: 10px;">华为视频</a> <a href="/tags/%E5%8D%97%E5%8D%9A/" style="font-size: 10px;">南博</a> <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 10px;">博客</a> <a href="/tags/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" style="font-size: 10.67px;">反向代理</a> <a href="/tags/%E5%9B%BD%E5%BA%86/" style="font-size: 10px;">国庆</a> <a href="/tags/%E5%9B%BE%E7%89%87/" style="font-size: 10px;">图片</a> <a href="/tags/%E5%9F%9F%E5%90%8D/" style="font-size: 10px;">域名</a> <a href="/tags/%E5%A4%87%E4%BB%BD/" style="font-size: 10px;">备份</a> <a href="/tags/%E5%A4%87%E6%A1%88/" style="font-size: 10px;">备案</a> <a href="/tags/%E5%A4%9C%E9%97%B4%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">夜间模式</a> <a href="/tags/%E5%AD%97%E4%BD%93/" style="font-size: 10px;">字体</a> <a href="/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/" style="font-size: 14px;">宝塔面板</a> <a href="/tags/%E5%AE%BD%E5%B8%A6%E6%B5%8B%E9%80%9F/" style="font-size: 10px;">宽带测速</a> <a href="/tags/%E5%B0%8F%E5%A4%A9%E7%A5%9E/" style="font-size: 10px;">小天神</a> <a href="/tags/%E5%B7%A5%E4%BF%A1%E9%83%A8/" style="font-size: 10px;">工信部</a> <a href="/tags/%E5%B9%BF%E4%B8%9C%E7%94%B5%E4%BF%A1/" style="font-size: 10.67px;">广东电信</a> <a href="/tags/%E5%BB%BA%E7%AB%99%E6%95%99%E7%A8%8B/" style="font-size: 10px;">建站教程</a> <a href="/tags/%E5%BE%AE%E4%BF%A1/" style="font-size: 10px;">微信</a> <a href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" style="font-size: 10px;">快捷键</a> <a href="/tags/%E6%87%92%E5%8A%A0%E8%BD%BD/" style="font-size: 11.33px;">懒加载</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/" style="font-size: 10.67px;">技术教程</a> <a href="/tags/%E6%8C%82%E8%BD%BD%E7%A3%81%E7%9B%98/" style="font-size: 10px;">挂载磁盘</a> <a href="/tags/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/" style="font-size: 10px;">搜索引擎</a> <a href="/tags/%E6%94%AF%E4%BB%98%E5%AE%9D/" style="font-size: 10px;">支付宝</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 10.67px;">数据库</a> <a href="/tags/%E6%97%A0%E7%BA%BF%E6%B5%8B%E9%80%9F/" style="font-size: 10px;">无线测速</a> <a href="/tags/%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1/" style="font-size: 10px;">日志服务</a> <a href="/tags/%E6%9A%97%E7%94%B5%E6%B5%81/" style="font-size: 10px;">暗电流</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 14px;">服务器</a> <a href="/tags/%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/" style="font-size: 10px;">格式转换</a> <a href="/tags/%E6%A1%8C%E9%9D%A2%E7%8E%AF%E5%A2%83/" style="font-size: 10px;">桌面环境</a> <a href="/tags/%E6%B0%94%E6%B3%A1/" style="font-size: 10px;">气泡</a> <a href="/tags/%E6%B1%BD%E8%BD%A6/" style="font-size: 10.67px;">汽车</a> <a href="/tags/%E6%B1%BD%E8%BD%A6%E6%BC%8F%E7%94%B5/" style="font-size: 10px;">汽车漏电</a> <a href="/tags/%E6%B5%8B%E9%80%9F/" style="font-size: 10px;">测速</a> <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="font-size: 10.67px;">浏览器</a> <a href="/tags/%E6%BC%94%E8%AF%B4%E5%AE%B6/" style="font-size: 10px;">演说家</a> <a href="/tags/%E7%81%AF%E7%AE%B1%E6%95%88%E6%9E%9C/" style="font-size: 10.67px;">灯箱效果</a> <a href="/tags/%E7%82%B9%E6%BB%B4/" style="font-size: 11.33px;">点滴</a> <a href="/tags/%E7%94%9F%E6%97%A5%E5%BF%AB%E4%B9%90/" style="font-size: 10.67px;">生日快乐</a> <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 10.67px;">生活</a> <a href="/tags/%E7%94%B5%E8%B7%AF%E6%A3%80%E6%B5%8B/" style="font-size: 10.67px;">电路检测</a> <a href="/tags/%E7%95%85%E8%B0%88/" style="font-size: 10px;">畅谈</a> <a href="/tags/%E7%99%BB%E5%BD%95%E6%8F%90%E9%86%92/" style="font-size: 10px;">登录提醒</a> <a href="/tags/%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">监控系统</a> <a href="/tags/%E7%9F%AD%E4%BB%A3%E7%A0%81/" style="font-size: 10px;">短代码</a> <a href="/tags/%E7%BA%AF%E4%BB%A3%E7%A0%81/" style="font-size: 10px;">纯代码</a> <a href="/tags/%E7%BB%88%E7%AB%AF/" style="font-size: 10.67px;">终端</a> <a href="/tags/%E7%BC%A9%E7%95%A5%E5%9B%BE/" style="font-size: 10px;">缩略图</a> <a href="/tags/%E7%BD%91%E7%AB%99%E4%BC%98%E5%8C%96/" style="font-size: 10px;">网站优化</a> <a href="/tags/%E7%BD%91%E9%80%9F%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">网速测试</a> <a href="/tags/%E8%85%BE%E8%AE%AF/" style="font-size: 10px;">腾讯</a> <a href="/tags/%E8%85%BE%E8%AE%AF%E4%BA%91/" style="font-size: 12.67px;">腾讯云</a> <a href="/tags/%E8%85%BE%E8%AE%AF%E5%A4%A7%E7%8E%8B%E5%8D%A1/" style="font-size: 10px;">腾讯大王卡</a> <a href="/tags/%E8%8A%B1%E5%B8%81/" style="font-size: 10px;">花币</a> <a href="/tags/%E8%8B%B9%E6%9E%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">苹果系统</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" style="font-size: 10px;">虚拟化</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" style="font-size: 16px;">虚拟机</a> <a href="/tags/%E8%A7%86%E9%A2%91/" style="font-size: 10.67px;">视频</a> <a href="/tags/%E8%AE%B0%E4%BA%8B%E6%9C%AC/" style="font-size: 10.67px;">记事本</a> <a href="/tags/%E8%AE%BF%E9%97%AE%E7%BB%9F%E8%AE%A1/" style="font-size: 10px;">访问统计</a> <a href="/tags/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/" style="font-size: 10px;">资源分享</a> <a href="/tags/%E8%B7%A8%E5%B9%B4/" style="font-size: 10px;">跨年</a> <a href="/tags/%E8%BF%87%E6%BB%A4%E8%AF%84%E8%AE%BA/" style="font-size: 10px;">过滤评论</a> <a href="/tags/%E8%BF%90%E7%BB%B4%E6%95%99%E7%A8%8B/" style="font-size: 12.67px;">运维教程</a> <a href="/tags/%E8%BF%98%E5%8E%9F/" style="font-size: 10px;">还原</a> <a href="/tags/%E8%BF%9C%E7%A8%8B%E7%AE%A1%E7%90%86/" style="font-size: 10px;">远程管理</a> <a href="/tags/%E9%92%89%E9%92%89/" style="font-size: 10px;">钉钉</a> <a href="/tags/%E9%92%A7%E8%A8%80%E9%92%A7%E8%AF%AD/" style="font-size: 10.67px;">钧言钧语</a> <a href="/tags/%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F/" style="font-size: 11.33px;">镜像加速</a> <a href="/tags/%E9%98%B2%E7%81%AB%E5%A2%99/" style="font-size: 10px;">防火墙</a> <a href="/tags/%E9%98%B2%E7%9B%97%E9%93%BE/" style="font-size: 10.67px;">防盗链</a> <a href="/tags/%E9%98%B2%E9%AA%9A%E6%89%B0/" style="font-size: 10px;">防骚扰</a> <a href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91/" style="font-size: 13.33px;">阿里云</a> <a href="/tags/%E9%9B%86%E4%BA%94%E7%A6%8F/" style="font-size: 10px;">集五福</a> <a href="/tags/%E9%9D%99%E6%80%81IP/" style="font-size: 10.67px;">静态IP</a> <a href="/tags/%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99/" style="font-size: 11.33px;">静态网站</a> <a href="/tags/%E9%9F%B3%E4%B9%90/" style="font-size: 10px;">音乐</a> <a href="/tags/%E9%9F%B3%E5%93%8D/" style="font-size: 10px;">音响</a> <a href="/tags/%E9%A2%86%E5%8F%96%E6%B5%81%E9%87%8F/" style="font-size: 10px;">领取流量</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">January 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">August 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">August 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">June 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/03/07/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/04/%E4%BD%BF%E7%94%A8%20CardLink%20%E7%94%9F%E6%88%90%E5%8D%A1%E7%89%87%E5%BC%8F%E9%93%BE%E6%8E%A5/">使用 CardLink 生成卡片式链接</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/19/%E6%B5%8B%E8%AF%95%E5%8D%95%E5%9B%BE%E6%A8%A1%E5%BC%8F/">测试单图模式</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/04/%E6%B5%8B%E8%AF%95%E5%A4%9A%E5%9B%BE%E6%96%87%E7%AB%A0/">测试多图文章</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/26/Zerotier%20%E7%A7%81%E6%9C%89%E5%8C%96%E9%83%A8%E7%BD%B2%E6%A0%B9%E6%9C%8D%E5%8A%A1%E5%99%A8(Planet)/">Zerotier 私有化部署根服务器(Planet)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 钧言<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

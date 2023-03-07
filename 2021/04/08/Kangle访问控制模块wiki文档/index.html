@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Kangle访问控制模块wiki文档 | 钧言极客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="##### 模块分类 kangle访问控制模块，按功能分为匹配模块和标记模块，按位置分为请求控制模块和回应控制模块。匹配模块只用来匹配相关数据，而不修改，标记模块就有可能修改，或特殊目的。 每个模块，都可以加上or&#x3D;’0|1’ revers&#x3D;’0|1’ 两个属性。or表示和下一个模块是或的关系，默认是与(AND)的关系。(kangle 3.1.7开始支持)revers表示逻辑反">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kangle访问控制模块wiki文档">
+<meta property="og:url" content="http://blog.jinjun.top/2021/04/08/Kangle%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E6%A8%A1%E5%9D%97wiki%E6%96%87%E6%A1%A3/index.html">
+<meta property="og:site_name" content="钧言极客">
+<meta property="og:description" content="##### 模块分类 kangle访问控制模块，按功能分为匹配模块和标记模块，按位置分为请求控制模块和回应控制模块。匹配模块只用来匹配相关数据，而不修改，标记模块就有可能修改，或特殊目的。 每个模块，都可以加上or&#x3D;’0|1’ revers&#x3D;’0|1’ 两个属性。or表示和下一个模块是或的关系，默认是与(AND)的关系。(kangle 3.1.7开始支持)revers表示逻辑反">
+<meta property="og:locale">
+<meta property="article:published_time" content="2021-04-08T07:48:00.000Z">
+<meta property="article:modified_time" content="2023-03-07T13:33:20.048Z">
+<meta property="article:author" content="钧言">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="mysql">
+<meta property="article:tag" content="kangle">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="钧言极客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">钧言极客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">记录生活,爱好学习,不爱折腾.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.jinjun.top"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Kangle访问控制模块wiki文档" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/04/08/Kangle%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E6%A8%A1%E5%9D%97wiki%E6%96%87%E6%A1%A3/" class="article-date">
+  <time class="dt-published" datetime="2021-04-08T07:48:00.000Z" itemprop="datePublished">2021-04-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%BB%BA%E7%AB%99%E7%9F%A5%E8%AF%86/">建站知识</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Kangle访问控制模块wiki文档
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <!--markdown-->##### 模块分类
+<p>kangle访问控制模块，按功能分为匹配模块和标记模块，按位置分为请求控制模块和回应控制模块。匹配模块只用来匹配相关数据，而不修改，标记模块就有可能修改，或特殊目的。</p>
+<p>每个模块，都可以加上or&#x3D;’0|1’ revers&#x3D;’0|1’ 两个属性。<br>or表示和下一个模块是或的关系，默认是与(AND)的关系。(kangle 3.1.7开始支持)<br>revers表示逻辑反转，默认不反转。</p>
+<h5 id="请求控制和回应控制"><a href="#请求控制和回应控制" class="headerlink" title="请求控制和回应控制"></a>请求控制和回应控制</h5><p>Kangle的访问控制分为请求控制和回应控制。 请求控制在最前面，用户发送请求过来时即进行请求控制。 回应控制发生在数据发送给用户之前，即进行回应控制。</p>
+<p>每个控制由一张或多张表加一个默认目标组成，其中BEGIN表是系统内建表，所有控制从BEGIN开始。 每张表可以定义若干条“链”，在一张表中控制按顺序从上到下对规则链进行匹配。 规则链由一个目标和任意个匹配模块和任意个标记模块组成。 在表中，用户可以按需要随意添加、删除、编辑或反转规则链。</p>
+<p>在”请求控制”内有一个系统表：”BEGIN表”。 在”回应控制”内有两个系统表”BEGIN表”和”POSTMAP表”。 “POSTMAP表”完成url到物理文件的映射。用户使用”POSTMAP表”，需要自行创建。 例如：对文件进行管理、禁止文件被下载（日志文件不允许被下载）等可用”POSTMAP表”。</p>
+<p>kangle如果发现用户的请求匹配了一个规则链中的匹配模块，则进入标记模块对请求做简单的处理，之后就按该条规则链指定的目标处理。如果目标是继续，则还要进行下一条规则链处理，否则就返回控制，按控制“目标”进行处理。 如果目标是“继续”，则还要进行下一条规则链的处理。 如果目标是“默认”，则控制按默认目标处理（默认目标有：拒绝、回写数据、服务器、虚拟主机等）。 如果目标是“拒绝”，则将对用户的请求拒绝并发送错误信息给用户，之后中断连接。 如果目标是“虚拟主机”，则将对用户请求使用虚拟主机处理。 如果目标是“服务器”，则用户使用的是反代。 如果目标是“回写数据”，则将对用户的请求拒绝，并发送管理员设定的原始数据给用户。</p>
+<table>
+<thead>
+<tr>
+<th align="center">模 块 名 称</th>
+<th>作 用</th>
+<th>模 块 说 明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">url</td>
+<td>请求控制和回应控制</td>
+<td>匹配用户url网址,网址可以使用正则表达式。</td>
+</tr>
+<tr>
+<td align="center">reg_path</td>
+<td>请求控制和回应控制</td>
+<td>匹配路径。可以使用正则表达式匹配路径。</td>
+</tr>
+<tr>
+<td align="center">reg_param</td>
+<td>请求控制和回应控制</td>
+<td>可用正则表达式进行url参数匹配</td>
+</tr>
+<tr>
+<td align="center">path</td>
+<td>请求控制和回应控制</td>
+<td>匹配路径</td>
+</tr>
+<tr>
+<td align="center">dst_port</td>
+<td>请求控制和回应控制</td>
+<td>匹配目标端口</td>
+</tr>
+<tr>
+<td align="center">meth</td>
+<td>请求控制和回应控制</td>
+<td>匹配http请求方法（如get 、 post ）</td>
+</tr>
+<tr>
+<td align="center">file_ext</td>
+<td>请求控制和回应控制</td>
+<td>匹配一个或多个文件扩展名</td>
+</tr>
+<tr>
+<td align="center">host</td>
+<td>请求控制和回应控制</td>
+<td>匹配一个或多个主机头</td>
+</tr>
+<tr>
+<td align="center">wide_host</td>
+<td>请求控制和回应控制</td>
+<td>泛域名匹配</td>
+</tr>
+<tr>
+<td align="center">map_host</td>
+<td>请求控制和回应控制</td>
+<td>匹配一个或多个主机头。与“host”的区别：map_host是以文件形式来存放主机头进行匹配</td>
+</tr>
+<tr>
+<td align="center">header</td>
+<td>请求控制和回应控制</td>
+<td>匹配http头</td>
+</tr>
+<tr>
+<td align="center">self</td>
+<td>请求控制和回应控制</td>
+<td>匹配当前连接的服务器ip</td>
+</tr>
+<tr>
+<td align="center">sefl_port</td>
+<td>请求控制和回应控制</td>
+<td>匹配当前连接的服务器端口</td>
+</tr>
+<tr>
+<td align="center">src</td>
+<td>请求控制和回应控制</td>
+<td>匹配源地址（ip或者ip段）</td>
+</tr>
+<tr>
+<td align="center">time</td>
+<td>请求控制和回应控制</td>
+<td>匹配当前时间，格式为：“crontab”</td>
+</tr>
+<tr>
+<td align="center">ssl_serial</td>
+<td>请求控制和回应控制</td>
+<td>匹配证书序列号</td>
+</tr>
+<tr>
+<td align="center">auth_user</td>
+<td>请求控制和回应控制</td>
+<td>匹配http论证的用户</td>
+</tr>
+<tr>
+<td align="center">referer</td>
+<td>请求控制和回应控制</td>
+<td>url来源</td>
+</tr>
+</tbody></table>
+<h3 id="请求控制匹配模块"><a href="#请求控制匹配模块" class="headerlink" title="请求控制匹配模块"></a>请求控制匹配模块</h3><h4 id="url"><a href="#url" class="headerlink" title="url"></a>url</h4><p>说明：匹配用户url网址。网址可以使用正则表达式<br>范围: 请求控制和回应控制<br>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_url &gt;&lt;![CDATA[url地址]]&gt;&lt;/acl_url&gt;</span><br></pre></td></tr></table></figure>
+
+<p>使用例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_url &gt;&lt;![CDATA[[www.test.com](http://www.test.com/)]]&gt;&lt;/acl_url&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="reg-path"><a href="#reg-path" class="headerlink" title="reg_path"></a>reg_path</h4><p>说明：匹配路径。可以使用正则表达式匹配路径<br>范围: 请求控制和回应控制<br>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_reg_path??path=&#x27;路径&#x27; raw=&#x27;原始的&#x27; nc=&#x27;不区分大小写&#x27;&gt;&lt;/acl_reg_path&gt;</span><br></pre></td></tr></table></figure>
+
+<p>使用例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_reg_path??path=&#x27;^/admin/&#x27;&gt;&lt;/acl_reg_path&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="reg-param"><a href="#reg-param" class="headerlink" title="reg_param"></a>reg_param</h4><p>说明：可用正则表达式进行url参数匹配<br>范围: 请求控制和回应控制<br>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_reg_param??param=&#x27;url参数&#x27;&gt;&lt;/acl_reg_param&gt;</span><br></pre></td></tr></table></figure>
+<p>使用例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_reg_param??param=&#x27;^[http://www.kanglesoft.com/&#x27;](http://www.kanglesoft.com/)&gt;&lt;/acl_reg_param&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="path"><a href="#path" class="headerlink" title="path"></a>path</h4><p>说明：匹配路径<br>范围: 请求控制和回应控制<br>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_path??path=&#x27;路径&#x27;&gt;&lt;/acl_path&gt;</span><br></pre></td></tr></table></figure>
+<p>使用例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_path??path=&#x27;/admin/&#x27;&gt;&lt;/acl_path&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="dst-port"><a href="#dst-port" class="headerlink" title="dst_port"></a>dst_port</h4><p>说明：匹配目标端口<br>范围: 请求控制和回应控制<br>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_dst_port &gt;端口&lt;/acl_dst_port&gt;</span><br></pre></td></tr></table></figure>
+<p>使用例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_dst_port &gt;80&lt;/acl_dst_port&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="meth"><a href="#meth" class="headerlink" title="meth"></a>meth</h4><p>说明：匹配http请求方法（如get 、post)<br>范围: 请求控制和回应控制<br>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_meth &gt;参数&lt;/acl_meth&gt;</span><br></pre></td></tr></table></figure>
+<p>使用例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_meth &gt;GET&lt;/acl_meth&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="file-ext"><a href="#file-ext" class="headerlink" title="file_ext"></a>file_ext</h4><p>说明：匹配一个或多个文件扩展名<br>范围: 请求控制和回应控制<br>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_file_ext??split=&#x27;|&#x27;&gt;文件扩展名&lt;/acl_file_ext&gt;</span><br></pre></td></tr></table></figure>
+<p>使用例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_file_ext??split=&#x27;|&#x27;&gt;html|js|php&lt;/acl_file_ext&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="host"><a href="#host" class="headerlink" title="host"></a>host</h4><p>说明：匹配一个或多个主机头<br>范围: 请求控制和回应控制<br>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_host??split=&#x27;|&#x27;&gt;主机头地址&lt;/acl_host&gt;</span><br></pre></td></tr></table></figure>
+<p>使用例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_host??split=&#x27;|&#x27;&gt;www.test.com|[www.ttt.com](http://www.ttt.com/)&lt;/acl_host&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="wide-host"><a href="#wide-host" class="headerlink" title="wide_host"></a>wide_host</h4><p>说明：泛域名匹配<br>范围: 请求控制和回应控制<br>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_wide_host??v=&#x27;域名1|域名2&#x27;&gt;&lt;/acl_wide_host&gt;</span><br></pre></td></tr></table></figure>
+<p>使用例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_wide_host??v=&#x27;abc.com|*.abc.com&#x27;&gt;&lt;/acl_wide_host&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="map-host"><a href="#map-host" class="headerlink" title="map_host"></a>map_host</h4><p>说明：匹配一个或多个主机头与”host”的区别：map_host是以文件形式来存放主机头进行匹配<br>范围: 请求控制和回应控制<br>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_map_host??file=&#x27;文件名&#x27;&gt;&lt;/acl_map_host&gt;</span><br></pre></td></tr></table></figure>
+<p>使用例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_map_host??file=&#x27;host.txt&#x27;&gt;&lt;/acl_map_host&gt;</span><br></pre></td></tr></table></figure>
+<p>注：在文件中域名一行写一个</p>
+<h4 id="header"><a href="#header" class="headerlink" title="header"></a>header</h4><p>说明:匹配http头<br>范围:请求控制和回应控制<br>语法:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_header header=&#x27;http头&#x27; regex=&#x27;1&#x27;&gt;&lt;![CDATA[参数]]&gt;&lt;/acl_header&gt;</span><br></pre></td></tr></table></figure>
+<p>使用例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_header header=&#x27;content-type&#x27; regex=&#x27;1&#x27;&gt;&lt;![CDATA[text/html]]&gt;&lt;/acl_header&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="self"><a href="#self" class="headerlink" title="self"></a>self</h4><p>说明:匹配当前连接的服务器ip<br>范围:请求控制和回应控制<br>语法:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_self &gt;ip地址&lt;/acl_self&gt;</span><br></pre></td></tr></table></figure>
+<p>使用例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_self &gt;192.168.1.203&lt;/acl_self&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="selfs"><a href="#selfs" class="headerlink" title="selfs"></a>selfs</h4><p>说明:匹配多个本机ip地址<br>范围:请求控制和回应控制<br>语法:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_selfs??split=&#x27;|&#x27;&gt;ip地址&lt;/acl_selfs&gt;</span><br></pre></td></tr></table></figure>
+<p>使用例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_selfs??split=&#x27;|&#x27;&gt;192.168.1.203|192.168.1.205&lt;/acl_selfs&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="sefl-port"><a href="#sefl-port" class="headerlink" title="sefl_port"></a>sefl_port</h4><p>说明:匹配当前连接的服务器端口<br>范围:请求控制和回应控制<br>语法:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_self_port &gt;端口号&lt;/acl_self_port&gt;</span><br></pre></td></tr></table></figure>
+<p>使用例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_self_port &gt;80&lt;/acl_self_port&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="self-ports"><a href="#self-ports" class="headerlink" title="self_ports"></a>self_ports</h4><p>说明:匹配多个本机端口<br>范围:请求控制和回应控制<br>语法:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_self_ports??split=&#x27;|&#x27;&gt;端口号&lt;/acl_self_ports&gt;</span><br></pre></td></tr></table></figure>
+<p>使用例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_self_ports??split=&#x27;|&#x27;&gt;80|3320&lt;/acl_self_ports&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="src"><a href="#src" class="headerlink" title="src"></a>src</h4><p>说明:匹配源地址（ip或者ip段）<br>范围:请求控制和回应控制<br>语法:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_src &gt;ip或ip段&lt;/acl_src&gt;</span><br></pre></td></tr></table></figure>
+<p>使用例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_src &gt;203.168.1.0/24&lt;/acl_src&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="srcs"><a href="#srcs" class="headerlink" title="srcs"></a>srcs</h4><p>说明:多ip段<br>范围:请求控制和回应控制<br>语法:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_srcs??split=&#x27;|&#x27;&gt;ip段地址&lt;/acl_srcs&gt;</span><br></pre></td></tr></table></figure>
+<p>使用例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_srcs??split=&#x27;|&#x27;&gt;203.158.0.|203.168.1.&lt;/acl_srcs&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="time"><a href="#time" class="headerlink" title="time"></a>time</h4><p>说明:匹配当前时间，格式为：”crontab”<br>范围:请求控制和回应控制<br>参数格式:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">*　 *　??*　 *　 *</span><br><span class="line">分　时　日　月　周</span><br></pre></td></tr></table></figure>
+<p>语法:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_time??time=&#x27;参数&#x27;&gt;&lt;/acl_time&gt;</span><br></pre></td></tr></table></figure>
+<p>使用例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_time??time=&#x27;30 21 * * *&#x27;&gt;&lt;/acl_time&gt;</span><br></pre></td></tr></table></figure>
+<p>例子表示每晚的21:30执行</p>
+<h4 id="ssl-serial"><a href="#ssl-serial" class="headerlink" title="ssl_serial"></a>ssl_serial</h4><p>说明:匹配证书序列号<br>范围:请求控制和回应控制<br>语法:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_ssl_serial??icase=&#x27;1&#x27; split=&#x27;|&#x27;&gt;证书序列号&lt;/acl_ssl_serial&gt;</span><br></pre></td></tr></table></figure>
+<p>使用例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_ssl_serial??icase=&#x27;1&#x27; split=&#x27;|&#x27;&gt;df48a548cef576bb4ae7a726b693842&lt;/acl_ssl_serial&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="auth-user"><a href="#auth-user" class="headerlink" title="auth_user"></a>auth_user</h4><p>说明:匹配http认证用户<br>范围:请求控制和回应控制<br>语法:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_auth_user??split=&#x27;|&#x27;&gt;用户名1|用户名2&lt;/acl_auth_user&gt;</span><br></pre></td></tr></table></figure>
+<p>例匹配用户名是usera和用户名为userb</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_auth_user??split=&#x27;|&gt;usera|userb&lt;/acl_auth_user&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="referer"><a href="#referer" class="headerlink" title="referer"></a>referer</h4><p>说明:url来源<br>范围:请求控制和回应控制<br>参数：<br>Null:匹配为空<br>NotNull:匹配不为空<br>EqHost:来源的域名和访问的域名相同<br>语法:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_referer??referer=&#x27;参数&#x27;&gt;&lt;/acl_referer&gt;</span><br></pre></td></tr></table></figure>
+<p>使用例子:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_referer??referer=&#x27;NotNull&#x27;&gt;&lt;/acl_referer&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="ip-rate"><a href="#ip-rate" class="headerlink" title="ip_rate"></a>ip_rate</h4><p>说明:ip访问频率<br>范围:请求控制和回应控制<br>语法:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_ip_rate request=&#x27;次数&#x27; second=&#x27;时间单位秒&#x27;&gt;&lt;/acl_ip_rate&gt;</span><br></pre></td></tr></table></figure>
+<p>使用例子:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_ip_rate request=&#x27;20&#x27; second=&#x27;10&#x27;&gt;&lt;/acl_ip_rate&gt;</span><br></pre></td></tr></table></figure>
+<p>设置匹配每ip10秒内可以访问20次</p>
+<h4 id="mark"><a href="#mark" class="headerlink" title="mark"></a>mark</h4><p>说明：印记模块<br>范围:请求控制和回应控制<br>参数：<br>eq是等于<br>lt是小于<br>gt是大于<br>语法:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_mark op=&#x27;eq&#x27; v=&#x27;参数&#x27;&gt;&lt;/acl_mark&gt;</span><br></pre></td></tr></table></figure>
+<p>参数可以设置在0-255范围内,mark可以将请求控制和回应控制中的模块通过印记模块串连起来</p>
+<p>使用例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_mark op=&#x27;eq&#x27; v=&#x27;100&#x27;&gt;&lt;/acl_mark&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="per-ip"><a href="#per-ip" class="headerlink" title="per_ip"></a>per_ip</h4><p>说明：匹配每ip连接数<br>范围:请求控制和回应控制<br>语法:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_per_ip??max=&#x27;数值&#x27;&gt;&lt;/acl_per_ip&gt;</span><br></pre></td></tr></table></figure>
+<p>使用例子:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_per_ip??max=&#x27;100&#x27;&gt;&lt;/acl_per_ip&gt;</span><br></pre></td></tr></table></figure>
+<p>匹配每ip 100连接数</p>
+<h4 id="worker"><a href="#worker" class="headerlink" title="worker"></a>worker</h4><p>说明：检测队列类型<br>范围:请求控制和回应控制<br>参数：<br>rq:请求队列<br>io:io队列<br>dns:dns工作数<br>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_worker??type=&#x27;队列类型&#x27; max=&#x27;达到匹配的设定参数就返回成功&#x27;&gt;&lt;/acl_worker&gt;</span><br></pre></td></tr></table></figure>
+<p>使用例子:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_worker??type=&#x27;rq&#x27; max=&#x27;20&#x27;&gt;&lt;/acl_worker&gt;</span><br></pre></td></tr></table></figure>
+
+
+<p>###请求控制标记模块</p>
+<h4 id="speed-limit"><a href="#speed-limit" class="headerlink" title="speed_limit"></a>speed_limit</h4><p>说明：单连接限速只针对当前连接<br>speed_limit模块使用方法请参考</p>
+<h4 id="gspeed-limit"><a href="#gspeed-limit" class="headerlink" title="gspeed_limit"></a>gspeed_limit</h4><p>说明：分组限速针对所有连接<br>gspeed_limit模块使用方法请参考</p>
+<h4 id="ip-speed-limit"><a href="#ip-speed-limit" class="headerlink" title="ip_speed_limit"></a>ip_speed_limit</h4><p>说明：每ip限速,限速针对每ip<br>ip_speed_limit模块使用方法请参考</p>
+<h4 id="flag"><a href="#flag" class="headerlink" title="flag"></a>flag</h4><p>说明：对用户请求作不缓存、不过滤内容及不防cc攻击标记<br>范围：请求控制<br>参数：<br>clear flag(clear):清除设置<br>不缓存(no_cache):不缓存<br>多节点忽略宕机切换(mserver_noswitch):勾选后多节点宕机不会自动切换<br>忽略网络错误(ignore_error):勾选后做多节点cdn源机出现问题，cdn节点仍可以访问<br>上流短连接(upstream_noka):上游使用短链接<br>原始url代理:(raw_proxy)<br>double_cache_expire:双倍过期时间<br>x_cache:插入x-cache<br>via:插入via<br>no_x_forwared_for:不插入x_forwared_for（如果没有勾选，默认是插入x_forwared_for）<br>x_real_ip: 插入真实ip<br>no_buffer: 不使用缓冲<br>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;mark_flag??no_cache=&#x27;参数&#x27; &gt;&lt;/mark_flag&gt;</span><br></pre></td></tr></table></figure>
+<p>使用例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;mark_flag??no_cache=&#x27;1&#x27; &gt;&lt;/mark_flag&gt;</span><br></pre></td></tr></table></figure>
+<p>例子说明：不缓存</p>
+<h4 id="rewrite"><a href="#rewrite" class="headerlink" title="rewrite"></a>rewrite</h4><p>说明：url重写<br>范围：请求控制<br>参数：<br>prefix：前缀<br>path：路径<br>rewrite to:重写到<br>code:状态码<br>internal:内部的<br>no case:忽略大小写<br>qsappend:附加的url参数<br>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;mark_rewrite? ?path=&#x27;路径&#x27; dst=&#x27;重写到&#x27; internal=&#x27;0&#x27; nc=&#x27;1&#x27; qsa=&#x27;1&#x27; code=&#x27;重写代码&#x27;&gt;&lt;/mark_rewrite&gt;</span><br></pre></td></tr></table></figure>
+<p>使用例子</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;mark_rewrite? ?path=&#x27;(.*)&#x27; dst=&#x27;http://t.com$1&#x27; internal=&#x27;0&#x27; nc=&#x27;1&#x27; qsa=&#x27;1&#x27; code=&#x27;301&#x27;&gt;&lt;/mark_rewrite&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="redirect"><a href="#redirect" class="headerlink" title="redirect"></a>redirect</h4><p>说明：url重定向<br>范围：请求控制<br>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;mark_redirect? ?dst=&#x27;重定向到的地址&#x27; internal=&#x27;内部的&#x27; code=&#x27;状态码&#x27;&gt;&lt;/mark_redirect&gt;</span><br></pre></td></tr></table></figure>
+<p>使用例子:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;acl_host??split=&#x27;|&#x27;&gt;www.php.com&lt;/acl_host&gt;</span><br><span class="line">&lt;mark_redirect? ?dst=&#x27;http://127.0.0.100/&#x27; internal=&#x27;1&#x27; code=&#x27;301&#x27;&gt;&lt;/mark_redirect&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="auth"><a href="#auth" class="headerlink" title="auth"></a>auth</h4><p>说明：http认证<br>范围：请求控制<br>参数：<br>file:文件名<br>crypt_type:加密类型<br>auth_type:论证类型<br>realm:一般使用默认的<br>require:验证使用的帐户名是否被允许使用kangle服务器<br>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;mark_auth? ?file=&#x27;文件名&#x27; crypt_type=&#x27;加密类型&#x27; auth_type=&#x27;论证类型&#x27; realm=&#x27;kangle&#x27; require=&#x27;*&#x27;&gt;&lt;/mark_auth&gt;</span><br></pre></td></tr></table></figure>
+<p>使用例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;mark_auth? ?file=&#x27;fly.txt&#x27; crypt_type=&#x27;plain&#x27; auth_type=&#x27;Basic&#x27; realm=&#x27;kangle&#x27; require=&#x27;*&#x27;&gt;&lt;/mark_auth&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="host-rewrite"><a href="#host-rewrite" class="headerlink" title="host_rewrite"></a>host_rewrite</h4><p>说明：主机重写<br>范围：请求控制<br>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;mark_host_rewrite? ?reg_host=&#x27;需重定向域名&#x27; host=&#x27;www.php.com&#x27; port=&#x27;80&#x27; proxy=&#x27;0或1(1是反代)&#x27; rewrite=&#x27;0或1(1是重写)&#x27; life_time=&#x27;生存时间&#x27;&gt;</span><br><span class="line">&lt;/mark_host_rewrite&gt;</span><br></pre></td></tr></table></figure>
+<p>使用例子:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;mark_host_rewrite? ?reg_host=&#x27;(.*)&#x27; host=&#x27;www.php.com&#x27; port=&#x27;80&#x27; proxy=&#x27;0&#x27; rewrite=&#x27;1&#x27; life_time=&#x27;0&#x27;&gt;&lt;/mark_host_rewrite&gt;</span><br></pre></td></tr></table></figure>
+<p>本例是所有域名访问重定向到<a target="_blank" rel="noopener" href="http://www.php.com/">www.php.com</a></p>
+<h4 id="anti-cc"><a href="#anti-cc" class="headerlink" title="anti_cc"></a>anti_cc</h4><p>说明：防CC模块<br>范围：请求控制<br>参数：<br>wl（white list）:1代表勾选白名单，0表示不勾选白名单，白名单时间有效时间以你的设置为准，可在kangle–》配置–》资源限制–》白名单有效期<br>fix_url： 勾选后，如触发了防CC，在地址栏不会显示一串长长的字符，这样让地址栏显得更友好<br>skip_cache：勾选后，如果是缓存了的内容，就会跳过防CC规则<br>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;mark_anti_cc? ?request=&#x27;次数&#x27; second=&#x27;时间/秒&#x27; wl=&#x27;白名单&#x27;&gt;&lt;![CDATA[防CC代码]]&gt;&lt;/mark_anti_cc&gt;</span><br></pre></td></tr></table></figure>
+<p>使用例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;mark_anti_cc? ?request=&#x27;20&#x27; second=&#x27;10&#x27; wl=&#x27;1&#x27;&gt;&lt;![CDATA[HTTP/1.1 200 OK</span><br><span class="line">??Content-Type: text/html; charset=utf-8</span><br><span class="line">??Connection: close</span><br><span class="line">&lt;html&gt;&lt;body&gt;&lt;script language=&quot;javascript&quot;&gt;window.location=&quot;&#123; &#123;murl&#125;&#125;&quot;;&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;]]&gt;&lt;/mark_anti_cc&gt;</span><br></pre></td></tr></table></figure>
+<p>注：{ {murl}}左右两边的大括号在写配置文件时中间不要有空格</p>
+<h4 id="extend-flag"><a href="#extend-flag" class="headerlink" title="extend_flag"></a>extend_flag</h4><p>说明：是否启用扩展卡<br>范围: 请求控制和回应控制<br>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;mark_extend_flag? ?no_extend=&#x27;参数&#x27;&gt;&lt;/mark_extend_flag&gt;</span><br></pre></td></tr></table></figure>
+<p>使用例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;mark_extend_flag? ?no_extend=&#x27;1&#x27;&gt;&lt;/mark_extend_flag&gt;</span><br></pre></td></tr></table></figure>
+<p>勾选了无扩展，全部文件以源文件形式显示,(这个模块在回应控制中要添加在POSTMAP表里面，因为在回应控制的BEGIN表里面，数据已经产生所以没有效果。如果在回应控制里没有POSTMAP表可以手动添加这个表)</p>
+<h4 id="host-1"><a href="#host-1" class="headerlink" title="host"></a>host</h4><p>说明：主机头<br>范围：请求控制<br>参数：<br>host:主机头<br>port:端口<br>life_time:生存时间<br>rewrite:重写<br>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;mark_host? ?host=&#x27;主机头&#x27; port=&#x27;端口号&#x27; proxy=&#x27;反代&#x27;&gt;&lt;/mark_host&gt;</span><br></pre></td></tr></table></figure>
+<p>使用例子:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;mark_host? ?host=&#x27;test986.com&#x27; port=&#x27;80&#x27; proxy=&#x27;1&#x27;&gt;&lt;/mark_host&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="replace-ip"><a href="#replace-ip" class="headerlink" title="replace_ip"></a>replace_ip</h4><p>说明：ip替换<br>范围：请求控制<br>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;mark_replace_ip? ?header=&#x27;参数&#x27;&gt;&lt;/mark_replace_ip&gt;</span><br></pre></td></tr></table></figure>
+<p>使用例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;mark_replace_ip? ?header=&#x27;X-Real-Ip&#x27;&gt;&lt;/mark_replace_ip&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="param"><a href="#param" class="headerlink" title="param"></a>param</h4><p>说明：参数过滤<br>范围：请求控制<br>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;mark_param? ?name=&#x27;命名&#x27; value=&#x27;需要过滤的参数&#x27; get=&#x27;0或1&#x27;??post=&#x27;0或1&#x27;??icase=&#x27;0或1（1是忽略大小写）&#x27;??charset=&#x27;编码&#x27;&gt;&lt;/mark_param&gt;</span><br></pre></td></tr></table></figure>
+<p>使用例子:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;mark_param? ?name=&#x27;name&#x27; value=&#x27;&#x27;.*[; ]?((or)|(insert)|(select)|(union)|(update)|(delete)|(replace)|</span><br><span class="line">(create)|(drop)|(alter)|(grant)|(load)|(show)|(exec))[\s(]&#x27; get=&#x27;1&#x27;??post=&#x27;1&#x27;??icase=&#x27;1&#x27;??charset=&#x27;utf-8&#x27;&gt;</span><br><span class="line">&lt;/mark_param&gt;</span><br></pre></td></tr></table></figure>
+<p>本例是防SQL注入攻击</p>
+<h4 id="post-file"><a href="#post-file" class="headerlink" title="post_file"></a>post_file</h4><p>说明：上传文件过滤<br>范围：请求控制<br>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;mark_post_file? ?filename=&#x27;参数&#x27; icase=&#x27;0或1（1是忽略大小写）&#x27;&gt;&lt;/mark_post_file&gt;</span><br></pre></td></tr></table></figure>
+<p>使用例子:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;mark_post_file? ?filename=&#x27;\.((php)|(htm)|(html))$&#x27; icase=&#x27;1&#x27;&gt;&lt;/mark_post_file&gt;</span><br></pre></td></tr></table></figure>
+<p>本例是防上传木马示例</p>
+<h4 id="mark-1"><a href="#mark-1" class="headerlink" title="mark"></a>mark</h4><p>请参考请求控制匹配模块的mark模块</p>
+<h4 id="black-list"><a href="#black-list" class="headerlink" title="black_list"></a>black_list</h4><p>说明：插入到黑名单<br>范围：请求控制和回应控制<br>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;mark_black_list??&gt;&lt;/mark_black_list&gt;</span><br></pre></td></tr></table></figure>
+<p>这个模块只要这样添加了就可以了</p>
+<h4 id="check-black-list"><a href="#check-black-list" class="headerlink" title="check_black_list"></a>check_black_list</h4><p>说明：检查黑名单<br>范围：请求控制<br>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;mark_check_black_list??time_out=&#x27;加入黑名单后限制时间&#x27;&gt;&lt;/mark_check_black_list&gt;</span><br></pre></td></tr></table></figure>
+<p>使用例子:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;mark_check_black_list??time_out=&#x27;1800&#x27;&gt;&lt;/mark_check_black_list&gt;</span><br></pre></td></tr></table></figure>
+<p>是黑名单就拒绝 ,check_black_list模块一般加在black_list模块前面</p>
+<h4 id="flow"><a href="#flow" class="headerlink" title="flow"></a>flow</h4><p>说明:流量统计<br>范围：请求控制和回应控制<br>参数：<br>reset：重置 (如果勾选了reset这个选项，重新点提交后，统计就会重新计算,此选项需要3311的flow访问控制模块里设置)<br>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;mark_flow??flow=&#x27;0&#x27; cache=&#x27;0&#x27; &gt;&lt;/mark_flow&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="param-count"><a href="#param-count" class="headerlink" title="param_count"></a>param_count</h4><p>说明：防hash攻击<br>范围：请求控制和回应控制<br>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;mark_param_count? ?get=&#x27;1&#x27;??post=&#x27;1&#x27;??max_count=&#x27;允许的参数数量&#x27; &gt;&lt;/mark_param_count&gt;</span><br></pre></td></tr></table></figure>
+<p>使用例子:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;mark_param_count? ?get=&#x27;1&#x27;??post=&#x27;1&#x27;??max_count=&#x27;1000&#x27; &gt;&lt;/mark_param_count&gt;</span><br></pre></td></tr></table></figure>
+<p>上例主要是防hash攻击，max_count&#x3D;1000是最多允许的参数数量</p>
+<h4 id="path-sign"><a href="#path-sign" class="headerlink" title="path_sign"></a>path_sign</h4><p>说明：签名防盗链<br>范围：请求控制<br>参数：<br>sign：签名<br>expire：有效期<br>key：密钥<br>说明：以上三个参数需要和您程序上的参数吻合才行<br>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;mark_path_sign??sign=&#x27;签名&#x27; expire=&#x27;有效期&#x27; key=&#x27;密钥&#x27;&gt;&lt;/mark_path_sign&gt;</span><br></pre></td></tr></table></figure>
+<p>使用例子:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;mark_path_sign??sign=&#x27;_KS&#x27; expire=&#x27;_KE&#x27; key=&#x27;dfsdfsdfse&#x27;&gt;&lt;/mark_path_sign&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="remove-header"><a href="#remove-header" class="headerlink" title="remove_header"></a>remove_header</h4><p>说明：删除http头<br>范围: 回应控制<br>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;mark_remove_header? ?attr=&#x27;属性&#x27; val=&#x27;值&#x27; &gt;&lt;/mark_remove_header&gt;</span><br></pre></td></tr></table></figure>
+<p>使用例子:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;mark_remove_header? ?attr=&#x27;http-header&#x27; val=&#x27;text&#x27; &gt;&lt;/mark_remove_header&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="remove-param"><a href="#remove-param" class="headerlink" title="remove_param"></a>remove_param</h4><p>说明：删除参数<br>范围：请求控制和回应控制<br>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;mark_remove_param??params=&#x27;参数&#x27; raw=&#x27;原始的&#x27; nc=&#x27;不区分大小写&#x27;&gt;&lt;/mark_remove_param&gt;</span><br></pre></td></tr></table></figure>
+<p>使用例子:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;mark_remove_param??params=&#x27;thread-1493962&#x27; raw=&#x27;0&#x27; nc=&#x27;1&#x27;&gt;&lt;/mark_remove_param&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="self-ip"><a href="#self-ip" class="headerlink" title="self_ip"></a>self_ip</h4><p>说明：指定出口ip<br>范围：请求控制<br>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;mark_self_ip? ?ip=&#x27;指定出口ip&#x27;&gt;&lt;/mark_self_ip&gt;</span><br></pre></td></tr></table></figure>
+<p>使用例子:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;mark_self_ip? ?ip=&#x27;192.168.1.20&#x27;&gt;&lt;/mark_self_ip&gt;</span><br></pre></td></tr></table></figure>
+<p>反向代理时指定哪个ip连接源机，如果为空时进来哪个ip就哪个ip去连接</p>
+<h4 id="temp-file"><a href="#temp-file" class="headerlink" title="temp_file"></a>temp_file</h4><p>说明：临时文件<br>范围：请求控制<br>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;mark_temp_file? ?tf=&#x27;0或1&#x27;&gt;&lt;/mark_temp_file&gt;</span><br></pre></td></tr></table></figure>
+<p>使用例子:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;mark_temp_file? ?tf=&#x27;1&#x27;&gt;&lt;/mark_temp_file&gt;</span><br><span class="line">````</span><br><span class="line">1是on 表示使用临时文件, 0是off 表示使用内存缓存, 设置了这个模块就会忽略全局里的设置，优先使用这里</span><br><span class="line"></span><br><span class="line">upload_progress</span><br><span class="line">upload_progress模块使用方法请参考</span><br><span class="line">#### url_rewrite</span><br><span class="line">说明：url重写</span><br><span class="line">范围：请求控制</span><br><span class="line">语法：</span><br></pre></td></tr></table></figure>
+<p>&lt;mark_url_rewrite??url&#x3D;’重写url’ dst&#x3D;’url地址’ icase&#x3D;’1（1是忽略大小写）’&gt;<br></mark_url_rewrite></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用例子:</span><br></pre></td></tr></table></figure>
+<p>&lt;mark_url_rewrite??url&#x3D;’<a target="_blank" rel="noopener" href="http://www.php22.com/vhost/(.*)$">http://www.php22.com/vhost/(.*)$</a>‘ dst&#x3D;’<a target="_blank" rel="noopener" href="http://www.php22.com/vhost/?c=session&a=loginForm">http://www.php22.com/vhost/?c=session&amp;a=loginForm</a>‘ icase&#x3D;’1’&gt;<br></mark_url_rewrite></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">kangle的url_rewrite重写带协议，比如是http的就在地址前面写上http</span><br><span class="line"></span><br><span class="line">### 回应控制匹配模块</span><br><span class="line"></span><br><span class="line">#### file</span><br><span class="line">说明：匹配一个或多个文件</span><br><span class="line">范围：回应控制</span><br><span class="line">语法：</span><br></pre></td></tr></table></figure>
+<p>&lt;acl_file??split&#x3D;’|’&gt;匹配文件</acl_file></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用例子</span><br></pre></td></tr></table></figure>
+<p>&lt;acl_file??split&#x3D;’|’&gt;D:\project\eeee\test2\index.html</acl_file></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">匹配的路径要写具体的路径，像reg_file可使用正则就不需要写具体的路径</span><br><span class="line"></span><br><span class="line">#### filename</span><br><span class="line">说明：匹配一个或多个文件名</span><br><span class="line">范围：回应控制</span><br><span class="line">语法：</span><br></pre></td></tr></table></figure>
+<p>&lt;acl_filename??split&#x3D;’|’&gt;匹配文件名</acl_filename></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用例子:</span><br></pre></td></tr></table></figure>
+<p>&lt;acl_filename??split&#x3D;’|’&gt;index.html|test.php</acl_filename></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### dir</span><br><span class="line">说明：匹配多个目录下的文件。按目录匹配</span><br><span class="line">范围：回应控制</span><br><span class="line">语法：</span><br></pre></td></tr></table></figure>
+<p>&lt;acl_dir??split&#x3D;’|’&gt;匹配文件目录名</acl_dir></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用例子:</span><br></pre></td></tr></table></figure>
+<p>&lt;acl_dir??split&#x3D;’|’&gt;D:\project\eeee\test2</acl_dir></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">#### reg_file</span><br><span class="line">说明：匹配一个或多个文件。可用正则表达式表示</span><br><span class="line">范围：回应控制</span><br><span class="line">语法：</span><br></pre></td></tr></table></figure>
+<p>&lt;acl_reg_file??file&#x3D;’匹配文件’&gt;</acl_reg_file></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用例子:</span><br></pre></td></tr></table></figure>
+<p>&lt;acl_reg_file??file&#x3D;’(D:\project\eeee\test2(.*))|D:\project\eeee\test(.*)’&gt;</acl_reg_file></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br></pre></td><td class="code"><pre><span class="line">上例是匹配test2和test这两个目录里的所有文件名</span><br><span class="line"></span><br><span class="line">#### reg_filename</span><br><span class="line">说明：匹配一个或多个文件名。可用正则表达式表示</span><br><span class="line">范围：回应控制</span><br><span class="line">语法：</span><br><span class="line">```</span><br><span class="line">&lt;acl_reg_filename??filename=&#x27;匹配文件名&#x27;&gt;&lt;/acl_reg_filename&gt;</span><br><span class="line">```</span><br><span class="line">使用例子:</span><br><span class="line">```</span><br><span class="line">&lt;acl_reg_filename??filename=&#x27;(index\.html)|(php\.php)&#x27;&gt;&lt;/acl_reg_filename&gt;</span><br><span class="line">```</span><br><span class="line"></span><br><span class="line">#### content_length</span><br><span class="line">说明：配置内容大小</span><br><span class="line">范围：回应控制</span><br><span class="line">语法：</span><br><span class="line">```</span><br><span class="line">&lt;acl_content_length??min=&#x27;匹配内容起始大小&#x27; max=&#x27;匹配内容最大大小&#x27; content_range=&#x27;返回内容范围&#x27;&gt;&lt;/acl_content_length&gt;</span><br><span class="line">```</span><br><span class="line">使用例子:</span><br><span class="line">```</span><br><span class="line">&lt;acl_content_length??min=&#x27;1&#x27; max=&#x27;100K&#x27; content_range=&#x27;1&#x27;&gt;&lt;/acl_content_length&gt;</span><br><span class="line">```</span><br><span class="line">参数的单位是字节，也可以在参数后面写单位,上例中是对1字节到100K的内容大小进行匹配</span><br><span class="line"></span><br><span class="line">#### mark</span><br><span class="line">请参考请求控制匹配模块的mark模块</span><br><span class="line">#### obj_flag</span><br><span class="line">说明：检测网页的状态</span><br><span class="line">范围：回应控制</span><br><span class="line">语法：</span><br><span class="line">```</span><br><span class="line">&lt;acl_obj_flag??flag=&#x27;参数&#x27;&gt;&lt;/acl_obj_flag&gt;</span><br><span class="line">```</span><br><span class="line">使用例子:</span><br><span class="line">```</span><br><span class="line">&lt;acl_obj_flag??flag=&#x27;nocache,&#x27;&gt;&lt;/acl_obj_flag&gt;</span><br><span class="line">```</span><br><span class="line">上例意思是：检测回应里面是否有不允许缓存的标识</span><br><span class="line"></span><br><span class="line">#### status_code</span><br><span class="line">说明：状态码</span><br><span class="line">范围：回应控制</span><br><span class="line">参数：</span><br><span class="line">eq是等于</span><br><span class="line">lt是小于</span><br><span class="line">gt是大于</span><br><span class="line">语法：</span><br><span class="line">```</span><br><span class="line">&lt;acl_status_code op=&#x27;参数&#x27; code=&#x27;状态码&#x27;&gt;&lt;/acl_status_code&gt;</span><br><span class="line">```</span><br><span class="line">使用例子:</span><br><span class="line">```</span><br><span class="line">&lt;acl_status_code op=&#x27;gt&#x27; code=&#x27;301&#x27;&gt;&lt;/acl_status_code&gt;</span><br><span class="line">```</span><br><span class="line"></span><br><span class="line">#### worker</span><br><span class="line">请参考请求控制匹配模块的worker模块</span><br><span class="line">回应控制标记模块</span><br><span class="line">#### cache_control</span><br><span class="line">说明：缓存标记</span><br><span class="line">范围: 回应控制</span><br><span class="line">参数：</span><br><span class="line">static：强制缓存静态化</span><br><span class="line">last_modified: 当勾选static这个选项后，勾选last-modified才会有用，勾选后会生成一个last-modified的头给浏览器(就是最后修改时间)</span><br><span class="line">soft: 勾选后就不会发送maxage给浏览器头</span><br><span class="line">语法：</span><br><span class="line">```</span><br><span class="line">&lt;mark_cache_control? ?max_age=&#x27;设置时间&#x27; static=&#x27;强制缓存静态化&#x27;&gt;&lt;/mark_cache_control&gt;</span><br><span class="line">```</span><br><span class="line">使用例子：</span><br><span class="line">```</span><br><span class="line">&lt;mark_cache_control? ?max_age=&#x27;120&#x27; static=&#x27;1&#x27;&gt;&lt;/mark_cache_control&gt;</span><br><span class="line">```</span><br><span class="line"></span><br><span class="line">#### content??</span><br><span class="line">说明：内容过滤（可以使用正则表达式进行内容过滤）</span><br><span class="line">范围: 回应控制</span><br><span class="line">语法：</span><br><span class="line">```</span><br><span class="line">&lt;mark_content? ?charset=&#x27;编码&#x27;&gt;&lt;![CDATA[过滤的内容]]&gt;&lt;/mark_content&gt;</span><br><span class="line">```</span><br><span class="line">使用例子：</span><br><span class="line">```</span><br><span class="line">&lt;mark_content? ?charset=&#x27;utf-8&#x27;&gt;&lt;![CDATA[(html)|(网站控制面板)]]&gt;&lt;/mark_content&gt;</span><br><span class="line">```</span><br><span class="line"></span><br><span class="line">#### response_flag</span><br><span class="line">说明：对回应给用户的请求作标记</span><br><span class="line">范围: 回应控制</span><br><span class="line">参数：</span><br><span class="line">nogzip: 不使用gzip压缩</span><br><span class="line">gzip: 启用gzip压缩</span><br><span class="line">nocache: 不缓存</span><br><span class="line">cache: 缓存</span><br><span class="line">nodiskcache: 不启用磁盘缓存</span><br><span class="line">语法：</span><br><span class="line">```</span><br><span class="line">&lt;mark_response_flag? ?flagvalue=&#x27;参数&#x27;&gt;&lt;/mark_response_flag&gt;</span><br><span class="line">```</span><br><span class="line">使用例子：</span><br><span class="line">```</span><br><span class="line">&lt;mark_response_flag? ?flagvalue=&#x27;gzip,&#x27;&gt;&lt;/mark_response_flag&gt;</span><br><span class="line">```</span><br><span class="line"></span><br><span class="line">#### add_header</span><br><span class="line">说明：增加自定义头</span><br><span class="line">范围: 回应控制</span><br><span class="line">语法：</span><br><span class="line">```</span><br><span class="line">&lt;mark_add_header? ?attr=&#x27;属性&#x27; val=&#x27;参数&#x27;&gt;&lt;/mark_add_header&gt;</span><br><span class="line">```</span><br><span class="line">使用例子:</span><br><span class="line">```</span><br><span class="line">&lt;mark_add_header? ?attr=&#x27;http-header&#x27; val=&#x27;kangle&#x27;&gt;&lt;/mark_add_header&gt;</span><br><span class="line">```</span><br><span class="line"></span><br><span class="line">#### remove_header</span><br><span class="line">请参考请求控制标记模块的remove_header模块</span><br><span class="line">#### replace_header</span><br><span class="line">说明：替换http头(注：用于反代或cdn，替换源的http头)</span><br><span class="line">范围: 回应控制</span><br><span class="line">语法：</span><br><span class="line">```</span><br><span class="line">&lt;mark_replace_header? ?attr=&#x27;http头名&#x27; val=&#x27;原始名&#x27; replace=&#x27;替换后名&#x27;&gt;&lt;/mark_replace_header&gt;</span><br><span class="line">```</span><br><span class="line">使用例子：</span><br><span class="line">```</span><br><span class="line">&lt;mark_replace_header? ?attr=&#x27;http-header&#x27; val=&#x27;test&#x27; replace=&#x27;test2&#x27;&gt;&lt;/mark_replace_header&gt;</span><br><span class="line">```</span><br><span class="line"></span><br><span class="line">#### footer</span><br><span class="line">说明：插入内容在前面或者后面</span><br><span class="line">范围: 回应控制</span><br><span class="line">参数：</span><br><span class="line">head：插入内空在头部</span><br><span class="line">replace: 选中后会替换页面的所有内容</span><br><span class="line">语法：</span><br><span class="line">```</span><br><span class="line">&lt;mark_footer??head=&#x27;插入广告在头部&#x27;&gt;&lt;![CDATA[插入的内容]]&gt;&lt;/mark_footer&gt;</span><br><span class="line">```</span><br><span class="line">使用例子：</span><br><span class="line">```</span><br><span class="line">&lt;mark_footer??head=&#x27;1&#x27;&gt;&lt;![CDATA[ad-test]]&gt;&lt;/mark_footer&gt;</span><br><span class="line">```</span><br><span class="line"></span><br><span class="line">#### extend_flag</span><br><span class="line">请参考请求控制标记模块的extend_flag模块</span><br><span class="line">http_only</span><br><span class="line">说明：防XSS跨站脚本攻击</span><br><span class="line">范围: 回应控制</span><br><span class="line">语法：</span><br><span class="line">```</span><br><span class="line">&lt;mark_http_only? ?cookie=&#x27;参数&#x27;&gt;&lt;/mark_http_only&gt;</span><br><span class="line">```</span><br><span class="line">使用例子：</span><br><span class="line">```</span><br><span class="line">&lt;mark_http_only? ?cookie=&#x27;.&#x27;&gt;&lt;/mark_http_only&gt;</span><br><span class="line">```</span><br><span class="line">.是匹配所有的cookie, 扩展阅读,案例说明.</span><br><span class="line"></span><br><span class="line">#### mark</span><br><span class="line">请参考请求控制匹配模块的mark模块</span><br><span class="line"></span><br><span class="line">#### replace_content</span><br><span class="line">说明：替换内容</span><br><span class="line">范围: 回应控制</span><br><span class="line">参数：</span><br><span class="line">charset：编码</span><br><span class="line">buffer：缓存大小</span><br><span class="line">replaced_stop:勾选此选项后，含有替换内容的页面会被全部替换(注：replaced_stop选中后buffer选项才会生效)</span><br><span class="line">语法：</span><br><span class="line">```</span><br><span class="line">&lt;mark_replace_content? ?content=&#x27;原始内容&#x27; replace=&#x27;替换后内容&#x27;??charset=&#x27;编码&#x27; buffer=&#x27;缓存大小&#x27;&gt;&lt;/mark_replace_content&gt;</span><br><span class="line">```</span><br><span class="line">使用例子：</span><br></pre></td></tr></table></figure>
+<p>&lt;mark_replace_content? ?content&#x3D;’test’ replace&#x3D;’php’??charset&#x3D;’utf-8’ replaced_stop&#x3D;’1’ buffer&#x3D;’1M’&gt;</mark_replace_content></p>
+<p>&#96;&#96;&#96;</p>
+<p>转载自：<a target="_blank" rel="noopener" href="https://bbs.itzmx.com/thread-97247-1-3.html">https://bbs.itzmx.com/thread-97247-1-3.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.jinjun.top/2021/04/08/Kangle%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E6%A8%A1%E5%9D%97wiki%E6%96%87%E6%A1%A3/" data-id="cleycjph2005aqguneat7gkyg" data-title="Kangle访问控制模块wiki文档" class="article-share-link">Teilen</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kangle/" rel="tag">kangle</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/04/10/PHP%E7%8E%AF%E5%A2%83%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AEphp.ini/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          PHP环境安全配置php.ini
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/03/27/Kangle%E6%8E%92%E9%99%A4%E6%9F%90IP%E5%9C%B0%E5%9D%80%E4%B8%8D%E8%A7%A6%E5%8F%91CC%E9%98%B2%E5%BE%A1%E8%A7%84%E5%88%99/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">Kangle排除某IP地址不触发CC防御规则</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Kategorien</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Typecho/">Typecho</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E4%BD%9C%E7%AC%94%E8%AE%B0/">工作笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BB%BA%E7%AB%99%E7%9F%A5%E8%AF%86/">建站知识</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%98%E8%85%BE%E7%AC%94%E8%AE%B0/">折腾笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%99%9A%E6%8B%9F%E5%8C%96/">虚拟化</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/">资源分享</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%92%A7%E8%A8%80%E9%92%A7%E8%AF%AD/">钧言钧语</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/2020/" rel="tag">2020</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AliSQL/" rel="tag">AliSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Aria2/" rel="tag">Aria2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BT/" rel="tag">BT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Brotli/" rel="tag">Brotli</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CDN/" rel="tag">CDN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CardLink/" rel="tag">CardLink</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/" rel="tag">CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Chrome/" rel="tag">Chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cloudflare/" rel="tag">Cloudflare</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DUX/" rel="tag">DUX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Debian/" rel="tag">Debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deepin/" rel="tag">Deepin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flash/" rel="tag">Flash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GCC/" rel="tag">GCC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GD/" rel="tag">GD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GNOME/" rel="tag">GNOME</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github/" rel="tag">Github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Go/" rel="tag">Go</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GoAccess/" rel="tag">GoAccess</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/" rel="tag">Golang</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gravtar/" rel="tag">Gravtar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hyper-V/" rel="tag">Hyper-V</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IPv4/" rel="tag">IPv4</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IPv6/" rel="tag">IPv6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Instantbox/" rel="tag">Instantbox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/" rel="tag">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KMS/" rel="tag">KMS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LXC%E5%AE%B9%E5%99%A8/" rel="tag">LXC容器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC/" rel="tag">MAC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MD5/" rel="tag">MD5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mariadb/" rel="tag">Mariadb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NAS/" rel="tag">NAS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NAT/" rel="tag">NAT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NTP/" rel="tag">NTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OSS/" rel="tag">OSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP%E6%89%A9%E5%B1%95/" rel="tag">PHP扩展</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PS/" rel="tag">PS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PT/" rel="tag">PT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PWA/" rel="tag">PWA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Photoshop/" rel="tag">Photoshop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PostgreSQL/" rel="tag">PostgreSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PowerOff/" rel="tag">PowerOff</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Proxmox/" rel="tag">Proxmox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QQ/" rel="tag">QQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reboot/" rel="tag">Reboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rocky/" rel="tag">Rocky</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SATA/" rel="tag">SATA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SHA1/" rel="tag">SHA1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SmarSpam/" rel="tag">SmarSpam</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCPA/" rel="tag">TCPA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tengine/" rel="tag">Tengine</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tenginx/" rel="tag">Tenginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Termux/" rel="tag">Termux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TinyProxy/" rel="tag">TinyProxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Transmission/" rel="tag">Transmission</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Typecho/" rel="tag">Typecho</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UNAS/" rel="tag">UNAS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UOS/" rel="tag">UOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware/" rel="tag">VMware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VNC/" rel="tag">VNC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPS/" rel="tag">VPS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VS-Code/" rel="tag">VS Code</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WEB/" rel="tag">WEB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WPS/" rel="tag">WPS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WPS-Office/" rel="tag">WPS Office</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WPS-Pro/" rel="tag">WPS Pro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ZeroTier/" rel="tag">ZeroTier</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dig%E5%91%BD%E4%BB%A4/" rel="tag">dig命令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/easypanel/" rel="tag">easypanel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/h5ai/" rel="tag">h5ai</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/halt/" rel="tag">halt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hosts/" rel="tag">hosts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iframe/" rel="tag">iframe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ipset/" rel="tag">ipset</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/" rel="tag">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kangle/" rel="tag">kangle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lazyload/" rel="tag">lazyload</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nethogs/" rel="tag">nethogs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nohup/" rel="tag">nohup</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ossutil/" rel="tag">ossutil</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/qBittorrent/" rel="tag">qBittorrent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rdesktop/" rel="tag">rdesktop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/screen/" rel="tag">screen</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webp/" rel="tag">webp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%8B%E8%BD%BD/" rel="tag">下载</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/" rel="tag">个人笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AD%E5%9B%BD%E7%94%B5%E4%BF%A1/" rel="tag">中国电信</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AD%E5%9B%BD%E7%A7%BB%E5%8A%A8/" rel="tag">中国移动</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AD%E5%9B%BD%E8%81%94%E9%80%9A/" rel="tag">中国联通</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AD%E7%A7%8B/" rel="tag">中秋</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%BB%E9%A2%98/" rel="tag">主题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%BB%E9%A2%98%E5%BC%80%E5%8F%91/" rel="tag">主题开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%91%E9%94%81/" rel="tag">云锁</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%92%E8%81%94%E7%BD%91/" rel="tag">互联网</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%92%E8%81%94%E7%BD%91%E5%8D%A1/" rel="tag">互联网卡</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/" rel="tag">代码片段</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E9%AB%98%E4%BA%AE/" rel="tag">代码高亮</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%81%9A%E5%9B%BE%E5%B0%8F%E6%8A%80%E5%B7%A7/" rel="tag">做图小技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%8D%E6%B5%81/" rel="tag">免流</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E6%A0%B8/" rel="tag">内核</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A0%E5%AF%86%E4%BF%9D%E6%8A%A4/" rel="tag">加密保护</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%8E%E4%B8%BA/" rel="tag">华为</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%8E%E4%B8%BA%E4%BA%91/" rel="tag">华为云</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%8E%E4%B8%BA%E8%A7%86%E9%A2%91/" rel="tag">华为视频</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%97%E5%8D%9A/" rel="tag">南博</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" rel="tag">反向代理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BD%E5%BA%86/" rel="tag">国庆</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E7%89%87/" rel="tag">图片</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%9F%E5%90%8D/" rel="tag">域名</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%87%E4%BB%BD/" rel="tag">备份</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%87%E6%A1%88/" rel="tag">备案</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9C%E9%97%B4%E6%A8%A1%E5%BC%8F/" rel="tag">夜间模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E4%BD%93/" rel="tag">字体</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/" rel="tag">宝塔面板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%BD%E5%B8%A6%E6%B5%8B%E9%80%9F/" rel="tag">宽带测速</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E5%A4%A9%E7%A5%9E/" rel="tag">小天神</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E4%BF%A1%E9%83%A8/" rel="tag">工信部</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%BF%E4%B8%9C%E7%94%B5%E4%BF%A1/" rel="tag">广东电信</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BB%BA%E7%AB%99%E6%95%99%E7%A8%8B/" rel="tag">建站教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1/" rel="tag">微信</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="tag">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%87%92%E5%8A%A0%E8%BD%BD/" rel="tag">懒加载</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/" rel="tag">技术教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8C%82%E8%BD%BD%E7%A3%81%E7%9B%98/" rel="tag">挂载磁盘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/" rel="tag">搜索引擎</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%94%AF%E4%BB%98%E5%AE%9D/" rel="tag">支付宝</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A0%E7%BA%BF%E6%B5%8B%E9%80%9F/" rel="tag">无线测速</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1/" rel="tag">日志服务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%97%E7%94%B5%E6%B5%81/" rel="tag">暗电流</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">服务器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/" rel="tag">格式转换</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%8C%E9%9D%A2%E7%8E%AF%E5%A2%83/" rel="tag">桌面环境</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B0%94%E6%B3%A1/" rel="tag">气泡</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B1%BD%E8%BD%A6/" rel="tag">汽车</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B1%BD%E8%BD%A6%E6%BC%8F%E7%94%B5/" rel="tag">汽车漏电</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E9%80%9F/" rel="tag">测速</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BC%94%E8%AF%B4%E5%AE%B6/" rel="tag">演说家</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%81%AF%E7%AE%B1%E6%95%88%E6%9E%9C/" rel="tag">灯箱效果</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%82%B9%E6%BB%B4/" rel="tag">点滴</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%97%A5%E5%BF%AB%E4%B9%90/" rel="tag">生日快乐</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB/" rel="tag">生活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%B5%E8%B7%AF%E6%A3%80%E6%B5%8B/" rel="tag">电路检测</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%95%85%E8%B0%88/" rel="tag">畅谈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BB%E5%BD%95%E6%8F%90%E9%86%92/" rel="tag">登录提醒</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F/" rel="tag">监控系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%AD%E4%BB%A3%E7%A0%81/" rel="tag">短代码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%AF%E4%BB%A3%E7%A0%81/" rel="tag">纯代码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%88%E7%AB%AF/" rel="tag">终端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%A9%E7%95%A5%E5%9B%BE/" rel="tag">缩略图</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%AB%99%E4%BC%98%E5%8C%96/" rel="tag">网站优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E9%80%9F%E6%B5%8B%E8%AF%95/" rel="tag">网速测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%85%BE%E8%AE%AF/" rel="tag">腾讯</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%85%BE%E8%AE%AF%E4%BA%91/" rel="tag">腾讯云</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%85%BE%E8%AE%AF%E5%A4%A7%E7%8E%8B%E5%8D%A1/" rel="tag">腾讯大王卡</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%8A%B1%E5%B8%81/" rel="tag">花币</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%8B%B9%E6%9E%9C%E7%B3%BB%E7%BB%9F/" rel="tag">苹果系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" rel="tag">虚拟化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91/" rel="tag">视频</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%B0%E4%BA%8B%E6%9C%AC/" rel="tag">记事本</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BF%E9%97%AE%E7%BB%9F%E8%AE%A1/" rel="tag">访问统计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/" rel="tag">资源分享</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B7%A8%E5%B9%B4/" rel="tag">跨年</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%87%E6%BB%A4%E8%AF%84%E8%AE%BA/" rel="tag">过滤评论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%90%E7%BB%B4%E6%95%99%E7%A8%8B/" rel="tag">运维教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%98%E5%8E%9F/" rel="tag">还原</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9C%E7%A8%8B%E7%AE%A1%E7%90%86/" rel="tag">远程管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%92%89%E9%92%89/" rel="tag">钉钉</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%92%A7%E8%A8%80%E9%92%A7%E8%AF%AD/" rel="tag">钧言钧语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F/" rel="tag">镜像加速</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%98%B2%E7%81%AB%E5%A2%99/" rel="tag">防火墙</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%98%B2%E7%9B%97%E9%93%BE/" rel="tag">防盗链</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%98%B2%E9%AA%9A%E6%89%B0/" rel="tag">防骚扰</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91/" rel="tag">阿里云</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E4%BA%94%E7%A6%8F/" rel="tag">集五福</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%99%E6%80%81IP/" rel="tag">静态IP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99/" rel="tag">静态网站</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9F%B3%E4%B9%90/" rel="tag">音乐</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9F%B3%E5%93%8D/" rel="tag">音响</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%86%E5%8F%96%E6%B5%81%E9%87%8F/" rel="tag">领取流量</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/2020/" style="font-size: 10px;">2020</a> <a href="/tags/AliSQL/" style="font-size: 10.67px;">AliSQL</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Aria2/" style="font-size: 10px;">Aria2</a> <a href="/tags/BT/" style="font-size: 10px;">BT</a> <a href="/tags/Brotli/" style="font-size: 10px;">Brotli</a> <a href="/tags/CDN/" style="font-size: 14.67px;">CDN</a> <a href="/tags/CSS/" style="font-size: 14.67px;">CSS</a> <a href="/tags/CardLink/" style="font-size: 10px;">CardLink</a> <a href="/tags/CentOS/" style="font-size: 18.67px;">CentOS</a> <a href="/tags/Chrome/" style="font-size: 11.33px;">Chrome</a> <a href="/tags/Cloudflare/" style="font-size: 10px;">Cloudflare</a> <a href="/tags/DUX/" style="font-size: 10px;">DUX</a> <a href="/tags/Debian/" style="font-size: 16.67px;">Debian</a> <a href="/tags/Deepin/" style="font-size: 14.67px;">Deepin</a> <a href="/tags/Docker/" style="font-size: 15.33px;">Docker</a> <a href="/tags/Flash/" style="font-size: 10px;">Flash</a> <a href="/tags/GCC/" style="font-size: 10.67px;">GCC</a> <a href="/tags/GD/" style="font-size: 10px;">GD</a> <a href="/tags/GNOME/" style="font-size: 10px;">GNOME</a> <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Go/" style="font-size: 10px;">Go</a> <a href="/tags/GoAccess/" style="font-size: 10px;">GoAccess</a> <a href="/tags/Golang/" style="font-size: 10px;">Golang</a> <a href="/tags/Gravtar/" style="font-size: 10.67px;">Gravtar</a> <a href="/tags/HTML/" style="font-size: 15.33px;">HTML</a> <a href="/tags/Hyper-V/" style="font-size: 10.67px;">Hyper-V</a> <a href="/tags/IPv4/" style="font-size: 12.67px;">IPv4</a> <a href="/tags/IPv6/" style="font-size: 12.67px;">IPv6</a> <a href="/tags/Instantbox/" style="font-size: 10px;">Instantbox</a> <a href="/tags/Javascript/" style="font-size: 17.33px;">Javascript</a> <a href="/tags/KMS/" style="font-size: 10px;">KMS</a> <a href="/tags/LXC%E5%AE%B9%E5%99%A8/" style="font-size: 11.33px;">LXC容器</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/MAC/" style="font-size: 12px;">MAC</a> <a href="/tags/MD5/" style="font-size: 10px;">MD5</a> <a href="/tags/Mariadb/" style="font-size: 10.67px;">Mariadb</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/NAS/" style="font-size: 11.33px;">NAS</a> <a href="/tags/NAT/" style="font-size: 11.33px;">NAT</a> <a href="/tags/NTP/" style="font-size: 10px;">NTP</a> <a href="/tags/Nginx/" style="font-size: 17.33px;">Nginx</a> <a href="/tags/OSS/" style="font-size: 10.67px;">OSS</a> <a href="/tags/PHP/" style="font-size: 17.33px;">PHP</a> <a href="/tags/PHP%E6%89%A9%E5%B1%95/" style="font-size: 14px;">PHP扩展</a> <a href="/tags/PS/" style="font-size: 10px;">PS</a> <a href="/tags/PT/" style="font-size: 10.67px;">PT</a> <a href="/tags/PWA/" style="font-size: 10px;">PWA</a> <a href="/tags/Photoshop/" style="font-size: 10px;">Photoshop</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/PowerOff/" style="font-size: 10px;">PowerOff</a> <a href="/tags/Proxmox/" style="font-size: 13.33px;">Proxmox</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/Reboot/" style="font-size: 10px;">Reboot</a> <a href="/tags/Rocky/" style="font-size: 10px;">Rocky</a> <a href="/tags/SATA/" style="font-size: 10px;">SATA</a> <a href="/tags/SHA1/" style="font-size: 10px;">SHA1</a> <a href="/tags/SSH/" style="font-size: 14.67px;">SSH</a> <a href="/tags/SmarSpam/" style="font-size: 10px;">SmarSpam</a> <a href="/tags/TCPA/" style="font-size: 10px;">TCPA</a> <a href="/tags/Tengine/" style="font-size: 10px;">Tengine</a> <a href="/tags/Tenginx/" style="font-size: 16px;">Tenginx</a> <a href="/tags/Termux/" style="font-size: 12.67px;">Termux</a> <a href="/tags/TinyProxy/" style="font-size: 10.67px;">TinyProxy</a> <a href="/tags/Transmission/" style="font-size: 12px;">Transmission</a> <a href="/tags/Typecho/" style="font-size: 19.33px;">Typecho</a> <a href="/tags/UNAS/" style="font-size: 10px;">UNAS</a> <a href="/tags/UOS/" style="font-size: 11.33px;">UOS</a> <a href="/tags/Ubuntu/" style="font-size: 13.33px;">Ubuntu</a> <a href="/tags/VMware/" style="font-size: 12px;">VMware</a> <a href="/tags/VNC/" style="font-size: 10.67px;">VNC</a> <a href="/tags/VPS/" style="font-size: 11.33px;">VPS</a> <a href="/tags/VS-Code/" style="font-size: 10px;">VS Code</a> <a href="/tags/WEB/" style="font-size: 12.67px;">WEB</a> <a href="/tags/WPS/" style="font-size: 10px;">WPS</a> <a href="/tags/WPS-Office/" style="font-size: 10px;">WPS Office</a> <a href="/tags/WPS-Pro/" style="font-size: 10px;">WPS Pro</a> <a href="/tags/Windows/" style="font-size: 13.33px;">Windows</a> <a href="/tags/ZeroTier/" style="font-size: 10.67px;">ZeroTier</a> <a href="/tags/dig%E5%91%BD%E4%BB%A4/" style="font-size: 10px;">dig命令</a> <a href="/tags/easypanel/" style="font-size: 10.67px;">easypanel</a> <a href="/tags/h5ai/" style="font-size: 10px;">h5ai</a> <a href="/tags/halt/" style="font-size: 10px;">halt</a> <a href="/tags/hosts/" style="font-size: 10px;">hosts</a> <a href="/tags/iframe/" style="font-size: 10px;">iframe</a> <a href="/tags/ipset/" style="font-size: 10px;">ipset</a> <a href="/tags/iptables/" style="font-size: 10.67px;">iptables</a> <a href="/tags/kangle/" style="font-size: 14.67px;">kangle</a> <a href="/tags/lazyload/" style="font-size: 10px;">lazyload</a> <a href="/tags/mysql/" style="font-size: 18px;">mysql</a> <a href="/tags/nethogs/" style="font-size: 10px;">nethogs</a> <a href="/tags/nohup/" style="font-size: 10px;">nohup</a> <a href="/tags/ossutil/" style="font-size: 10px;">ossutil</a> <a href="/tags/qBittorrent/" style="font-size: 10px;">qBittorrent</a> <a href="/tags/rdesktop/" style="font-size: 10px;">rdesktop</a> <a href="/tags/screen/" style="font-size: 10px;">screen</a> <a href="/tags/webp/" style="font-size: 10px;">webp</a> <a href="/tags/%E4%B8%8B%E8%BD%BD/" style="font-size: 11.33px;">下载</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E7%AC%94%E8%AE%B0/" style="font-size: 10px;">个人笔记</a> <a href="/tags/%E4%B8%AD%E5%9B%BD%E7%94%B5%E4%BF%A1/" style="font-size: 12px;">中国电信</a> <a href="/tags/%E4%B8%AD%E5%9B%BD%E7%A7%BB%E5%8A%A8/" style="font-size: 11.33px;">中国移动</a> <a href="/tags/%E4%B8%AD%E5%9B%BD%E8%81%94%E9%80%9A/" style="font-size: 12px;">中国联通</a> <a href="/tags/%E4%B8%AD%E7%A7%8B/" style="font-size: 10px;">中秋</a> <a href="/tags/%E4%B8%BB%E9%A2%98/" style="font-size: 10px;">主题</a> <a href="/tags/%E4%B8%BB%E9%A2%98%E5%BC%80%E5%8F%91/" style="font-size: 10.67px;">主题开发</a> <a href="/tags/%E4%BA%91%E9%94%81/" style="font-size: 10px;">云锁</a> <a href="/tags/%E4%BA%92%E8%81%94%E7%BD%91/" style="font-size: 10px;">互联网</a> <a href="/tags/%E4%BA%92%E8%81%94%E7%BD%91%E5%8D%A1/" style="font-size: 10.67px;">互联网卡</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/" style="font-size: 10.67px;">代码片段</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E9%AB%98%E4%BA%AE/" style="font-size: 10px;">代码高亮</a> <a href="/tags/%E5%81%9A%E5%9B%BE%E5%B0%8F%E6%8A%80%E5%B7%A7/" style="font-size: 10px;">做图小技巧</a> <a href="/tags/%E5%85%8D%E6%B5%81/" style="font-size: 10.67px;">免流</a> <a href="/tags/%E5%86%85%E6%A0%B8/" style="font-size: 10.67px;">内核</a> <a href="/tags/%E5%8A%A0%E5%AF%86%E4%BF%9D%E6%8A%A4/" style="font-size: 10px;">加密保护</a> <a href="/tags/%E5%8D%8E%E4%B8%BA/" style="font-size: 11.33px;">华为</a> <a href="/tags/%E5%8D%8E%E4%B8%BA%E4%BA%91/" style="font-size: 10.67px;">华为云</a> <a href="/tags/%E5%8D%8E%E4%B8%BA%E8%A7%86%E9%A2%91/" style="font-size: 10px;">华为视频</a> <a href="/tags/%E5%8D%97%E5%8D%9A/" style="font-size: 10px;">南博</a> <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 10px;">博客</a> <a href="/tags/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" style="font-size: 10.67px;">反向代理</a> <a href="/tags/%E5%9B%BD%E5%BA%86/" style="font-size: 10px;">国庆</a> <a href="/tags/%E5%9B%BE%E7%89%87/" style="font-size: 10px;">图片</a> <a href="/tags/%E5%9F%9F%E5%90%8D/" style="font-size: 10px;">域名</a> <a href="/tags/%E5%A4%87%E4%BB%BD/" style="font-size: 10px;">备份</a> <a href="/tags/%E5%A4%87%E6%A1%88/" style="font-size: 10px;">备案</a> <a href="/tags/%E5%A4%9C%E9%97%B4%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">夜间模式</a> <a href="/tags/%E5%AD%97%E4%BD%93/" style="font-size: 10px;">字体</a> <a href="/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/" style="font-size: 14px;">宝塔面板</a> <a href="/tags/%E5%AE%BD%E5%B8%A6%E6%B5%8B%E9%80%9F/" style="font-size: 10px;">宽带测速</a> <a href="/tags/%E5%B0%8F%E5%A4%A9%E7%A5%9E/" style="font-size: 10px;">小天神</a> <a href="/tags/%E5%B7%A5%E4%BF%A1%E9%83%A8/" style="font-size: 10px;">工信部</a> <a href="/tags/%E5%B9%BF%E4%B8%9C%E7%94%B5%E4%BF%A1/" style="font-size: 10.67px;">广东电信</a> <a href="/tags/%E5%BB%BA%E7%AB%99%E6%95%99%E7%A8%8B/" style="font-size: 10px;">建站教程</a> <a href="/tags/%E5%BE%AE%E4%BF%A1/" style="font-size: 10px;">微信</a> <a href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" style="font-size: 10px;">快捷键</a> <a href="/tags/%E6%87%92%E5%8A%A0%E8%BD%BD/" style="font-size: 11.33px;">懒加载</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/" style="font-size: 10.67px;">技术教程</a> <a href="/tags/%E6%8C%82%E8%BD%BD%E7%A3%81%E7%9B%98/" style="font-size: 10px;">挂载磁盘</a> <a href="/tags/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/" style="font-size: 10px;">搜索引擎</a> <a href="/tags/%E6%94%AF%E4%BB%98%E5%AE%9D/" style="font-size: 10px;">支付宝</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 10.67px;">数据库</a> <a href="/tags/%E6%97%A0%E7%BA%BF%E6%B5%8B%E9%80%9F/" style="font-size: 10px;">无线测速</a> <a href="/tags/%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1/" style="font-size: 10px;">日志服务</a> <a href="/tags/%E6%9A%97%E7%94%B5%E6%B5%81/" style="font-size: 10px;">暗电流</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 14px;">服务器</a> <a href="/tags/%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/" style="font-size: 10px;">格式转换</a> <a href="/tags/%E6%A1%8C%E9%9D%A2%E7%8E%AF%E5%A2%83/" style="font-size: 10px;">桌面环境</a> <a href="/tags/%E6%B0%94%E6%B3%A1/" style="font-size: 10px;">气泡</a> <a href="/tags/%E6%B1%BD%E8%BD%A6/" style="font-size: 10.67px;">汽车</a> <a href="/tags/%E6%B1%BD%E8%BD%A6%E6%BC%8F%E7%94%B5/" style="font-size: 10px;">汽车漏电</a> <a href="/tags/%E6%B5%8B%E9%80%9F/" style="font-size: 10px;">测速</a> <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="font-size: 10.67px;">浏览器</a> <a href="/tags/%E6%BC%94%E8%AF%B4%E5%AE%B6/" style="font-size: 10px;">演说家</a> <a href="/tags/%E7%81%AF%E7%AE%B1%E6%95%88%E6%9E%9C/" style="font-size: 10.67px;">灯箱效果</a> <a href="/tags/%E7%82%B9%E6%BB%B4/" style="font-size: 11.33px;">点滴</a> <a href="/tags/%E7%94%9F%E6%97%A5%E5%BF%AB%E4%B9%90/" style="font-size: 10.67px;">生日快乐</a> <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 10.67px;">生活</a> <a href="/tags/%E7%94%B5%E8%B7%AF%E6%A3%80%E6%B5%8B/" style="font-size: 10.67px;">电路检测</a> <a href="/tags/%E7%95%85%E8%B0%88/" style="font-size: 10px;">畅谈</a> <a href="/tags/%E7%99%BB%E5%BD%95%E6%8F%90%E9%86%92/" style="font-size: 10px;">登录提醒</a> <a href="/tags/%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">监控系统</a> <a href="/tags/%E7%9F%AD%E4%BB%A3%E7%A0%81/" style="font-size: 10px;">短代码</a> <a href="/tags/%E7%BA%AF%E4%BB%A3%E7%A0%81/" style="font-size: 10px;">纯代码</a> <a href="/tags/%E7%BB%88%E7%AB%AF/" style="font-size: 10.67px;">终端</a> <a href="/tags/%E7%BC%A9%E7%95%A5%E5%9B%BE/" style="font-size: 10px;">缩略图</a> <a href="/tags/%E7%BD%91%E7%AB%99%E4%BC%98%E5%8C%96/" style="font-size: 10px;">网站优化</a> <a href="/tags/%E7%BD%91%E9%80%9F%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">网速测试</a> <a href="/tags/%E8%85%BE%E8%AE%AF/" style="font-size: 10px;">腾讯</a> <a href="/tags/%E8%85%BE%E8%AE%AF%E4%BA%91/" style="font-size: 12.67px;">腾讯云</a> <a href="/tags/%E8%85%BE%E8%AE%AF%E5%A4%A7%E7%8E%8B%E5%8D%A1/" style="font-size: 10px;">腾讯大王卡</a> <a href="/tags/%E8%8A%B1%E5%B8%81/" style="font-size: 10px;">花币</a> <a href="/tags/%E8%8B%B9%E6%9E%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">苹果系统</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" style="font-size: 10px;">虚拟化</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" style="font-size: 16px;">虚拟机</a> <a href="/tags/%E8%A7%86%E9%A2%91/" style="font-size: 10.67px;">视频</a> <a href="/tags/%E8%AE%B0%E4%BA%8B%E6%9C%AC/" style="font-size: 10.67px;">记事本</a> <a href="/tags/%E8%AE%BF%E9%97%AE%E7%BB%9F%E8%AE%A1/" style="font-size: 10px;">访问统计</a> <a href="/tags/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/" style="font-size: 10px;">资源分享</a> <a href="/tags/%E8%B7%A8%E5%B9%B4/" style="font-size: 10px;">跨年</a> <a href="/tags/%E8%BF%87%E6%BB%A4%E8%AF%84%E8%AE%BA/" style="font-size: 10px;">过滤评论</a> <a href="/tags/%E8%BF%90%E7%BB%B4%E6%95%99%E7%A8%8B/" style="font-size: 12.67px;">运维教程</a> <a href="/tags/%E8%BF%98%E5%8E%9F/" style="font-size: 10px;">还原</a> <a href="/tags/%E8%BF%9C%E7%A8%8B%E7%AE%A1%E7%90%86/" style="font-size: 10px;">远程管理</a> <a href="/tags/%E9%92%89%E9%92%89/" style="font-size: 10px;">钉钉</a> <a href="/tags/%E9%92%A7%E8%A8%80%E9%92%A7%E8%AF%AD/" style="font-size: 10.67px;">钧言钧语</a> <a href="/tags/%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F/" style="font-size: 11.33px;">镜像加速</a> <a href="/tags/%E9%98%B2%E7%81%AB%E5%A2%99/" style="font-size: 10px;">防火墙</a> <a href="/tags/%E9%98%B2%E7%9B%97%E9%93%BE/" style="font-size: 10.67px;">防盗链</a> <a href="/tags/%E9%98%B2%E9%AA%9A%E6%89%B0/" style="font-size: 10px;">防骚扰</a> <a href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91/" style="font-size: 13.33px;">阿里云</a> <a href="/tags/%E9%9B%86%E4%BA%94%E7%A6%8F/" style="font-size: 10px;">集五福</a> <a href="/tags/%E9%9D%99%E6%80%81IP/" style="font-size: 10.67px;">静态IP</a> <a href="/tags/%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99/" style="font-size: 11.33px;">静态网站</a> <a href="/tags/%E9%9F%B3%E4%B9%90/" style="font-size: 10px;">音乐</a> <a href="/tags/%E9%9F%B3%E5%93%8D/" style="font-size: 10px;">音响</a> <a href="/tags/%E9%A2%86%E5%8F%96%E6%B5%81%E9%87%8F/" style="font-size: 10px;">领取流量</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">January 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">August 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">August 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">June 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/03/07/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/04/%E4%BD%BF%E7%94%A8%20CardLink%20%E7%94%9F%E6%88%90%E5%8D%A1%E7%89%87%E5%BC%8F%E9%93%BE%E6%8E%A5/">使用 CardLink 生成卡片式链接</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/19/%E6%B5%8B%E8%AF%95%E5%8D%95%E5%9B%BE%E6%A8%A1%E5%BC%8F/">测试单图模式</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/04/%E6%B5%8B%E8%AF%95%E5%A4%9A%E5%9B%BE%E6%96%87%E7%AB%A0/">测试多图文章</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/26/Zerotier%20%E7%A7%81%E6%9C%89%E5%8C%96%E9%83%A8%E7%BD%B2%E6%A0%B9%E6%9C%8D%E5%8A%A1%E5%99%A8(Planet)/">Zerotier 私有化部署根服务器(Planet)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 钧言<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
