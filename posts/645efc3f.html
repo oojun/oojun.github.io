@@ -1,0 +1,202 @@
+<!DOCTYPE html><html lang="zh" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>CentOS安装AliSQL手记 | 钧言极客</title><meta name="author" content="钧言"><meta name="copyright" content="钧言"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="AliSQL是基于MySQL官方版本的一个分支，由阿里云数据库团队维护，目前也应用于阿里巴巴集团业务以及阿里云数据库服务。该版本在社区版的基础上做了大量的性能与功能的优化改进。尤其适合电商、云计算以及金融等行业环境。  据说比MySQL5.6官方版本，速度提升不少。社区版本已经有好几年没有更新了，也不知道是不是KPI产物，开源开着就没有下文了，参考阿里系的应用，不赚钱的基本都关闭了。 下载地址开源">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CentOS安装AliSQL手记">
+<meta property="og:url" content="http://blog.jinjun.top/posts/645efc3f.html">
+<meta property="og:site_name" content="钧言极客">
+<meta property="og:description" content="AliSQL是基于MySQL官方版本的一个分支，由阿里云数据库团队维护，目前也应用于阿里巴巴集团业务以及阿里云数据库服务。该版本在社区版的基础上做了大量的性能与功能的优化改进。尤其适合电商、云计算以及金融等行业环境。  据说比MySQL5.6官方版本，速度提升不少。社区版本已经有好几年没有更新了，也不知道是不是KPI产物，开源开着就没有下文了，参考阿里系的应用，不赚钱的基本都关闭了。 下载地址开源">
+<meta property="og:locale">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:published_time" content="2021-01-09T00:45:00.000Z">
+<meta property="article:modified_time" content="2023-03-10T16:21:24.648Z">
+<meta property="article:author" content="钧言">
+<meta property="article:tag" content="CentOS">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="mysql">
+<meta property="article:tag" content="数据库">
+<meta property="article:tag" content="AliSQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://blog.jinjun.top/posts/645efc3f.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'CentOS安装AliSQL手记',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-03-11 00:21:24'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">210</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">197</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">9</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="钧言极客"><span class="site-name">钧言极客</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">CentOS安装AliSQL手记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2021-01-09T00:45:00.000Z" title="Created 2021-01-09 08:45:00">2021-01-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-03-10T16:21:24.648Z" title="Updated 2023-03-11 00:21:24">2023-03-11</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%BB%BA%E7%AB%99%E7%9F%A5%E8%AF%86/">建站知识</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="CentOS安装AliSQL手记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><!--markdown-->AliSQL是基于MySQL官方版本的一个分支，由阿里云数据库团队维护，目前也应用于阿里巴巴集团业务以及阿里云数据库服务。该版本在社区版的基础上做了大量的性能与功能的优化改进。尤其适合电商、云计算以及金融等行业环境。
+
+<p>据说比MySQL5.6官方版本，速度提升不少。社区版本已经有好几年没有更新了，也不知道是不是KPI产物，开源开着就没有下文了，参考阿里系的应用，不赚钱的基本都关闭了。</p>
+<h4 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h4><p>开源地址：<a target="_blank" rel="noopener" href="https://github.com/alibaba/AliSQL">https://github.com/alibaba/AliSQL</a></p>
+<h4 id="安装检查"><a href="#安装检查" class="headerlink" title="安装检查"></a>安装检查</h4><p>检查主机是否安装已经安装MySQL，如果就卸载。建议使用纯净的环境安装</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum remove mysql mysql-server mysql-libs</span><br><span class="line">rm /etc/my.cnf</span><br></pre></td></tr></table></figure>
+
+<p>查看是否安装MySQL</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa|grep mysql</span><br><span class="line"># 如果查询到 继续卸载</span><br><span class="line">yum remove 软件名</span><br></pre></td></tr></table></figure>
+
+<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ul>
+<li>使用环境为 Centos7.9 2H4G</li>
+</ul>
+<p>安装编译源码所需要的扩展和库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install wget gcc gcc-c++ ncurses-devel perl cmake bison autoconf</span><br></pre></td></tr></table></figure>
+
+<h3 id="设置用户和所属组"><a href="#设置用户和所属组" class="headerlink" title="设置用户和所属组"></a>设置用户和所属组</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 创建用户组</span><br><span class="line">groupadd mysql</span><br><span class="line"></span><br><span class="line"># 用户组创建用户</span><br><span class="line">useradd -M -s/sbin/nologin -g mysql -r mysql</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建MySQL工作目录"><a href="#创建MySQL工作目录" class="headerlink" title="创建MySQL工作目录"></a>创建MySQL工作目录</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 创建MySQL安装目录</span><br><span class="line">mkdir –p /usr/local/mysql</span><br><span class="line"></span><br><span class="line"># 创建数据库文件存放位置</span><br><span class="line">mkdir -p /date/sqldb</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装AliSQL"><a href="#安装AliSQL" class="headerlink" title="安装AliSQL"></a>安装AliSQL</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># 下载AliSQL源码</span><br><span class="line">wget https://github.com/alibaba/AliSQL/archive/AliSQL-5.6.32-9.tar.gz</span><br><span class="line"></span><br><span class="line"># 解压文件</span><br><span class="line">tar -zxvf AliSQL-5.6.32-9.tar.gz</span><br><span class="line"></span><br><span class="line"># 查看解压目录名</span><br><span class="line">ls</span><br><span class="line"></span><br><span class="line"># 进入AliSQL目录</span><br><span class="line">cd AliSQL-AliSQL-5.6.32-9</span><br><span class="line"></span><br><span class="line"># 设置编译参数</span><br><span class="line">cmake -DCMAKE_INSTALL_PREFIX=/usr/local/mysql -DMYSQL_UNIX_ADDR=/usr/local/mysql/mysql.sock -DDEFAULT_CHARSET=utf8 -DDEFAULT_COLLATION=utf8_general_ci -DWITH_INNOBASE_STORAGE_ENGINE=1 -DWITH_ARCHIVE_STORAGE_ENGINE=1 -DWITH_BLACKHOLE_STORAGE_ENGINE=1 -DMYSQL_DATADIR=/data/sqldb -DMYSQL_TCP_PORT=3306 -DENABLE_DOWNLOADS=1</span><br><span class="line"></span><br><span class="line"># 编译安装</span><br><span class="line">make -j2 &amp; make install</span><br></pre></td></tr></table></figure>
+
+<p>这里编译的参数可以参考MySQL的编译参数，自由定义自己的参数。<code>-j2</code>是多线程编译，可以加快编译速度。</p>
+<h3 id="授权MySQL目录运行用户"><a href="#授权MySQL目录运行用户" class="headerlink" title="授权MySQL目录运行用户"></a>授权MySQL目录运行用户</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chown -R mysql:mysql /usr/local/mysql</span><br><span class="line">chown -R mysql:mysql /date/sqldb</span><br></pre></td></tr></table></figure>
+
+<h3 id="初始化AliSQL"><a href="#初始化AliSQL" class="headerlink" title="初始化AliSQL"></a>初始化AliSQL</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/mysql</span><br><span class="line">./scripts/mysql_install_db --user=mysql --basedir=/usr/local/mysql --datadir=/date/sqldb</span><br></pre></td></tr></table></figure>
+
+<h3 id="设置启动脚本和链接"><a href="#设置启动脚本和链接" class="headerlink" title="设置启动脚本和链接"></a>设置启动脚本和链接</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cp /usr/local/mysql/support-files/my-default.cnf /etc/my.cnf</span><br><span class="line">cp  support-files/mysql.server  /etc/init.d/mysqld</span><br><span class="line">ln -s /usr/local/mysql/bin/mysql /usr/bin</span><br><span class="line">echo &quot;export PATH=$PATH:/usr/local/mysql/bin&quot;&gt;&gt;/etc/profile</span><br></pre></td></tr></table></figure>
+
+<h3 id="启动Alisql"><a href="#启动Alisql" class="headerlink" title="启动Alisql"></a>启动Alisql</h3><p>启动Alisql并加入开机自动启动</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service mysqld start</span><br><span class="line">chkconfig --level 35 mysqld on</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="设置root运行密码"><a href="#设置root运行密码" class="headerlink" title="设置root运行密码"></a>设置root运行密码</h3><p>Alisql安装完成后，密码默认是没有的，需要自己设置。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br><span class="line">SET PASSWORD FOR root=PASSWORD(’你的密码’);</span><br><span class="line">flush privileges;</span><br><span class="line">exit;</span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="http://blog.jinjun.top">钧言</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://blog.jinjun.top/posts/645efc3f.html">http://blog.jinjun.top/posts/645efc3f.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CentOS/">CentOS</a><a class="post-meta__tags" href="/tags/Linux/">Linux</a><a class="post-meta__tags" href="/tags/mysql/">mysql</a><a class="post-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><a class="post-meta__tags" href="/tags/AliSQL/">AliSQL</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/d0026c1b.html" title="Centos编译安装PHP8"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">Centos编译安装PHP8</div></div></a></div><div class="next-post pull-right"><a href="/posts/6afd2345.html" title="mysql数据库备份与还原"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">mysql数据库备份与还原</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/posts/ffcc00e.html" title="MYSQL优化参数减少内存占用"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-01-16</div><div class="title">MYSQL优化参数减少内存占用</div></div></a></div><div><a href="/posts/d0026c1b.html" title="Centos编译安装PHP8"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-01-15</div><div class="title">Centos编译安装PHP8</div></div></a></div><div><a href="/posts/6afd2345.html" title="mysql数据库备份与还原"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-01-05</div><div class="title">mysql数据库备份与还原</div></div></a></div><div><a href="/posts/777563a0.html" title="Linux 提示 bash:ls:command not found"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-02</div><div class="title">Linux 提示 bash:ls:command not found</div></div></a></div><div><a href="/posts/7faf237f.html" title="Rocky Linux&#x2F;CentOS8 管理网卡命令"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-24</div><div class="title">Rocky Linux&#x2F;CentOS8 管理网卡命令</div></div></a></div><div><a href="/posts/a37843f8.html" title="CentOS下卸载和重装yum源"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-11-17</div><div class="title">CentOS下卸载和重装yum源</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">钧言</div><div class="author-info__description">钧言极客（JINJUN.TOP）一个独立个人博客，记录平凡生活中的一些感悟、分享生活点滴和折腾的新事物，与我一起记录每一次精彩瞬间。</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">210</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">197</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80"><span class="toc-number">1.</span> <span class="toc-text">下载地址</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E6%A3%80%E6%9F%A5"><span class="toc-number">2.</span> <span class="toc-text">安装检查</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number"></span> <span class="toc-text">准备工作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E7%94%A8%E6%88%B7%E5%92%8C%E6%89%80%E5%B1%9E%E7%BB%84"><span class="toc-number"></span> <span class="toc-text">设置用户和所属组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BAMySQL%E5%B7%A5%E4%BD%9C%E7%9B%AE%E5%BD%95"><span class="toc-number"></span> <span class="toc-text">创建MySQL工作目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85AliSQL"><span class="toc-number"></span> <span class="toc-text">安装AliSQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%88%E6%9D%83MySQL%E7%9B%AE%E5%BD%95%E8%BF%90%E8%A1%8C%E7%94%A8%E6%88%B7"><span class="toc-number"></span> <span class="toc-text">授权MySQL目录运行用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96AliSQL"><span class="toc-number"></span> <span class="toc-text">初始化AliSQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC%E5%92%8C%E9%93%BE%E6%8E%A5"><span class="toc-number"></span> <span class="toc-text">设置启动脚本和链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8Alisql"><span class="toc-number"></span> <span class="toc-text">启动Alisql</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AEroot%E8%BF%90%E8%A1%8C%E5%AF%86%E7%A0%81"><span class="toc-number"></span> <span class="toc-text">设置root运行密码</span></a></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/4a17b156.html" title="Hello World">Hello World</a><time datetime="2023-03-07T13:20:55.504Z" title="Created 2023-03-07 21:20:55">2023-03-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/6c4158f9.html" title="使用 CardLink 生成卡片式链接">使用 CardLink 生成卡片式链接</a><time datetime="2023-03-03T23:27:00.000Z" title="Created 2023-03-04 07:27:00">2023-03-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/55c355ab.html" title="测试单图模式">测试单图模式</a><time datetime="2023-02-19T06:45:00.000Z" title="Created 2023-02-19 14:45:00">2023-02-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/6f8724d0.html" title="测试多图文章">测试多图文章</a><time datetime="2023-02-03T22:42:00.000Z" title="Created 2023-02-04 06:42:00">2023-02-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/f0531d7a.html" title="Zerotier 私有化部署根服务器(Planet)">Zerotier 私有化部署根服务器(Planet)</a><time datetime="2023-01-26T02:06:00.000Z" title="Created 2023-01-26 10:06:00">2023-01-26</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 钧言</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

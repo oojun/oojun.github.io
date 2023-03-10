@@ -1,0 +1,261 @@
+<!DOCTYPE html><html lang="zh" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>Typecho利用HTML5代码实现本地视频播放 | 钧言极客</title><meta name="author" content="钧言"><meta name="copyright" content="钧言"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="#### HTML5 Video标签的使用  钧言自用Video标签含有src、poster、preload、controls、width、height等几个属性， 以及一个内部使用的标签。  src属性和poster属性  你能想象src属性是用来干啥的。跟标签的一样，这个属性用于指定视频的地址。而poster属性用于指定一张图片，在当前视频数据无效时显示（预览图）。视频数据无效可能是视频正在加">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Typecho利用HTML5代码实现本地视频播放">
+<meta property="og:url" content="http://blog.jinjun.top/posts/719cadaa.html">
+<meta property="og:site_name" content="钧言极客">
+<meta property="og:description" content="#### HTML5 Video标签的使用  钧言自用Video标签含有src、poster、preload、controls、width、height等几个属性， 以及一个内部使用的标签。  src属性和poster属性  你能想象src属性是用来干啥的。跟标签的一样，这个属性用于指定视频的地址。而poster属性用于指定一张图片，在当前视频数据无效时显示（预览图）。视频数据无效可能是视频正在加">
+<meta property="og:locale">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:published_time" content="2019-09-11T08:36:00.000Z">
+<meta property="article:modified_time" content="2023-03-10T16:21:24.705Z">
+<meta property="article:author" content="钧言">
+<meta property="article:tag" content="Typecho">
+<meta property="article:tag" content="HTML">
+<meta property="article:tag" content="视频">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://blog.jinjun.top/posts/719cadaa.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Typecho利用HTML5代码实现本地视频播放',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2023-03-11 00:21:24'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">210</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">197</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">9</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="钧言极客"><span class="site-name">钧言极客</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Typecho利用HTML5代码实现本地视频播放</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2019-09-11T08:36:00.000Z" title="Created 2019-09-11 16:36:00">2019-09-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-03-10T16:21:24.705Z" title="Updated 2023-03-11 00:21:24">2023-03-11</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Typecho/">Typecho</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Typecho利用HTML5代码实现本地视频播放"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><!--markdown-->#### HTML5 Video标签的使用
+
+<p>钧言自用Video标签含有src、poster、preload、controls、width、height等几个属性， 以及一个内部使用的标签。</p>
+<ul>
+<li>src属性和poster属性</li>
+</ul>
+<p>你能想象src属性是用来干啥的。跟标签的一样，这个属性用于指定视频的地址。而poster属性用于指定一张图片，在当前视频数据无效时显示（预览图）。视频数据无效可能是视频正在加载，可能是视频地址错误等等。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;video width=<span class="string">&quot;658&quot;</span> height=<span class="string">&quot;444&quot;</span> src=<span class="string">&quot;https://xiaojun.org/usr/xxx.mp4&quot;</span>poster=<span class="string">&quot;https://xiaojun.org/usr/xxx.jpg&quot;</span>&gt;&lt;/video&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>preload属性</li>
+</ul>
+<p>这个属性也能通过名字了解用处，此属性用于定义视频是否预加载。属性有三个可选择的值：none、metadata、auto。如果不使用此属性，默认为auto。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;video width=<span class="string">&quot;658&quot;</span> height=<span class="string">&quot;444&quot;</span> src=<span class="string">&quot;https://xiaojun.org/usr/xxx.mp4&quot;</span> poster=<span class="string">&quot;https://xiaojun.org/usr/xxx.jpg&quot;</span> preload=<span class="string">&quot;auto&quot;</span>&gt;&lt;/video&gt;</span><br></pre></td></tr></table></figure>
+<p>None：不进行预加载。使用此属性值，可能是页面制作者认为用户不期望此视频，或者减少HTTP请求。</p>
+<p>Metadata：部分预加载。使用此属性值，代表页面制作者认为用户不期望此视频，但为用户提供一些元数据。</p>
+<p>Auto：全部预加载。</p>
+<ul>
+<li>controls属性</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;video width=<span class="string">&quot;658&quot;</span> height=<span class="string">&quot;444&quot;</span> poster=<span class="string">&quot;https://xiaojun.org/usr/xxx.jpg&quot;</span> preload=<span class="string">&quot;none&quot;</span> controls=<span class="string">&quot;controls&quot;</span>&gt;&lt;source src=<span class="string">&quot;https://xiaojun.org/usr/xxx.mp4&quot;</span> /&gt;&lt;/video&gt;</span><br></pre></td></tr></table></figure>
+<p>Controls属性用于向浏览器指明页面制作者没有使用脚本生成播放控制器，需要浏览器启用本身的播放控制栏。</p>
+<p>控制栏须包括播放暂停控制，播放进度控制，音量控制等等。</p>
+<ul>
+<li>width属性和height属性</li>
+</ul>
+<p>width属性为视频的宽度，height属性为视频的高度，此标签不做过多讲解。</p>
+<ul>
+<li>source标签</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;video width=<span class="string">&quot;658&quot;</span> height=<span class="string">&quot;444&quot;</span> poster=<span class="string">&quot;https://xiaojun.org/usr/xxx.jpg&quot;</span> preload=<span class="string">&quot;none&quot;</span> controls=<span class="string">&quot;controls&quot;</span>&gt;&lt;source src=<span class="string">&quot;https://xiaojun.org/usr/xxx.mp4&quot;</span> /&gt;&lt;/video&gt;</span><br></pre></td></tr></table></figure>
+<p>Source标签用于给媒体（因为audio标签同样可以包含此标签，所以这儿用媒体，而不是视频）指定多个可选择的（浏览器最终只能选一个）文件地址，且只能在媒体标签没有使用src属性时使用。</p>
+<p>浏览器按source标签的顺序检测标签指定的视频是否能够播放（可能是视频格式不支持，视频不存在等等），如果不能播放，换下一个。此方法多用于兼容不同的浏览器。Source标签本身不代表任何含义，不能单独出现。</p>
+<p>此标签包含src、type、media三个属性。</p>
+<p>src属性：用于指定媒体的地址，和video标签的一样。</p>
+<p>Type属性：用于说明src属性指定媒体的类型，帮助浏览器在获取媒体前判断是否支持此类别的媒体格式。</p>
+<p>Media属性：用于说明媒体在何种媒介中使用，不设置时默认值为all，表示支持所有媒介。</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>autoplay</td>
+<td>autoplay</td>
+<td>如果出现该属性，则视频在就绪后马上播放。</td>
+</tr>
+<tr>
+<td>controls</td>
+<td>controls</td>
+<td>如果出现该属性，则向用户显示控件，比如播放按钮。</td>
+</tr>
+<tr>
+<td>loop</td>
+<td>loop</td>
+<td>如果出现该属性，则当媒介文件完成播放后再次开始播放。</td>
+</tr>
+<tr>
+<td>muted</td>
+<td>muted</td>
+<td>规定视频的音频输出应该被静音。</td>
+</tr>
+<tr>
+<td>poster</td>
+<td>URL</td>
+<td>规定视频下载时显示的图像，或者在用户点击播放按钮前显示的图像。</td>
+</tr>
+<tr>
+<td>preload</td>
+<td>preload</td>
+<td>如果出现该属性，则视频在页面加载时进行加载，并预备播放。如果使用 “autoplay”，则忽略该属性。</td>
+</tr>
+<tr>
+<td>src</td>
+<td>url</td>
+<td>要播放的视频的 URL。</td>
+</tr>
+<tr>
+<td>height</td>
+<td>pixels</td>
+<td>设置视频播放器的高度。</td>
+</tr>
+<tr>
+<td>width</td>
+<td>pixels</td>
+<td>设置视频播放器的宽度。</td>
+</tr>
+</tbody></table>
+<ul>
+<li>一个完整的例子</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;video width=<span class="string">&quot;658&quot;</span> height=<span class="string">&quot;444&quot;</span> poster=<span class="string">&quot;https://xiaojun.org/usr/xxx.jpg&quot;</span> preload=<span class="string">&quot;none&quot;</span> controls=<span class="string">&quot;controls&quot;</span>&gt;&lt;source src=<span class="string">&quot;https://xiaojun.org/usr/xxx.mp4&quot;</span> /&gt;&lt;/video&gt;</span><br></pre></td></tr></table></figure>
+<p>注：自行替换链接为自己的域名链接地址！</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="http://blog.jinjun.top">钧言</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://blog.jinjun.top/posts/719cadaa.html">http://blog.jinjun.top/posts/719cadaa.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Typecho/">Typecho</a><a class="post-meta__tags" href="/tags/HTML/">HTML</a><a class="post-meta__tags" href="/tags/%E8%A7%86%E9%A2%91/">视频</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/ab79cc1d.html" title="Youtube励志Mv，I Can I Can！"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">Youtube励志Mv，I Can I Can！</div></div></a></div><div class="next-post pull-right"><a href="/posts/db6e4fa8.html" title="Typecho的伪静态规则"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">Typecho的伪静态规则</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/posts/a53a8705.html" title="网页自动适配操作系统&#x2F;浏览器夜间模式"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-12-21</div><div class="title">网页自动适配操作系统&#x2F;浏览器夜间模式</div></div></a></div><div><a href="/posts/3736f639.html" title="typecho生成首页静态化HTML"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-12-11</div><div class="title">typecho生成首页静态化HTML</div></div></a></div><div><a href="/posts/6c4158f9.html" title="使用 CardLink 生成卡片式链接"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-04</div><div class="title">使用 CardLink 生成卡片式链接</div></div></a></div><div><a href="/posts/975bb460.html" title="使用vanilla-lazyload实现懒加载"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-14</div><div class="title">使用vanilla-lazyload实现懒加载</div></div></a></div><div><a href="/posts/1522f0f7.html" title="typecho&#x2F;wordress 实现点击加载更多文章"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-11-02</div><div class="title">typecho&#x2F;wordress 实现点击加载更多文章</div></div></a></div><div><a href="/posts/29b4101b.html" title="Typecho 博客文章&#x2F;页面内添加时间轴记录"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-12-08</div><div class="title">Typecho 博客文章&#x2F;页面内添加时间轴记录</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">钧言</div><div class="author-info__description">钧言极客（JINJUN.TOP）一个独立个人博客，记录平凡生活中的一些感悟、分享生活点滴和折腾的新事物，与我一起记录每一次精彩瞬间。</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">210</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">197</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/4a17b156.html" title="Hello World">Hello World</a><time datetime="2023-03-07T13:20:55.504Z" title="Created 2023-03-07 21:20:55">2023-03-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/6c4158f9.html" title="使用 CardLink 生成卡片式链接">使用 CardLink 生成卡片式链接</a><time datetime="2023-03-03T23:27:00.000Z" title="Created 2023-03-04 07:27:00">2023-03-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/55c355ab.html" title="测试单图模式">测试单图模式</a><time datetime="2023-02-19T06:45:00.000Z" title="Created 2023-02-19 14:45:00">2023-02-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/6f8724d0.html" title="测试多图文章">测试多图文章</a><time datetime="2023-02-03T22:42:00.000Z" title="Created 2023-02-04 06:42:00">2023-02-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/f0531d7a.html" title="Zerotier 私有化部署根服务器(Planet)">Zerotier 私有化部署根服务器(Planet)</a><time datetime="2023-01-26T02:06:00.000Z" title="Created 2023-01-26 10:06:00">2023-01-26</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 钧言</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

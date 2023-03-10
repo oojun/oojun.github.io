@@ -1,0 +1,238 @@
+<!DOCTYPE html><html lang="zh" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>安卓手机装 Linux 系统  让玩机变成无限可能 | 钧言极客</title><meta name="author" content="钧言"><meta name="copyright" content="钧言"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="&gt; 为什么有本文  现在手机更新换代简直快的不要不要的，家里闲置下来的旧手机难道只能换剪子换盆么？No！其实老旧的安卓手机也能焕发新春，接下来就跟钧言博客一起来给手机装个 Linux 系统，体验一把 Android 设备的高逼格玩法~ 可以搭建学习环境 PHP Mysql Python等等等等，你能想到的  liunx都可以帮你完成  准备工作   一台旧手机，我使用的是360 N5  配置是6+">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安卓手机装 Linux 系统  让玩机变成无限可能">
+<meta property="og:url" content="http://blog.jinjun.top/posts/afb8c4ef.html">
+<meta property="og:site_name" content="钧言极客">
+<meta property="og:description" content="&gt; 为什么有本文  现在手机更新换代简直快的不要不要的，家里闲置下来的旧手机难道只能换剪子换盆么？No！其实老旧的安卓手机也能焕发新春，接下来就跟钧言博客一起来给手机装个 Linux 系统，体验一把 Android 设备的高逼格玩法~ 可以搭建学习环境 PHP Mysql Python等等等等，你能想到的  liunx都可以帮你完成  准备工作   一台旧手机，我使用的是360 N5  配置是6+">
+<meta property="og:locale">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:published_time" content="2019-12-07T09:46:00.000Z">
+<meta property="article:modified_time" content="2023-03-10T16:21:24.766Z">
+<meta property="article:author" content="钧言">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="mysql">
+<meta property="article:tag" content="SSH">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://blog.jinjun.top/posts/afb8c4ef.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '安卓手机装 Linux 系统  让玩机变成无限可能',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2023-03-11 00:21:24'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">210</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">197</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">9</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="钧言极客"><span class="site-name">钧言极客</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">安卓手机装 Linux 系统  让玩机变成无限可能</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2019-12-07T09:46:00.000Z" title="Created 2019-12-07 17:46:00">2019-12-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-03-10T16:21:24.766Z" title="Updated 2023-03-11 00:21:24">2023-03-11</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%99%9A%E6%8B%9F%E5%8C%96/">虚拟化</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="安卓手机装 Linux 系统  让玩机变成无限可能"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><!--markdown-->> 为什么有本文
+
+<p>现在手机更新换代简直快的不要不要的，家里闲置下来的旧手机难道只能换剪子换盆么？No！其实老旧的安卓手机也能焕发新春，接下来就跟钧言博客一起来给手机装个 Linux 系统，体验一把 Android 设备的高逼格玩法~</p>
+<p>可以搭建学习环境 PHP Mysql Python等等等等，你能想到的  liunx都可以帮你完成</p>
+<blockquote>
+<p>准备工作</p>
+</blockquote>
+<ul>
+<li>一台旧手机，我使用的是360 N5  配置是6+32</li>
+<li>需要手机获得 <code>ROOT</code> 权限，否则不能正常使用  </li>
+<li>手机剩余内存大于 <code>512M</code> 即可 </li>
+<li>建议在 <code>WiFi</code>环境下在线安装系统</li>
+</ul>
+<blockquote>
+<p>下载软件</p>
+</blockquote>
+<p>Linux系统支撑软件：<a target="_blank" rel="noopener" href="http://github.com/meefik/linuxdeploy/releases">http://github.com/meefik/linuxdeploy/releases</a></p>
+<p>Linux deploy支撑软件：<a target="_blank" rel="noopener" href="http://github.com/meefik/busybox/releases">http://github.com/meefik/busybox/releases</a></p>
+<p>JuiceSSH：<a target="_blank" rel="noopener" href="http://juicessh.com/changelog#v2.1.4">http://juicessh.com/changelog#v2.1.4</a></p>
+<blockquote>
+<p>完成软件下载·安装之后，先打开第一个软件</p>
+</blockquote>
+<p>##BusyBox</p>
+<p>安装完毕后，运行Busy Box，看到如下界面：</p>
+<p>这个是我已经完成了安装，刚刚打开不好意思没有截到 </p>
+<p><img src="https://img.jinjun.top/images/usr/uploads/2018/11/2734792614.jpg" alt="BusyBox.jpg"></p>
+<p>点击install，等待程序自行运行，在界面中输出## END后退出程序。未安装前是不会有Busy Box的版本信息的，无须在意到时候界面中少了内容。</p>
+<p>P S：Busy Box默认界面语言是英文，可以改成中文，点击右上角部分，在弹出的菜单中选择Settings，接着进入设置界面，找到Language项，点击后选择简体中文，退出设置界面后界面语言就改为中文了。</p>
+<p><img src="https://img.jinjun.top/images/usr/uploads/2018/11/2256580087.jpg" alt="BusyBox设置中文.jpg"></p>
+<p>在设置界面中还可以设置其他参数，看个人喜好，但注意不要修改安装路径，如非要修改，则需要记住修改后的路径，后续步骤需要使用。</p>
+<blockquote>
+<p>BusyBox就安装介绍到此为止  下一步配置Liux Deploy</p>
+</blockquote>
+<p>##Linux deploy</p>
+<p>运行完毕<code>Busy Box</code>的部分后，运行Linux deploy。</p>
+<p><img src="https://img.jinjun.top/images/usr/uploads/2018/11/2558519724.jpg" alt="LinuxDeploy.jpg"></p>
+<p>点击左图左上角部分，选择设置</p>
+<p><img src="https://img.jinjun.top/images/usr/uploads/2018/11/376779088.jpg" alt="设置.jpg"></p>
+<p>在设置界面中找到<code>PATH</code>变量，赋予其值 <code>/system/xbin</code><br>注意这是<code>Busy Box</code>的安装路径，如果前面在<code>Busy Box</code>有修改默认安装路径的话，就要填写修改后的路径。</p>
+<p>设置界面其余部分看个人喜好设置，建议开启锁定Wifi功能。<br>接着退回主界面，点击左图右下角部分。</p>
+<p><img src="https://img.jinjun.top/images/usr/uploads/2018/11/1401444805.jpg" alt="Liunx设置.jpg"></p>
+<ul>
+<li><p>这里我选择的是<code>Arch Liunx</code>系统 </p>
+</li>
+<li><p>这里要注意一下 尽量换成国内的源 因为下载会快很多  <a target="_blank" rel="noopener" href="http://www.archlinux.org/mirrors/status/">官方源检查</a></p>
+</li>
+</ul>
+<p>##其他的系统国内源备份</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="http://mirrors.tuna.tsinghua.edu.cn/">清华大学源镜像</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://mirrors.163.com/">网易开放源镜像</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://opsx.alibaba.com/mirror">阿里云开放源镜像</a></p>
+</li>
+</ul>
+<p>这几个基本可以应付了 更多源镜像 后面会分享</p>
+<p> ::aru:nomatter:: 聊了这么多废话 感觉进入主题</p>
+<p><img src="https://img.jinjun.top/images/usr/uploads/2018/11/1691782325.jpg" alt="安装目录.jpg"></p>
+<ul>
+<li>安装路径是Linux系统的安装路径，如要安装在手机自带的存储空间中，则在路径开头加上<code>$&#123;ENV_DIR&#125;</code>，这代表的是存储空间根目录。如要安装在<code>sdcard</code>中，则加上<code>$&#123;EXTERNAL_STORAGE&#125;</code>。</li>
+<li>用户名和密码自定义，本地、远程连接该系统用。</li>
+<li>DNS如需自定义就自行输入，否则保留默认</li>
+</ul>
+<p> 按需开启SSH和图形界面功能</p>
+<p><img src="https://img.jinjun.top/images/usr/uploads/2018/11/2886146520.jpg" alt="开启SSH.jpg"></p>
+<p>退出系统设置界面，点击主界面右上角，选择安装。</p>
+<p><img src="https://img.jinjun.top/images/usr/uploads/2018/11/720639823.jpg" alt="安装系统.jpg"></p>
+<p><img src="https://img.jinjun.top/images/usr/uploads/2018/11/2497819099.jpg" alt="Liunx安装.jpg"></p>
+<p><img src="https://img.jinjun.top/images/usr/uploads/2018/11/4082281434.jpg" alt="安装完成.jpg"></p>
+<p>等待程序自行安装Linux系统，时间不定，看到&lt;&lt;&lt;deploy则安装完毕。如果中间没有报错则安装成功。<br><strong>注意：安装完毕后要先点击停止按钮，再按启动按钮</strong></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="http://blog.jinjun.top">钧言</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://blog.jinjun.top/posts/afb8c4ef.html">http://blog.jinjun.top/posts/afb8c4ef.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Linux/">Linux</a><a class="post-meta__tags" href="/tags/mysql/">mysql</a><a class="post-meta__tags" href="/tags/SSH/">SSH</a><a class="post-meta__tags" href="/tags/Android/">Android</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/29b4101b.html" title="Typecho 博客文章/页面内添加时间轴记录"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">Typecho 博客文章/页面内添加时间轴记录</div></div></a></div><div class="next-post pull-right"><a href="/posts/445425e1.html" title="官方源更新特别慢 给Deepin/UOS更换系统镜像源提高速度"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">官方源更新特别慢 给Deepin/UOS更换系统镜像源提高速度</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/posts/1135095d.html" title="CentOS7&#x2F;8编译安装kangle和easypanel"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-08-21</div><div class="title">CentOS7&#x2F;8编译安装kangle和easypanel</div></div></a></div><div><a href="/posts/645efc3f.html" title="CentOS安装AliSQL手记"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-01-09</div><div class="title">CentOS安装AliSQL手记</div></div></a></div><div><a href="/posts/d0026c1b.html" title="Centos编译安装PHP8"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-01-15</div><div class="title">Centos编译安装PHP8</div></div></a></div><div><a href="/posts/9538d4ce.html" title="Debian编译安装Mysql 5.5"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-15</div><div class="title">Debian编译安装Mysql 5.5</div></div></a></div><div><a href="/posts/84b854b0.html" title="Kangle访问控制模块wiki文档"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-04-08</div><div class="title">Kangle访问控制模块wiki文档</div></div></a></div><div><a href="/posts/f0f0f03.html" title="Linux VPS主机修改VPS默认SSH端口"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-15</div><div class="title">Linux VPS主机修改VPS默认SSH端口</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">钧言</div><div class="author-info__description">钧言极客（JINJUN.TOP）一个独立个人博客，记录平凡生活中的一些感悟、分享生活点滴和折腾的新事物，与我一起记录每一次精彩瞬间。</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">210</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">197</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/4a17b156.html" title="Hello World">Hello World</a><time datetime="2023-03-07T13:20:55.504Z" title="Created 2023-03-07 21:20:55">2023-03-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/6c4158f9.html" title="使用 CardLink 生成卡片式链接">使用 CardLink 生成卡片式链接</a><time datetime="2023-03-03T23:27:00.000Z" title="Created 2023-03-04 07:27:00">2023-03-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/55c355ab.html" title="测试单图模式">测试单图模式</a><time datetime="2023-02-19T06:45:00.000Z" title="Created 2023-02-19 14:45:00">2023-02-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/6f8724d0.html" title="测试多图文章">测试多图文章</a><time datetime="2023-02-03T22:42:00.000Z" title="Created 2023-02-04 06:42:00">2023-02-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/f0531d7a.html" title="Zerotier 私有化部署根服务器(Planet)">Zerotier 私有化部署根服务器(Planet)</a><time datetime="2023-01-26T02:06:00.000Z" title="Created 2023-01-26 10:06:00">2023-01-26</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 钧言</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

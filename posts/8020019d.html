@@ -1,0 +1,216 @@
+<!DOCTYPE html><html lang="zh" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>宝塔面板Nginx启用Brotli压缩算法提高网站访问速度 | 钧言极客</title><meta name="author" content="钧言"><meta name="copyright" content="钧言"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="&gt; Brotli介绍  Brotli是Google推出的开源压缩算法，通过变种的LZ77算法、Huffman编码以及二阶文本建模等方式进行数据压缩，与其他压缩算法相比，它有着更高的压缩效率，性能也比我们目前常见的Gzip高17-25%，可以帮我们更高效的压缩网页中的各类文件大小及脚本，从而提高加载速度，提升网页浏览体验。  Brotli 凭借它优异的性能迅速占领了市场，对主流浏览器都有广泛的支持B">
+<meta property="og:type" content="article">
+<meta property="og:title" content="宝塔面板Nginx启用Brotli压缩算法提高网站访问速度">
+<meta property="og:url" content="http://blog.jinjun.top/posts/8020019d.html">
+<meta property="og:site_name" content="钧言极客">
+<meta property="og:description" content="&gt; Brotli介绍  Brotli是Google推出的开源压缩算法，通过变种的LZ77算法、Huffman编码以及二阶文本建模等方式进行数据压缩，与其他压缩算法相比，它有着更高的压缩效率，性能也比我们目前常见的Gzip高17-25%，可以帮我们更高效的压缩网页中的各类文件大小及脚本，从而提高加载速度，提升网页浏览体验。  Brotli 凭借它优异的性能迅速占领了市场，对主流浏览器都有广泛的支持B">
+<meta property="og:locale">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:published_time" content="2019-09-30T08:36:00.000Z">
+<meta property="article:modified_time" content="2023-03-10T16:21:24.768Z">
+<meta property="article:author" content="钧言">
+<meta property="article:tag" content="CentOS">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Tenginx">
+<meta property="article:tag" content="宝塔面板">
+<meta property="article:tag" content="Brotli">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://blog.jinjun.top/posts/8020019d.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '宝塔面板Nginx启用Brotli压缩算法提高网站访问速度',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-03-11 00:21:24'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">210</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">197</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">9</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="钧言极客"><span class="site-name">钧言极客</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">宝塔面板Nginx启用Brotli压缩算法提高网站访问速度</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2019-09-30T08:36:00.000Z" title="Created 2019-09-30 16:36:00">2019-09-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-03-10T16:21:24.768Z" title="Updated 2023-03-11 00:21:24">2023-03-11</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%BB%BA%E7%AB%99%E7%9F%A5%E8%AF%86/">建站知识</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="宝塔面板Nginx启用Brotli压缩算法提高网站访问速度"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><!--markdown-->> Brotli介绍
+
+<p>Brotli是Google推出的开源压缩算法，通过变种的LZ77算法、Huffman编码以及二阶文本建模等方式进行数据压缩，与其他压缩算法相比，它有着更高的压缩效率，性能也比我们目前常见的Gzip高17-25%，可以帮我们更高效的压缩网页中的各类文件大小及脚本，从而提高加载速度，提升网页浏览体验。</p>
+<p><img src="https://img.jinjun.top/images/usr/uploads/2019/09/1569854114.png" alt="Brotli.png"></p>
+<p>Brotli 凭借它优异的性能迅速占领了市场，对主流浏览器都有广泛的支持Brotli算法。各大CDN厂商也推出了Brotli，可以看出Brotli有多么火热。在考虑资源占用和流量或访问速度等各方面因素，建议启用。钧言极客已经支持Brotli算法，对访问速度有一定的提升。</p>
+<blockquote>
+<p>Brotli安装</p>
+</blockquote>
+<p>这里使用宝塔管理面板来安装。操作环境 <code>Centos 7.6</code> 其他环境也可以借鉴</p>
+<h2 id="下载Brotli"><a href="#下载Brotli" class="headerlink" title="下载Brotli"></a>下载Brotli</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd /www/server    ##进入宝塔环境目录</span><br><span class="line">git clone https://github.com/google/ngx_brotli.git    ##下载brotli</span><br><span class="line">cd ngx_brotli</span><br><span class="line">git submodule update --init    ##更新brotli</span><br></pre></td></tr></table></figure>
+
+<h2 id="编译安装Nginx"><a href="#编译安装Nginx" class="headerlink" title="编译安装Nginx"></a>编译安装Nginx</h2><p>这里我使用<code>tengine 2.3.1</code>版本 </p>
+<p> 1、 创建一个编译目录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /work</span><br><span class="line">cd /work</span><br></pre></td></tr></table></figure>
+
+<p> 2、 下载并解压tengine</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /work  #如果你在work目录下，此命令省略</span><br><span class="line">wget http://tengine.taobao.org/download/tengine-2.3.1.tar.gz</span><br><span class="line">tar -xzvf tengine-2.3.1.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p> 3、 查看宝塔Linux面板原先的Tengine的编译参数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -V</span><br></pre></td></tr></table></figure>
+
+<p>查询的tenginx编译参数 并把<code>configure arguments:</code>之后的参数复制下来</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Tengine version: Tengine/2.3.1</span><br><span class="line">nginx version: nginx/1.16.0</span><br><span class="line">built by gcc 4.8.5 20150623 (Red Hat 4.8.5-36) (GCC)</span><br><span class="line">built with OpenSSL 1.1.1b  26 Feb 2019</span><br><span class="line">TLS SNI support enabled</span><br><span class="line">configure arguments: --user=www --group=www --prefix=/www/server/nginx --add-module=/www/server/nginx/src/ngx_devel_kit --with-openssl=/www/server/nginx/src/openssl --add-module=/www/server/nginx/src/ngx_cache_purge --add-module=/www/server/nginx/src/nginx-sticky-module --add-module=/www/server/nginx/src/lua_nginx_module --with-http_stub_status_module --with-http_ssl_module --with-http_v2_module --with-http_image_filter_module --with-http_gzip_static_module --with-http_gunzip_module --with-ipv6--with-http_sub_module --with-http_flv_module --with-http_addition_module --with-http_realip_module--with-http_mp4_module --with-ld-opt=-Wl,-E --with-pcre --with-cc-opt=-Wno-error --add-module=/www/server/nginx/src/ngx-pagespeed --add-module=/work/nginx-plugin-master</span><br></pre></td></tr></table></figure>
+
+
+<p> 4、 进入Tengine解压目录，重新编译Tengine。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /work/tengine-2.3.1</span><br><span class="line">./configure 粘贴上一步复制的参数 --add-module=/www/server/ngx_brotli</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
+<p>编译过程有点慢，耐心等一下。</p>
+<p> 5、 备份原来的Tengine文件，把编译后的Tengine文件替换掉旧的Tengine</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cd /www/server/nginx/sbin</span><br><span class="line">cp nginx nginx.bak</span><br><span class="line">service nginx stop</span><br><span class="line">rm -rf /www/server/nginx/sbin/nginx</span><br><span class="line">cd /work/tengine-2.3.1</span><br><span class="line">cp objs/nginx /www/server/nginx/sbin</span><br><span class="line">service nginx start</span><br></pre></td></tr></table></figure>
+
+<p> 6、 检查是否编译成功</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -V</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img.jinjun.top/images/usr/uploads/2019/09/1569858059.png" alt="Brotli.png"></p>
+<p>这样就算编译成功了。</p>
+<blockquote>
+<p>开启Brotli压缩</p>
+</blockquote>
+<p>在宝塔面板点击左侧软件商店 - Nginx设置 - 配置修改，在http段内添加以下内容启用Brotli压缩。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">brotli on;</span><br><span class="line">brotli_comp_level 6;</span><br><span class="line">brotli_min_length 512;</span><br><span class="line">brotli_types text/plain text/javascript text/css text/xml text/x-component application/javascript application/x-javascript application/xml application/json application/xhtml+xml application/rss+xml application/atom+xml application/x-font-ttf application/vnd.ms-fontobject image/svg+xml image/x-icon font/opentype;</span><br><span class="line">brotli_static always;</span><br></pre></td></tr></table></figure>
+
+<p>最后保存一下文件，然后重载配置或者重启一下nginx就可以了</p>
+<h3 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">brotli on;               #启用</span><br><span class="line">brotli_comp_level 6;     #压缩等级，默认6，最高11，太高的压缩水平可能需要更多的CPU</span><br><span class="line">brotli_buffers 16 8k;    #请求缓冲区的数量和大小</span><br><span class="line">brotli_min_length 20;    #指定压缩数据的最小长度，只有大于或等于最小长度才会对其压缩。这里指定20字节</span><br><span class="line">brotli_types text/plain; #指定允许进行压缩类型</span><br><span class="line">brotli_static always;    #是否允许查找预处理好的、以.br结尾的压缩文件，可选值为on、off、always</span><br><span class="line">brotli_window 512k;      #窗口值，默认值为512k</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="浏览器测试"><a href="#浏览器测试" class="headerlink" title="浏览器测试"></a>浏览器测试</h3><p><img src="https://img.jinjun.top/images/usr/uploads/2019/10/1569888462.png" alt="Brotli.png"></p>
+<p><strong>PS：</strong> brotli只会在https状态下才会生效，http状态会使用Gzip</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="http://blog.jinjun.top">钧言</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://blog.jinjun.top/posts/8020019d.html">http://blog.jinjun.top/posts/8020019d.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CentOS/">CentOS</a><a class="post-meta__tags" href="/tags/Linux/">Linux</a><a class="post-meta__tags" href="/tags/Tenginx/">Tenginx</a><a class="post-meta__tags" href="/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/">宝塔面板</a><a class="post-meta__tags" href="/tags/Brotli/">Brotli</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/5a5bd127.html" title="CheungSSH国产运维自动化管理工具"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">CheungSSH国产运维自动化管理工具</div></div></a></div><div class="next-post pull-right"><a href="/posts/64501c3a.html" title="使用docker中部署BT宝塔面板过程"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">使用docker中部署BT宝塔面板过程</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/posts/64501c3a.html" title="使用docker中部署BT宝塔面板过程"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-09-24</div><div class="title">使用docker中部署BT宝塔面板过程</div></div></a></div><div><a href="/posts/afef60b8.html" title="Liunx 宝塔6.x解锁nginx隐藏的waf防火墙插件"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-08-30</div><div class="title">Liunx 宝塔6.x解锁nginx隐藏的waf防火墙插件</div></div></a></div><div><a href="/posts/cd069d28.html" title="宝塔面板nginx编译云锁防御模块的小坑"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-09-17</div><div class="title">宝塔面板nginx编译云锁防御模块的小坑</div></div></a></div><div><a href="/posts/777563a0.html" title="Linux 提示 bash:ls:command not found"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-02</div><div class="title">Linux 提示 bash:ls:command not found</div></div></a></div><div><a href="/posts/7faf237f.html" title="Rocky Linux&#x2F;CentOS8 管理网卡命令"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-24</div><div class="title">Rocky Linux&#x2F;CentOS8 管理网卡命令</div></div></a></div><div><a href="/posts/a37843f8.html" title="CentOS下卸载和重装yum源"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-11-17</div><div class="title">CentOS下卸载和重装yum源</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">钧言</div><div class="author-info__description">钧言极客（JINJUN.TOP）一个独立个人博客，记录平凡生活中的一些感悟、分享生活点滴和折腾的新事物，与我一起记录每一次精彩瞬间。</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">210</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">197</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDBrotli"><span class="toc-number">1.</span> <span class="toc-text">下载Brotli</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85Nginx"><span class="toc-number">2.</span> <span class="toc-text">编译安装Nginx</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E"><span class="toc-number">2.1.</span> <span class="toc-text">参数说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B5%8B%E8%AF%95"><span class="toc-number">2.2.</span> <span class="toc-text">浏览器测试</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/4a17b156.html" title="Hello World">Hello World</a><time datetime="2023-03-07T13:20:55.504Z" title="Created 2023-03-07 21:20:55">2023-03-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/6c4158f9.html" title="使用 CardLink 生成卡片式链接">使用 CardLink 生成卡片式链接</a><time datetime="2023-03-03T23:27:00.000Z" title="Created 2023-03-04 07:27:00">2023-03-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/55c355ab.html" title="测试单图模式">测试单图模式</a><time datetime="2023-02-19T06:45:00.000Z" title="Created 2023-02-19 14:45:00">2023-02-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/6f8724d0.html" title="测试多图文章">测试多图文章</a><time datetime="2023-02-03T22:42:00.000Z" title="Created 2023-02-04 06:42:00">2023-02-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/f0531d7a.html" title="Zerotier 私有化部署根服务器(Planet)">Zerotier 私有化部署根服务器(Planet)</a><time datetime="2023-01-26T02:06:00.000Z" title="Created 2023-01-26 10:06:00">2023-01-26</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 钧言</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
