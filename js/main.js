@@ -2,17 +2,14 @@ document.addEventListener('DOMContentLoaded', function () {
   let headerContentWidth, $nav
   let mobileSidebarOpen = false
 
-  const adjustMenu = init => {
-    const getAllWidth = ele => {
-      let width = 0
-      ele.length && Array.from(ele).forEach(i => { width += i.offsetWidth })
-      return width
-    }
-
+  const adjustMenu = (init) => {
     if (init) {
-      const blogInfoWidth = getAllWidth(document.querySelector('#blog-info > a').children)
-      const menusWidth = getAllWidth(document.getElementById('menus').children)
-      headerContentWidth = blogInfoWidth + menusWidth
+      blogNameWidth = document.getElementById('site-name').offsetWidth
+      const $menusEle = document.querySelectorAll('#menus .menus_item')
+      menusWidth = 0
+      $menusEle.length && $menusEle.forEach(i => { menusWidth += i.offsetWidth })
+      const $searchEle = document.querySelector('#search-button')
+      searchWidth = $searchEle ? $searchEle.offsetWidth : 0
       $nav = document.getElementById('nav')
     }
 
@@ -338,6 +335,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const currentTop = window.scrollY || document.documentElement.scrollTop
       const isDown = scrollDirection(currentTop)
       if (currentTop > 56) {
+        $header.classList.add('is-top-bar')
         if (isDown) {
           if ($header.classList.contains('nav-visible')) $header.classList.remove('nav-visible')
           if (isChatBtnShow && isChatShow === true) {
@@ -357,7 +355,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       } else {
         if (currentTop === 0) {
-          $header.classList.remove('nav-fixed', 'nav-visible')
+          $header.classList.remove('nav-fixed', 'nav-visible' , 'is-top-bar')
         }
         $rightside.style.cssText = "opacity: ''; transform: ''"
       }
