@@ -1,0 +1,17 @@
+@font-face {
+    font-family: 'Alibaba Fonts';
+    font-display: swap;
+    src: url('/fonts/AlimamaFangYuanTiVF-Thin.woff2') format("woff2");
+}
+
+body {
+    font-family: 'Alibaba Fonts' !important;
+}
+
+.title {
+    font-family: 'Alibaba Fonts' !important;
+}
+
+.categoryButtonText {
+    font-family: 'Alibaba Fonts' !important;
+}
