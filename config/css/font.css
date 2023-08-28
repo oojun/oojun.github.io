@@ -1,17 +1,20 @@
 @font-face {
-    font-family: 'Alibaba Fonts';
+    font-family: '阿里妈妈方圆体 VF';
     font-display: swap;
     src: url('/config/fonts/AlimamaFangYuanTiVF-Thin.woff2') format("woff2");
+    font-style: normal italic;
+	font-weight: 100 900;
+	font-stretch: 10% 300%;
 }
 
 body {
-    font-family: 'Alibaba Fonts' !important;
+    font-family: '阿里妈妈方圆体 VF', webfont-notdef !important;
 }
 
 .title {
-    font-family: 'Alibaba Fonts' !important;
+    font-family: '阿里妈妈方圆体 VF', webfont-notdef !important;
 }
 
 .categoryButtonText {
-    font-family: 'Alibaba Fonts' !important;
+    font-family: 'Alibaba Fonts', webfont-notdef !important;
 }
