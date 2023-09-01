@@ -2,9 +2,12 @@
     font-family: 'moonbridge';
     font-display: swap;
     src: url('https://cdn.jsdelivr.net/gh/TaylorLottner/CDN@master/TYPES/moonbridge/moonbridge.woff2') format("woff2");
-    font-style: normal italic;
     font-weight: normal;
-    font-style: normal;    
+    font-style: normal;
+    ascent-override: 100%;
+    descent-override: 20%;
+    line-gap-override: normal;
+    advance-override: 10;
 }
 
 body {
