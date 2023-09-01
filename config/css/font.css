@@ -1,20 +1,20 @@
 @font-face {
-    font-family: '阿里妈妈方圆体 VF';
+    font-family: 'moonbridge';
     font-display: swap;
-    src: url('/config/fonts/AlimamaFangYuanTiVF-Thin.woff2') format("woff2");
+    src: url('https://cdn.jsdelivr.net/gh/TaylorLottner/CDN@master/TYPES/moonbridge/moonbridge.woff2') format("woff2");
     font-style: normal italic;
-	font-weight: 100 900;
-	font-stretch: 10% 300%;
+    font-weight: normal;
+    font-style: normal;    
 }
 
 body {
-    font-family: '阿里妈妈方圆体 VF' !important;
+    font-family: 'moonbridge' !important;
 }
 
 .title {
-    font-family: '阿里妈妈方圆体 VF' !important;
+    font-family: 'moonbridge' !important;
 }
 
 .categoryButtonText {
-    font-family: 'Alibaba Fonts' !important;
+    font-family: 'moonbridge' !important;
 }
