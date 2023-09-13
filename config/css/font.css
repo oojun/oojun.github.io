@@ -1,7 +1,7 @@
 @font-face {
     font-family: 'moonbridge';
     font-display: swap;
-    src: url('https://cdn.jsdelivr.net/gh/TaylorLottner/CDN@master/TYPES/moonbridge/moonbridge.woff2') format("woff2");
+    src: url('/config/fonts/zt.woff2') format("woff2");
     font-weight: normal;
     font-style: normal;
     ascent-override: 100%;
