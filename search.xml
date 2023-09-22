@@ -37,8 +37,8 @@
       </tags>
   </entry>
   <entry>
-    <title>Docker-Compose限制CPU和内存使用</title>
-    <url>/posts/856f7f9f.html</url>
+    <title>Docker-Compose 限制CPU和内存使用</title>
+    <url>/posts/5770415d.html</url>
     <content><![CDATA[<p>最近在尝试自建<code>gitlab</code> 过程中，发现该容器内存占用很高，导致服务器的MySQL服务经常被kill。导致本机服务器的其他服务无法正常使用。</p>
 <p>在搜索引擎一顿探索后，给我感觉是很乱。下面总结一下尝试的结果。</p>
 <h3 id="CPU和内存限制"><a href="#CPU和内存限制" class="headerlink" title="CPU和内存限制"></a>CPU和内存限制</h3><p>在<code>compse.yml</code>文件添加<code>services.deploy</code>内容：</p>
