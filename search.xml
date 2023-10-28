@@ -44,6 +44,35 @@
 <h3 id="CPU和内存限制"><a href="#CPU和内存限制" class="headerlink" title="CPU和内存限制"></a>CPU和内存限制</h3><p>在<code>compse.yml</code>文件添加<code>services.deploy</code>内容：</p>
 <figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">resources:</span></span><br><span class="line">    <span class="attr">limits:</span></span><br><span class="line">      <span class="attr">cpus:</span> <span class="string">&#x27;0.50&#x27;</span></span><br><span class="line">      <span class="attr">memory:</span> <span class="string">2048M</span></span><br><span class="line">    <span class="attr">reservations:</span></span><br><span class="line">      <span class="attr">cpus:</span> <span class="string">&#x27;0.25&#x27;</span></span><br><span class="line">      <span class="attr">memory:</span> <span class="string">1024M</span></span><br></pre></td></tr></table></figure>
 
+
+<p>以我安装的<code>gitlab</code>为例</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3.7&#x27;</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">web:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">&#x27;gitlab/gitlab-ce:latest&#x27;</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">hostname:</span> <span class="string">&#x27;gitlab.admin.com&#x27;</span></span><br><span class="line">    <span class="attr">deploy:</span></span><br><span class="line">      <span class="attr">resources:</span></span><br><span class="line">        <span class="attr">limits:</span></span><br><span class="line">          <span class="attr">cpus:</span> <span class="string">&#x27;0.50&#x27;</span></span><br><span class="line">          <span class="attr">memory:</span> <span class="string">2048M</span></span><br><span class="line">        <span class="attr">reservations:</span></span><br><span class="line">          <span class="attr">cpus:</span> <span class="string">&#x27;0.25&#x27;</span></span><br><span class="line">          <span class="attr">memory:</span> <span class="string">1024M</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;1080:80&#x27;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;10443:443&#x27;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;11022:22&#x27;</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;/gitlab-date/config:/etc/gitlab&#x27;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;/gitlab-date/logs:/var/log/gitlab&#x27;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;/gitlab-date/data:/var/opt/gitlab&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>限制命令在<code>deploy.resources.limits</code> 这部分，上面限制的注释是：</p>
+<blockquote>
+<p> 限制 CPU 使用率 50%，限制 内存 使用率 2048M。同时，这个服务至少需要25%的CPU和1024M的内存。</p>
+</blockquote>
+<p>启动的时候命令行也有所改变，否则不生效：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">原本的启动命令为</span></span><br><span class="line">docker-compse up -d</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">需要添加一个参数--compatibility表示以兼容模式来运行</span></span><br><span class="line">docker-compose --compatibility up -d</span><br></pre></td></tr></table></figure>
+<p>需要注意的是，启动时需增加 –compatibility 选项,以兼容模式来运行。</p>
+<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><p>通过上述方法限制容器CPU和内存后，再继续使用命令 <code>docker stats</code> 查看容器资源使用情况</p>
+]]></content>
+      <categories>
+        <category>Docker</category>
+      </categories>
+      <tags>
+        <tag>Docker</tag>
+        <tag>docker-compose</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Docker-Compose 限制CPU和内存使用</title>
+    <url>/posts/5770415d.html</url>
+    <content><![CDATA[<p>最近在尝试自建<code>gitlab</code> 过程中，发现该容器内存占用很高，导致服务器的MySQL服务经常被kill。导致本机服务器的其他服务无法正常使用。</p>
+<p>在搜索引擎一顿探索后，给我感觉是很乱。下面总结一下尝试的结果。</p>
+<h3 id="CPU和内存限制"><a href="#CPU和内存限制" class="headerlink" title="CPU和内存限制"></a>CPU和内存限制</h3><p>在<code>compse.yml</code>文件添加<code>services.deploy</code>内容：</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">resources:</span></span><br><span class="line">    <span class="attr">limits:</span></span><br><span class="line">      <span class="attr">cpus:</span> <span class="string">&#x27;0.50&#x27;</span></span><br><span class="line">      <span class="attr">memory:</span> <span class="string">2048M</span></span><br><span class="line">    <span class="attr">reservations:</span></span><br><span class="line">      <span class="attr">cpus:</span> <span class="string">&#x27;0.25&#x27;</span></span><br><span class="line">      <span class="attr">memory:</span> <span class="string">1024M</span></span><br></pre></td></tr></table></figure>
+
 <p>以我安装的<code>gitlab</code>为例</p>
 <figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3.7&#x27;</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">web:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">&#x27;gitlab/gitlab-ce:latest&#x27;</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">hostname:</span> <span class="string">&#x27;gitlab.admin.com&#x27;</span></span><br><span class="line">    <span class="attr">deploy:</span></span><br><span class="line">      <span class="attr">resources:</span></span><br><span class="line">        <span class="attr">limits:</span></span><br><span class="line">          <span class="attr">cpus:</span> <span class="string">&#x27;0.50&#x27;</span></span><br><span class="line">          <span class="attr">memory:</span> <span class="string">2048M</span></span><br><span class="line">        <span class="attr">reservations:</span></span><br><span class="line">          <span class="attr">cpus:</span> <span class="string">&#x27;0.25&#x27;</span></span><br><span class="line">          <span class="attr">memory:</span> <span class="string">1024M</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;1080:80&#x27;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;10443:443&#x27;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;11022:22&#x27;</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;/gitlab-date/config:/etc/gitlab&#x27;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;/gitlab-date/logs:/var/log/gitlab&#x27;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;/gitlab-date/data:/var/opt/gitlab&#x27;</span></span><br></pre></td></tr></table></figure>
 
@@ -329,7 +358,7 @@
 <td>页面页面</td>
 </tr>
 </tbody></table>
-<p><code>hexo naw post hello</code>，表示在 <code>_posts</code>创建了一篇为 <code>hello</code>的文章</p>
+<p><code>hexo new post hello</code>，表示在 <code>_posts</code>创建了一篇为 <code>hello</code>的文章</p>
 <h3 id="hexo-server"><a href="#hexo-server" class="headerlink" title="hexo server"></a><code>hexo server</code></h3><p>当你你想浏览本地生成网站的时候，使用这个命令。</p>
 <p>命令可以简写为 <code>hexo s</code></p>
 <p>默认地址为 <code>http://localhost:4000</code> 如果想修改端口号，可以在 <code>Git Bash</code> 输入 <code>hexo s -p 端口</code></p>
