@@ -44,35 +44,6 @@
 <h3 id="CPU和内存限制"><a href="#CPU和内存限制" class="headerlink" title="CPU和内存限制"></a>CPU和内存限制</h3><p>在<code>compse.yml</code>文件添加<code>services.deploy</code>内容：</p>
 <figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">resources:</span></span><br><span class="line">    <span class="attr">limits:</span></span><br><span class="line">      <span class="attr">cpus:</span> <span class="string">&#x27;0.50&#x27;</span></span><br><span class="line">      <span class="attr">memory:</span> <span class="string">2048M</span></span><br><span class="line">    <span class="attr">reservations:</span></span><br><span class="line">      <span class="attr">cpus:</span> <span class="string">&#x27;0.25&#x27;</span></span><br><span class="line">      <span class="attr">memory:</span> <span class="string">1024M</span></span><br></pre></td></tr></table></figure>
 
-
-<p>以我安装的<code>gitlab</code>为例</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3.7&#x27;</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">web:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">&#x27;gitlab/gitlab-ce:latest&#x27;</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">hostname:</span> <span class="string">&#x27;gitlab.admin.com&#x27;</span></span><br><span class="line">    <span class="attr">deploy:</span></span><br><span class="line">      <span class="attr">resources:</span></span><br><span class="line">        <span class="attr">limits:</span></span><br><span class="line">          <span class="attr">cpus:</span> <span class="string">&#x27;0.50&#x27;</span></span><br><span class="line">          <span class="attr">memory:</span> <span class="string">2048M</span></span><br><span class="line">        <span class="attr">reservations:</span></span><br><span class="line">          <span class="attr">cpus:</span> <span class="string">&#x27;0.25&#x27;</span></span><br><span class="line">          <span class="attr">memory:</span> <span class="string">1024M</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;1080:80&#x27;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;10443:443&#x27;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;11022:22&#x27;</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;/gitlab-date/config:/etc/gitlab&#x27;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;/gitlab-date/logs:/var/log/gitlab&#x27;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;/gitlab-date/data:/var/opt/gitlab&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p>限制命令在<code>deploy.resources.limits</code> 这部分，上面限制的注释是：</p>
-<blockquote>
-<p> 限制 CPU 使用率 50%，限制 内存 使用率 2048M。同时，这个服务至少需要25%的CPU和1024M的内存。</p>
-</blockquote>
-<p>启动的时候命令行也有所改变，否则不生效：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">原本的启动命令为</span></span><br><span class="line">docker-compse up -d</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">需要添加一个参数--compatibility表示以兼容模式来运行</span></span><br><span class="line">docker-compose --compatibility up -d</span><br></pre></td></tr></table></figure>
-<p>需要注意的是，启动时需增加 –compatibility 选项,以兼容模式来运行。</p>
-<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><p>通过上述方法限制容器CPU和内存后，再继续使用命令 <code>docker stats</code> 查看容器资源使用情况</p>
-]]></content>
-      <categories>
-        <category>Docker</category>
-      </categories>
-      <tags>
-        <tag>Docker</tag>
-        <tag>docker-compose</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Docker-Compose 限制CPU和内存使用</title>
-    <url>/posts/5770415d.html</url>
-    <content><![CDATA[<p>最近在尝试自建<code>gitlab</code> 过程中，发现该容器内存占用很高，导致服务器的MySQL服务经常被kill。导致本机服务器的其他服务无法正常使用。</p>
-<p>在搜索引擎一顿探索后，给我感觉是很乱。下面总结一下尝试的结果。</p>
-<h3 id="CPU和内存限制"><a href="#CPU和内存限制" class="headerlink" title="CPU和内存限制"></a>CPU和内存限制</h3><p>在<code>compse.yml</code>文件添加<code>services.deploy</code>内容：</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">resources:</span></span><br><span class="line">    <span class="attr">limits:</span></span><br><span class="line">      <span class="attr">cpus:</span> <span class="string">&#x27;0.50&#x27;</span></span><br><span class="line">      <span class="attr">memory:</span> <span class="string">2048M</span></span><br><span class="line">    <span class="attr">reservations:</span></span><br><span class="line">      <span class="attr">cpus:</span> <span class="string">&#x27;0.25&#x27;</span></span><br><span class="line">      <span class="attr">memory:</span> <span class="string">1024M</span></span><br></pre></td></tr></table></figure>
-
 <p>以我安装的<code>gitlab</code>为例</p>
 <figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3.7&#x27;</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">web:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">&#x27;gitlab/gitlab-ce:latest&#x27;</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">hostname:</span> <span class="string">&#x27;gitlab.admin.com&#x27;</span></span><br><span class="line">    <span class="attr">deploy:</span></span><br><span class="line">      <span class="attr">resources:</span></span><br><span class="line">        <span class="attr">limits:</span></span><br><span class="line">          <span class="attr">cpus:</span> <span class="string">&#x27;0.50&#x27;</span></span><br><span class="line">          <span class="attr">memory:</span> <span class="string">2048M</span></span><br><span class="line">        <span class="attr">reservations:</span></span><br><span class="line">          <span class="attr">cpus:</span> <span class="string">&#x27;0.25&#x27;</span></span><br><span class="line">          <span class="attr">memory:</span> <span class="string">1024M</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;1080:80&#x27;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;10443:443&#x27;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;11022:22&#x27;</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;/gitlab-date/config:/etc/gitlab&#x27;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;/gitlab-date/logs:/var/log/gitlab&#x27;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;/gitlab-date/data:/var/opt/gitlab&#x27;</span></span><br></pre></td></tr></table></figure>
 
@@ -93,6 +64,73 @@
       <tags>
         <tag>Docker</tag>
         <tag>docker-compose</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Gitea Actions 初体验</title>
+    <url>/posts/34869306.html</url>
+    <content><![CDATA[<p>Gitea Actions 基本上和 Github Actions 一样的语法，兼容Github的actions软件包，经过我的测试有一些actions的包是不能运行的。</p>
+<blockquote>
+<p>Gitea 行动的目的是在 Gitea 和现有的 CI&#x2F;CD 系统之间实现更紧密的集成。另一个目标是为独立运行器提供统一的管理界面，以减少支持多个系统的管理开销（如果需要）。独立运行器工作流旨在与 GitHub Actions 兼容，可用于在 Gitea 上构建、测试、打包、发布或部署任何代码项目。<br><br><br>Gitea Actions 不仅仅是 DevOps，还允许您在存储库中发生其他事件时运行工作流。例如，您可以运行工作流，以便在有人在您的存储库中创建新问题时自动添加相应的标签。</p>
+</blockquote>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>使用Gitea 1.19.0及以上版本，未安装的请参考 <a href="https://docs.gitea.com/zh-cn/">Gitea Docs</a></p>
+<p>这里我使用宝塔面板和腾讯云的服务器，提前在面板安装好Docker环境。</p>
+<ol>
+<li>Gitea 开启 actions 选项</li>
+</ol>
+<p>actions的配置默认是禁用的，需要修改文件进行开启，修改<code>gitea/config/app.ini</code> 配置文件,修改完成之后建议重启一下。</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 开启actions</span></span><br><span class="line">[<span class="string">actions</span>]</span><br><span class="line"><span class="string">ENABLED</span> <span class="string">=</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>查看Gitea Runner token</li>
+</ol>
+<p>管理后台 - Actions -Runners - 创建Runner - 这里有 <code>token</code> 要记下来后面会用到。</p>
+<p><img src="https://img.jinjun.top/images/2023/11/13/e2328f8959daa7abad4dfb8b4b5eb815.jpg" alt="Gitea Actions"></p>
+<ol start="3">
+<li>安装 act runner</li>
+</ol>
+<p>使用docker compose启动，在gitea的目录下新建一个<code>cet runner</code>文件夹添加<code>docker-compose.yml</code></p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&quot;3&quot;</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">act_runner:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">gitea/act_runner:latest</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">GITEA_INSTANCE_URL=https://192.168.0.1:3000/</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">GITEA_RUNNER_REGISTRATION_TOKEN=5NwZolPXGrRZ</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">GITEA_RUNNER_NAME=docker_runner</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/var/run/docker.sock:/var/run/docker.sock</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./act_data:/data</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./ct_cache:/root/.cache</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>GITEA_INSTANCE_URL</code> 是gitea的地址</li>
+<li><code>GITEA_RUNNER_REGISTRATION_TOKEN</code> 填写你获取的token</li>
+</ul>
+<ol start="4">
+<li>查看是否添加成功</li>
+</ol>
+<p>在 runner 管理面板即可看见新加入的runner的状态。</p>
+<p><img src="https://img.jinjun.top/images/2023/11/13/8315880534ece6313b89c0c3d2976d8b.jpg" alt="Runner"></p>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><ol>
+<li>创建仓库</li>
+</ol>
+<p>创建一个<code>demo</code>的测试仓库，让我们来尝鲜一下吧。</p>
+<p><img src="https://img.jinjun.top/images/2023/11/13/b2c64d70502ac1ec6e556d3dcfec1b0a.jpg" alt="actions"></p>
+<ol start="2">
+<li>添加工作流文件</li>
+</ol>
+<p>以下为官方的一个实例，将它保存至 <code>.gitea/workflows/build.yaml</code> 会触发 CI 工作。，yaml 语法可参考 <a href="https://docs.github.com/zh/actions/using-workflows/workflow-syntax-for-github-actions">Github Actions Docs</a></p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">Gitea</span> <span class="string">Actions</span> <span class="string">Demo</span></span><br><span class="line"><span class="attr">run-name:</span> <span class="string">$&#123;&#123;</span> <span class="string">gitea.actor</span> <span class="string">&#125;&#125;</span> <span class="string">is</span> <span class="string">testing</span> <span class="string">out</span> <span class="string">Gitea</span> <span class="string">Actions</span> <span class="string">🚀</span></span><br><span class="line"><span class="attr">on:</span> [<span class="string">push</span>]</span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">Explore-Gitea-Actions:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">run:</span> <span class="string">echo</span> <span class="string">&quot;🎉 The job was automatically triggered by a $<span class="template-variable">&#123;&#123; gitea.event_name &#125;&#125;</span> event.&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">run:</span> <span class="string">echo</span> <span class="string">&quot;🐧 This job is now running on a $<span class="template-variable">&#123;&#123; runner.os &#125;&#125;</span> server hosted by Gitea!&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">run:</span> <span class="string">echo</span> <span class="string">&quot;🔎 The name of your branch is $<span class="template-variable">&#123;&#123; gitea.ref &#125;&#125;</span> and your repository is $<span class="template-variable">&#123;&#123; gitea.repository &#125;&#125;</span>.&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Check</span> <span class="string">out</span> <span class="string">repository</span> <span class="string">code</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/checkout@v3</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">run:</span> <span class="string">echo</span> <span class="string">&quot;💡 The $<span class="template-variable">&#123;&#123; gitea.repository &#125;&#125;</span> repository has been cloned to the runner.&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">run:</span> <span class="string">echo</span> <span class="string">&quot;🖥️ The workflow is now ready to test your code on the runner.&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">List</span> <span class="string">files</span> <span class="string">in</span> <span class="string">the</span> <span class="string">repository</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          ls $&#123;&#123; gitea.workspace &#125;&#125;</span></span><br><span class="line"><span class="string"></span>      <span class="bullet">-</span> <span class="attr">run:</span> <span class="string">echo</span> <span class="string">&quot;🍏 This job&#x27;s status is $<span class="template-variable">&#123;&#123; gitea.status &#125;&#125;</span>.&quot;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>查看执行结果</li>
+</ol>
+<p><img src="https://img.jinjun.top/images/2023/11/13/5648a0ed12a86379c3994fc5107b2b2f.jpg" alt="runner"></p>
+<p>来自以下文献：</p>
+<ul>
+<li><a href="https://seepine.com/git/gitea/actions/">Gitea Actions 搭建 - Seepine’s Blog</a></li>
+<li><a href="https://gitea.com/gitea/act_runner/issues/70">#70 - setup-java download jdk binary again every time due to not cache tool folder</a></li>
+<li><a href="https://docs.gitea.com/zh-cn/usage/actions/quickstart">快速入门 | Gitea Documentation</a></li>
+<li><a href="https://qiita.com/sinsky/items/5ab6017f82548f9e35e6">我在 docker 环境中尝试了 Gitea Actions #Docker - Qiita</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>折腾日志</category>
+      </categories>
+      <tags>
+        <tag>Docker</tag>
+        <tag>Gitea</tag>
+        <tag>Actions</tag>
       </tags>
   </entry>
   <entry>
@@ -153,7 +191,7 @@
 <p>自定义域名有时候会莫名其妙的丢失，这个问题可以在仓库的根目录下创建一个<code>CNAME</code> 的文件，编辑内容为你的自定义域名。这样本地推送的时候就不会莫名其妙的丢失绑定的域名了。</p>
 ]]></content>
       <categories>
-        <category>Hexo</category>
+        <category>博客构建</category>
       </categories>
       <tags>
         <tag>hexo</tag>
@@ -210,6 +248,54 @@
 
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>基于宝塔面板 DOcker 安装 Gitea</title>
+    <url>/posts/fff93366.html</url>
+    <content><![CDATA[<p>本文使用最新版本的宝塔面板、docker环境、Nginx用于反代、Debian 12</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>为什么要自建git托管，众所周知在国内网络的环境的情况下，github已经不能正常的使用，有时候会出现断联的情况。国内的很多都有条条框框的限制，基于这个需求，为什么不自建属于自己的git托管。</p>
+<p>首先我尝试了：gitea、gitlab、gogs 这三款软件，综合性能分析，日常使用 Gitea 能满足我的需求，内存占用也低，也轻量化。</p>
+<h2 id="Gitea简介"><a href="#Gitea简介" class="headerlink" title="Gitea简介"></a>Gitea简介</h2><p>Gitea的首要目标是创建一个极易安装，运行非常快速，安装和使用体验良好的自建 Git 服务。我们采用Go作为后端语言，这使我们只要生成一个可执行程序即可。并且他还支持跨平台，支持 Linux, macOS 和 Windows 以及各种架构，除了x86，amd64，还包括 ARM 和 PowerPC。</p>
+<p>官网文档地址：<a href="https://docs.gitea.com/zh-cn/next/">gitea DOCS</a></p>
+<h3 id="Gitea安装"><a href="#Gitea安装" class="headerlink" title="Gitea安装"></a>Gitea安装</h3><p>首先在官网上找到 <strong>Docker Compose</strong> 的安装方式。</p>
+<p><code>gitea rootless</code>和<code>gitea</code>版本区别，前者是通过gitea内部的ssh进行管理，后者通过openSSH进行管理。</p>
+<p>文档地址：<a href="https://docs.gitea.com/zh-cn/installation/install-with-docker-rootless">使用 Docker 安装 (rootless)</a></p>
+<p>然后在宝塔上添加docker 项目模板。如果是自行构建的也可以把新建的<code>docker-compose.yml</code>文件放在你想存放的目录下。</p>
+<p>这里选择自行构建，先创建一个运行目录和<code>docker-compose</code></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mkdir -p gitea/&#123;data,config&#125;</span><br><span class="line">cd gitea</span><br><span class="line">vim docker-compose.yml</span><br></pre></td></tr></table></figure>
+
+<p>然后将以下内容粘贴到 <code>docker-compose.yml</code> 文件里面</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&quot;2&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">server:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">gitea/gitea:1.20.5-rootless</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./data:/var/lib/gitea</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./config:/etc/gitea</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/etc/timezone:/etc/timezone:ro</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/etc/localtime:/etc/localtime:ro</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;3000:3000&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;2222:2222&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>赋予指定docker卷的用户&#x2F;组，默认情况下，Docker中的Gitea将使用uid:1000 gid:1000。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo chown 1000:1000 config/ data/</span><br></pre></td></tr></table></figure>
+
+<p>然后进入刚刚创建的gitea的目录，检查目录下有没有<code>docker-compose.yml</code>文件。确认存在就启动。</p>
+<ul>
+<li><code>docker-compose up -d</code>: 拉起docker-compose所包含服务，并以守护进程方式运行</li>
+<li><code>docker-compose restart</code>: 重启docker-compose所有服务</li>
+<li><code>docker-compose down</code>: 关闭docker-compose所有服务</li>
+<li><code>docker-compose logs -f</code> : 查看运行日志</li>
+</ul>
+<p>以上是不使用数据库，只使用SQlite3来运行，如果数据量不大情况下SQlite3完全可以胜任，如果是多人协作，那就选择数据库会更加好。<br>更多安装详情去官网文档就可以找到。</p>
+<h3 id="Gitea使用"><a href="#Gitea使用" class="headerlink" title="Gitea使用"></a>Gitea使用</h3><h4 id="git客户端以ssh的方式访问"><a href="#git客户端以ssh的方式访问" class="headerlink" title="git客户端以ssh的方式访问"></a>git客户端以ssh的方式访问</h4><p>创建客户端的密钥和公钥,然后在gitea的个人设置-SSH&#x2F;GPG密钥下，添加公钥。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd</span><br><span class="line">mkdir -p .ssh</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">生成密钥对</span></span><br><span class="line">ssh-keygen -t rsa</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看公钥</span></span><br><span class="line">cat ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
+
+<p>测试仓库到客户端链接</p>
+<p>这里我自定义了ssh的端口所以要带上端口进行测试</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ssh -T git@106.199.x.x -p 222</span><br><span class="line">---------------------------------</span><br><span class="line">Hi there, jun! You&#x27;ve successfully authenticated with the key named git@xx.com, but Gitea does not provide shell access.</span><br><span class="line">If this is unexpected, please log in with password and setup Gitea under another user.</span><br></pre></td></tr></table></figure>
+
+<p>这样看起来就验证成功了，我们来拉取一个git库试试。仓库的http&#x2F;ssh的地址可以在仓库页面右上角找到。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git clone ssh://git@106.199.x.x:222/Jun/test.git</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>折腾日志</category>
+      </categories>
+      <tags>
+        <tag>Docker</tag>
+        <tag>Gitea</tag>
+        <tag>宝塔面板</tag>
+      </tags>
   </entry>
   <entry>
     <title>零基础玩转 Hexo ：本地化部署</title>
