@@ -298,6 +298,18 @@
       </tags>
   </entry>
   <entry>
+    <title>测试语雀API</title>
+    <url>/posts/124306671110.html</url>
+    <content><![CDATA[<p>测试语雀 API</p>
+]]></content>
+      <categories>
+        <category>分类</category>
+      </categories>
+      <tags>
+        <tag>标签</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>零基础玩转 Hexo ：本地化部署</title>
     <url>/posts/45333.html</url>
     <content><![CDATA[<blockquote>
@@ -477,18 +489,6 @@
         <tag>博客</tag>
         <tag>Git</tag>
         <tag>Node</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>测试语雀API</title>
-    <url>/posts/124306671110.html</url>
-    <content><![CDATA[<p>测试语雀 API</p>
-]]></content>
-      <categories>
-        <category>分类</category>
-      </categories>
-      <tags>
-        <tag>标签</tag>
       </tags>
   </entry>
 </search>
