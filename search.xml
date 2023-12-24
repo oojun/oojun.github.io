@@ -134,6 +134,18 @@
       </tags>
   </entry>
   <entry>
+    <title>文章标题</title>
+    <url>/posts/1243060.html</url>
+    <content><![CDATA[<p>这里写内容 123</p>
+]]></content>
+      <categories>
+        <category>分类</category>
+      </categories>
+      <tags>
+        <tag>标签</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hello World</title>
     <url>/posts/1243066710.html</url>
     <content><![CDATA[<h2 id="你好，世界！您好，欢迎来访的朋友们！欢迎来到我的小世界！"><a href="#你好，世界！您好，欢迎来访的朋友们！欢迎来到我的小世界！" class="headerlink" title="你好，世界！您好，欢迎来访的朋友们！欢迎来到我的小世界！"></a>你好，世界！您好，欢迎来访的朋友们！欢迎来到我的小世界！</h2><p>本站使用 <code>Hexo</code>搭建，并使用 <code>GitHub Actions</code>进行自动化部署。希望给各位带来不错的体验！</p>
@@ -295,6 +307,18 @@
         <tag>Docker</tag>
         <tag>Gitea</tag>
         <tag>宝塔面板</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>文章标题</title>
+    <url>/posts/1243066710.html</url>
+    <content><![CDATA[<p>这里写内容</p>
+]]></content>
+      <categories>
+        <category>分类</category>
+      </categories>
+      <tags>
+        <tag>标签</tag>
       </tags>
   </entry>
   <entry>
