@@ -136,7 +136,7 @@
   <entry>
     <title>语雀测试</title>
     <url>/posts/124306671.html</url>
-    <content><![CDATA[<p>这里写内容</p>
+    <content><![CDATA[<p>这里写内容 1</p>
 ]]></content>
       <categories>
         <category>分类</category>
@@ -259,6 +259,18 @@
         <tag>hexo</tag>
         <tag>博客</tag>
         <tag>美化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>文章标题</title>
+    <url>/posts/124306.html</url>
+    <content><![CDATA[<p>这里写内容</p>
+]]></content>
+      <categories>
+        <category>分类</category>
+      </categories>
+      <tags>
+        <tag>标签</tag>
       </tags>
   </entry>
   <entry>
