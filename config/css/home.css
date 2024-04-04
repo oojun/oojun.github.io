@@ -1,3 +1,4 @@
+/* 文章图片光效 */
 #recent-posts > .recent-post-item:not(a)::before {
     content: "";
     position: absolute;
@@ -12,4 +13,9 @@
   }
   #recent-posts > .recent-post-item:not(a):hover::before {
     transform: translateX(100%) skewX(-60deg);
-  }
+}
+
+/* 优化edge滚动条显示 */
+#catalog-list {
+  overflow-x: hidden !important;
+}
